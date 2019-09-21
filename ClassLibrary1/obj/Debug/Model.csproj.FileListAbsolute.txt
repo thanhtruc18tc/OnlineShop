@@ -1,0 +1,5 @@
+D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\ClassLibrary1\bin\Debug\ClassLibrary1.dll
+D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\ClassLibrary1\bin\Debug\ClassLibrary1.pdb
+D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\ClassLibrary1\obj\Debug\Model.csprojResolveAssemblyReference.cache
+D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\ClassLibrary1\obj\Debug\ClassLibrary1.dll
+D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\ClassLibrary1\obj\Debug\ClassLibrary1.pdb
