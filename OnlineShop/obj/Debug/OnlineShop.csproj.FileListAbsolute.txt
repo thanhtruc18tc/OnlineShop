@@ -79,3 +79,6 @@ D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\OnlineShop\bin\Microsoft.O
 D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\OnlineShop\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\OnlineShop\obj\Debug\OnlineShop.dll
 D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\OnlineShop\obj\Debug\OnlineShop.pdb
+D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\OnlineShop\bin\Model.dll
+D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\OnlineShop\bin\Model.pdb
+D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\OnlineShop\obj\Debug\OnlineShop.csprojResolveAssemblyReference.cache

@@ -1,0 +1,10 @@
+D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\bin\Debug\Model.dll.config
+D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\bin\Debug\Model.dll
+D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\bin\Debug\Model.pdb
+D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\bin\Debug\EntityFramework.dll
+D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\bin\Debug\EntityFramework.SqlServer.dll
+D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\bin\Debug\EntityFramework.xml
+D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\bin\Debug\EntityFramework.SqlServer.xml
+D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\obj\Debug\Model.dll
+D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\obj\Debug\Model.pdb
