@@ -8,3 +8,15 @@ D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\bin\Debug\EntityFram
 D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
 D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\obj\Debug\Model.dll
 D:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\obj\Debug\Model.pdb
+D:\TDT STUDY\ChuyenDeCNPM\DoAn\OnlineShop\Model\bin\Debug\Model.dll.config
+D:\TDT STUDY\ChuyenDeCNPM\DoAn\OnlineShop\Model\bin\Debug\Model.dll
+D:\TDT STUDY\ChuyenDeCNPM\DoAn\OnlineShop\Model\bin\Debug\Model.pdb
+D:\TDT STUDY\ChuyenDeCNPM\DoAn\OnlineShop\Model\bin\Debug\EntityFramework.dll
+D:\TDT STUDY\ChuyenDeCNPM\DoAn\OnlineShop\Model\bin\Debug\EntityFramework.SqlServer.dll
+D:\TDT STUDY\ChuyenDeCNPM\DoAn\OnlineShop\Model\bin\Debug\EntityFramework.xml
+D:\TDT STUDY\ChuyenDeCNPM\DoAn\OnlineShop\Model\bin\Debug\EntityFramework.SqlServer.xml
+D:\TDT STUDY\ChuyenDeCNPM\DoAn\OnlineShop\Model\obj\Debug\Model.csprojAssemblyReference.cache
+D:\TDT STUDY\ChuyenDeCNPM\DoAn\OnlineShop\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+D:\TDT STUDY\ChuyenDeCNPM\DoAn\OnlineShop\Model\obj\Debug\Model.csproj.CopyComplete
+D:\TDT STUDY\ChuyenDeCNPM\DoAn\OnlineShop\Model\obj\Debug\Model.dll
+D:\TDT STUDY\ChuyenDeCNPM\DoAn\OnlineShop\Model\obj\Debug\Model.pdb
