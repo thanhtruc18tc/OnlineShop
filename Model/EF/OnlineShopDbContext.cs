@@ -8,7 +8,7 @@ namespace Model.EF
     public partial class OnlineShopDbContext : DbContext
     {
         public OnlineShopDbContext()
-            : base("name=OnlineShopDbContext")
+            : base("Data Source=DESKTOP-TO0UBO9;Initial Catalog=OnlineShop;Integrated Security=True")
         {
         }
 

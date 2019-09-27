@@ -1,6 +1,7 @@
 ﻿@*@{
-        ViewBag.Title = "Home Page";
-    }*@
+    ViewBag.Title = "Home Page";    
+}*@
+@model OnlineShop.Models.LoginModel
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
     <link rel="stylesheet" href="~/Assets/fonts/icomoon/style.css">
-    <link rel="stylesheet" href="~/Assets/css/bootstrap.min.css">
+    @*<link rel="stylesheet" href="~/Assets/css/bootstrap.min.css">*@
     <link rel="stylesheet" href="~/Assets/css/magnific-popup.css">
     <link rel="stylesheet" href="~/Assets/css/jquery-ui.css">
     <link rel="stylesheet" href="~/Assets/css/owl.carousel.min.css">
@@ -17,172 +18,103 @@
 
     <link rel="stylesheet" href="~/Assets/css/aos.css">
     <link rel="stylesheet" href="~/Assets/css/style.css">
-
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
 </head>
-<style type="text/css">
-    body {
-        color: #434343;
-        background: #dfe7e9;
-        font-family: 'Varela Round', sans-serif;
+<style>
+    .modal {
+        margin-top: 50px;
     }
+    .form-elegant .font-small {
+    font-size: 0.8rem; }
 
-    .form-control {
-        font-size: 16px;
-        transition: all 0.4s;
-        box-shadow: none;
-    }
+.form-elegant .z-depth-1a {
+    -webkit-box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25);
+    box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25); }
 
-        .form-control:focus {
-            border-color: #5cb85c;
-        }
+.form-elegant .z-depth-1-half,
+.form-elegant .btn:hover {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15);
+    box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15); }
 
-    .form-control, .btn {
-        border-radius: 50px;
-        outline: none !important;
-    }
+.form-elegant .modal-header {
+    border-bottom: none; }
 
-    .signin-form {
-        width: 400px;
-        margin: 0 auto;
-        padding: 30px 0;
-    }
+.modal-dialog .form-elegant .btn .fab {
+    color: #2196f3!important; }
 
-        .signin-form form {
-            border-radius: 5px;
-            margin-bottom: 20px;
-            background: #fff;
-            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-            padding: 40px;
-        }
-
-        .signin-form a {
-            color: #5cb85c;
-        }
-
-        .signin-form h2 {
-            text-align: center;
-            font-size: 34px;
-            margin: 10px 0 15px;
-        }
-
-        .signin-form .hint-text {
-            color: #999;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .signin-form .form-group {
-            margin-bottom: 20px;
-        }
-
-        .signin-form .btn {
-            font-size: 18px;
-            line-height: 26px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .signin-form .small {
-            font-size: 13px;
-        }
-
-    .signup-btn {
-        text-align: center;
-        border-color: #5cb85c;
-        transition: all 0.4s;
-    }
-
-        .signup-btn:hover {
-            background: #5cb85c;
-            opacity: 0.8;
-        }
-
-    .or-seperator {
-        margin: 50px 0 15px;
-        text-align: center;
-        border-top: 1px solid #e0e0e0;
-    }
-
-        .or-seperator b {
-            padding: 0 10px;
-            width: 40px;
-            height: 40px;
-            font-size: 16px;
-            text-align: center;
-            line-height: 40px;
-            background: #fff;
-            display: inline-block;
-            border: 1px solid #e0e0e0;
-            border-radius: 50%;
-            position: relative;
-            top: -22px;
-            z-index: 1;
-        }
-
-    .social-btn .btn {
-        color: #fff;
-        margin: 10px 0 0 30px;
-        font-size: 15px;
-        width: 55px;
-        height: 55px;
-        line-height: 38px;
-        border-radius: 50%;
-        font-weight: normal;
-        text-align: center;
-        border: none;
-        transition: all 0.4s;
-    }
-
-        .social-btn .btn:first-child {
-            margin-left: 0;
-        }
-
-        .social-btn .btn:hover {
-            opacity: 0.8;
-        }
-
-    .social-btn .btn-primary {
-        background: #507cc0;
-    }
-
-    .social-btn .btn-info {
-        background: #64ccf1;
-    }
-
-    .social-btn .btn-danger {
-        background: #df4930;
-    }
-
-    .social-btn .btn i {
-        font-size: 20px;
-    }
+.form-elegant .modal-body, .form-elegant .modal-footer {
+    font-weight: 400; }
+.model-header {
+    height: 20px;
+}
 </style>
+
 <body>
-    <div id="myModal" class="modal fade">
-        <div class="modal-dialog modal-login signin-form">
-            <form action="/examples/actions/confirmation.php" method="post">
-                <h2>Sign in</h2>
-                <p class="hint-text">Sign in with your social media account</p>
-                <div class="social-btn text-center">
-                    <a href="#" class="btn btn-primary btn-lg" title="Facebook"><i class="fa fa-facebook"></i></a>
-                    <a href="#" class="btn btn-info btn-lg" title="Twitter"><i class="fa fa-twitter"></i></a>
-                    <a href="#" class="btn btn-danger btn-lg" title="Google"><i class="fa fa-google"></i></a>
+    <!-- Modal -->
+    <div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <!--Content-->
+            <div class="modal-content form-elegant">
+                <!--Header-->
+                <div class="modal-header text-center"  style="height:50px">
+                    <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>Sign in</strong></h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="or-seperator"><b>or</b></div>
-                <div class="form-group">
-                    <input type="text" class="form-control input-lg" name="username" placeholder="Username" required="required">
+                <!--Body-->
+                <div class="modal-body mx-4">
+                    <!--Body-->
+                    @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                    {
+                        <div class="md-form mb-5">
+                            @Html.TextBoxFor(model=>model.UserName, new {@type="text", @class = "form-control", @autofocus= "autofocus", @placeholder = "Your username", @id = "username", @required = "required" })
+                        </div>
+
+                        <div class="md-form pb-3" style="margin-top: -20px; margin-bottom: -20px">
+                            @Html.PasswordFor(model => model.Password, new { @type = "password", @class = "form-control", @placeholder = "Your password", @id = "password" ,@required = "required" })
+                            <p class="font-small blue-text d-flex justify-content-end">
+                                Forgot <a href="#" class="blue-text ml-1">
+                                    Password?
+                                </a>
+                            </p>
+                        </div>
+                        @Html.ValidationSummary(false, "", "error");
+                        <div class="text-center mb-3" style="margin-top: -10px">
+                            <button type="submit" class="btn blue-gradient btn-block btn-rounded z-depth-1a" onclick="myFunction()">Sign in</button>
+                        </div>
+                    }
+                    <p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2">
+                        or Sign in
+                        with:
+                    </p>
+
+                    <div class="row my-3 d-flex justify-content-center">
+                        <!--Facebook-->
+                        <button type="button" class="btn btn-white btn-rounded mr-md-3 z-depth-1a"><i class="fab fa-facebook-f text-center"></i></button>
+                        <!--Google +-->
+                        <button type="button" class="btn btn-white btn-rounded z-depth-1a"><i class="fab fa-google-plus-g"></i></button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="password" class="form-control input-lg" name="password" placeholder="Password" required="required">
+                <!--Footer-->
+                <div class="modal-footer mx-5 pt-3 mb-1">
+                    <p class="font-small grey-text d-flex justify-content-end">
+                        Not a member? <a href="#" class="blue-text ml-1">
+                            Sign Up
+                        </a>
+                    </p>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-lg btn-block signup-btn">Sign in</button>
-                </div>
-                <div class="text-center small"><a href="#">Forgot Your password?</a></div>
-                <div class="text-center small">Don't have an account? <a href="#" class="signup">Sign up</a></div>
-            </form>
+            </div>
+            <!--/.Content-->
         </div>
     </div>
+    <!-- Modal -->
     <div class="site-wrap">
 
         <div class="site-navbar bg-white py-2">
@@ -230,11 +162,11 @@
                     </div>
                     <div class="icons">
                         <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
-                        <a href="#myModal" class="trigger-btn" data-toggle="modal" class="icons-btn d-inline-block"><span class="icon-user-o"></span></a>
                         <a href="cart.html" class="icons-btn d-inline-block bag">
                             <span class="icon-shopping-bag"></span>
                             <span class="number">2</span>
                         </a>
+                        <a href="#elegantModalForm" classs="trigger-btn" data-toggle="modal" class="icons-btn d-inline-block" id="btnAccount"><span class="icon-user-o"></span></a>
                         <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span class="icon-menu"></span></a>
                     </div>
                 </div>
@@ -545,6 +477,14 @@
     <script src="~/Assets/js/jquery.magnific-popup.min.js"></script>
     <script src="~/Assets/js/aos.js"></script>
     <script src="~/Assets/js/main.js"></script>
-
+    <script>
+        // MARK: Check login status
+        var showModal = '@ViewBag.ShowModal'
+        if (showModal == "True") {
+            $(window).on('load', function () {
+                $('#elegantModalForm').modal('show');
+            });
+        }
+    </script>
 </body>
 </html>
