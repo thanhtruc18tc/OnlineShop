@@ -9,11 +9,22 @@ namespace Model.EF
     [Table("User")]
     public partial class User
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public User(string username, string password, string name, string address, string email, string phone, DateTime? createdDate, bool? status)
+        {
+            Username = username;
+            Password = password;
+            Name = name;
+            Address = address;
+            Email = email;
+            Phone = phone;
+            CreatedDate = createdDate;
+            Status = status;
+        }
+
         public long ID { get; set; }
 
         [StringLength(50)]
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         [StringLength(32)]
         public string Password { get; set; }
@@ -21,8 +32,16 @@ namespace Model.EF
         [StringLength(50)]
         public string Name { get; set; }
 
-        [StringLength(100)]
+        [StringLength(50)]
         public string Address { get; set; }
+
+        [StringLength(50)]
+        public string Email { get; set; }
+
+        [StringLength(50)]
+        public string Phone { get; set; }
+
+        public DateTime? CreatedDate { get; set; }
 
         public bool? Status { get; set; }
     }

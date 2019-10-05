@@ -8,7 +8,7 @@ namespace Model.EF
     public partial class OnlineShopDbContext : DbContext
     {
         public OnlineShopDbContext()
-            : base("Data Source=DESKTOP-TO0UBO9;Initial Catalog=OnlineShop;Integrated Security=True")
+            : base(@"Data Source=DESKTOP-CB9P5OP\SQLEXPRESS;Initial Catalog=OnlineShop;Integrated Security=True")
         {
         }
 
@@ -17,20 +17,12 @@ namespace Model.EF
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
-                .Property(e => e.UserName)
-                .IsFixedLength();
+                .Property(e => e.Username)
+                .IsUnicode(false);
 
             modelBuilder.Entity<User>()
                 .Property(e => e.Password)
-                .IsFixedLength();
-
-            modelBuilder.Entity<User>()
-                .Property(e => e.Name)
-                .IsFixedLength();
-
-            modelBuilder.Entity<User>()
-                .Property(e => e.Address)
-                .IsFixedLength();
+                .IsUnicode(false);
         }
     }
 }

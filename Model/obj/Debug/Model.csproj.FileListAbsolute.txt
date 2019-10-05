@@ -20,3 +20,13 @@ D:\TDT STUDY\ChuyenDeCNPM\DoAn\OnlineShop\Model\obj\Debug\Model.csproj.CoreCompi
 D:\TDT STUDY\ChuyenDeCNPM\DoAn\OnlineShop\Model\obj\Debug\Model.csproj.CopyComplete
 D:\TDT STUDY\ChuyenDeCNPM\DoAn\OnlineShop\Model\obj\Debug\Model.dll
 D:\TDT STUDY\ChuyenDeCNPM\DoAn\OnlineShop\Model\obj\Debug\Model.pdb
+E:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\bin\Debug\Model.dll.config
+E:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\bin\Debug\Model.dll
+E:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\bin\Debug\Model.pdb
+E:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\bin\Debug\EntityFramework.dll
+E:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\bin\Debug\EntityFramework.SqlServer.dll
+E:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\bin\Debug\EntityFramework.xml
+E:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\bin\Debug\EntityFramework.SqlServer.xml
+E:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\obj\Debug\Model.dll
+E:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\obj\Debug\Model.pdb
+E:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache

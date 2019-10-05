@@ -17,9 +17,11 @@ namespace Model.Dao
             db = new OnlineShopDbContext();
         }
 
-        public User GetById(string username)
+        public object Encryptor { get; private set; }
+
+        public User GetByUserName(string username)
         {
-            return db.Users.SingleOrDefault(x => x.UserName == username);
+            return db.Users.SingleOrDefault(x => x.Username == username);
         }
 
         public long Insert(User entity)
@@ -29,17 +31,31 @@ namespace Model.Dao
             return entity.ID;
         }
 
-        public bool Login(string username, string password)
+        public bool IsEmailExisted(string email)
         {
-            var result = db.Users.Count(x => x.UserName == username && x.Password == password);
+            return db.Users.Count(x => x.Email == email) != 0;
+        }
+
+        public int Login(string username, string password)
+        {
+            var result = db.Users.Count(x => x.Username == username);
             if (result > 0)
             {
-                return true;
-            }
-            else
+                result = db.Users.Count(x => x.Username == username && x.Password == password);
+                if (result > 0)
+                {
+                    return 1; // Success
+                }
+                else
+                {
+                    return 0; // Fail
+                }
+            } else
             {
-                return false;
+                return -1; // Not exist
             }
+
+            
         }
     }
 }
