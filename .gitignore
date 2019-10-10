@@ -266,3 +266,5 @@ __pycache__/
 *.cache
 bin/
 obj/
+OnlineShop.csproj
+OnlineShop.csproj.user

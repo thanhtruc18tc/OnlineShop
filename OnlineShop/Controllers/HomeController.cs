@@ -18,17 +18,34 @@ namespace OnlineShop.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Shop()
         {
-            ViewBag.Message = "Your application description page.";
+            return View();
+        }
 
+        public ActionResult Product()
+        {
+            return View();
+        }
+
+
+        public ActionResult Cart()
+        {
+            return View();
+        }
+
+        public ActionResult Checkout()
+        {
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            return View();
+        }
 
+        public ActionResult Thankyou()
+        {
             return View();
         }
 
