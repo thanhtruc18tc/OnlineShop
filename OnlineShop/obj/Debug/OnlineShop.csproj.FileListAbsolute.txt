@@ -250,6 +250,6 @@ E:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\OnlineShop\bin\Microsoft.O
 E:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\OnlineShop\bin\Microsoft.Owin.Security.Google.xml
 E:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\OnlineShop\bin\Microsoft.Owin.Security.Twitter.xml
 E:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\OnlineShop\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\OnlineShop\obj\Debug\OnlineShop.csprojResolveAssemblyReference.cache
 E:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\OnlineShop\obj\Debug\OnlineShop.dll
 E:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\OnlineShop\obj\Debug\OnlineShop.pdb
-E:\Chuyen de Cong nghe phan mem\OnlineShop\OnlineShop\OnlineShop\obj\Debug\OnlineShop.csprojResolveAssemblyReference.cache
