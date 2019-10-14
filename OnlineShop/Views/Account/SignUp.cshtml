@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model OnlineShop.Models.RegisterModel
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css      />
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="~/Assets/css/Controller/AccountCSS/account.css" rel="stylesheet" />
+
+<section class="login-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 login-sec">
+                <h2 class="text-center">Đăng kí ngay bây giờ</h2>
+                @using (Html.BeginForm("SignUp", "Account", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Tên đăng nhập</label>
+                        @Html.TextBoxFor(model => model.Username, new { @type = "text", @class = "form-control", @id = "username1", @required = "required", @autocomplete = "off" })
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Mật khẩu</label>
+                        @Html.PasswordFor(model => model.Password, new { @type = "password", @class = "form-control", @id = "password1", @required = "required" })
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nhập lại mật khẩu</label>
+                        @Html.PasswordFor(model => model.RePassword, new { @type = "password", @class = "form-control", @id = "re-password", @required = "required" })
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Tên</label>
+                        @Html.TextBoxFor(model => model.Name, new { @type = "text", @class = "form-control", @id = "name", @required = "required", @autocomplete = "off" })
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        @Html.TextBoxFor(model => model.Email, new { @type = "text", @class = "form-control", @id = "email", @required = "required", @autocomplete = "off" })
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Số điện thoại</label>
+                        @Html.TextBoxFor(model => model.NumberPhone, new { @type = "text", @class = "form-control", @id = "number-phone", @required = "required", @autocomplete = "off" })
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Địa chỉ</label>
+                        @Html.TextBoxFor(model => model.Address, new { @type = "text", @class = "form-control", @id = "address", @required = "required", @autocomplete = "off" })
+
+                    </div>
+                    <div style="align-self: center">
+
+                        @Html.ValidationSummary(true, "", new { @style = "color: red" })
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-login float-right">ĐĂNG KÍ</button>
+                    </div>
+
+                }
+                <div>
+                    <span>
+                        Bạn đã có tài khoản?
+                    </span>
+                    <a href="/Account/LoginIndex" class="blue-text ml-1">
+                        Đăng nhập
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-8 banner-sec">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active">
+                            <img class="d-block img-fluid" src="https://images.pexels.com/photos/872957/pexels-photo-872957.jpeg" alt="First slide">
+                            <div class="carousel-caption d-none d-md-block">
+                                <div class="banner-text">
+                                    <h2>The ShopMax Viet Nam</h2>
+                                    <p>The ShopMax luôn lấy khách hàng làm trọng tâm phát triển. Tại công ty của chúng tôi, thời trang không chỉ đơn thuần là thiết kế, phát triển sản phẩm và quảng bá thị trường. Chúng tôi tin rằng có thể đem đến cho khách hàng những sản phẩm thời trang tinh xảo với giá cả hợp lý nhất chính là mang lại niềm vui cho khách hàng và làm cho cuộc sống của họ đẹp hơn mỗi ngày.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+</section>

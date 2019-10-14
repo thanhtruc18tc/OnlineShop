@@ -220,6 +220,7 @@
     <Content Include="Assets\css\bootstrap.min.css" />
     <Content Include="Assets\css\bootstrap\bootstrap-grid.css" />
     <Content Include="Assets\css\bootstrap\bootstrap-reboot.css" />
+    <Content Include="Assets\css\Controller\AccountCSS\account.css" />
     <Content Include="Assets\css\jquery-ui.css" />
     <Content Include="Assets\css\magnific-popup.css" />
     <Content Include="Assets\css\owl.carousel.min.css" />
@@ -261,6 +262,7 @@
     <Content Include="Assets\images\women.jpg" />
     <Content Include="Assets\js\aos.js" />
     <Content Include="Assets\js\bootstrap.min.js" />
+    <Content Include="Assets\js\Controller\Account\account.js" />
     <Content Include="Assets\js\Controller\HomeJS\goToModal.js" />
     <Content Include="Assets\js\Controller\HomeJS\login.js" />
     <Content Include="Assets\js\Controller\HomeJS\userController.js" />
@@ -401,7 +403,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Modal.cshtml" />
     <Content Include="Views\Home\Cart.cshtml" />
@@ -410,6 +411,8 @@
     <Content Include="Views\Home\Product.cshtml" />
     <Content Include="Views\Home\Shop.cshtml" />
     <Content Include="Views\Home\Thankyou.cshtml" />
+    <Content Include="Views\Account\SignUp.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -417,6 +420,7 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Common\Param\" />
+    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
