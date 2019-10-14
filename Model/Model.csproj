@@ -51,8 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dao\MemberDAO.cs" />
     <Compile Include="Dao\UserDao.cs" />
-    <Compile Include="EF\OnlineShopDbContext.cs" />
+    <Compile Include="EF\Cart.cs" />
+    <Compile Include="EF\CartDetail.cs" />
+    <Compile Include="EF\Category.cs" />
+    <Compile Include="EF\Image.cs" />
+    <Compile Include="EF\Member.cs" />
+    <Compile Include="EF\OnlineShopContext.cs" />
+    <Compile Include="EF\Product.cs" />
+    <Compile Include="EF\SizeColor.cs" />
     <Compile Include="EF\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

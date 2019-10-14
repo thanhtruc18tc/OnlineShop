@@ -9,40 +9,59 @@ namespace Model.EF
     [Table("User")]
     public partial class User
     {
-        public User(string username, string password, string name, string address, string email, string phone, DateTime? createdDate, bool? status)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
         {
-            Username = username;
-            Password = password;
-            Name = name;
-            Address = address;
-            Email = email;
-            Phone = phone;
-            CreatedDate = createdDate;
-            Status = status;
+            Carts = new HashSet<Cart>();
         }
 
-        public long ID { get; set; }
+        public User(String username, String password, String email, String name, String phone, String address, Member member, int point, bool admin, bool status)
+        {
+            this.username = username;
+            this.password = password;
+            this.email = email;
+            this.name = name;
+            this.phone = phone;
+            this.address = address;
+            this.Member = member;
+            this.point = point;
+            this.admin = admin;
+            this.status = status;
+
+        }
+
+        [Key]
+        public int id_user { get; set; }
 
         [StringLength(50)]
-        public string Username { get; set; }
+        public string username { get; set; }
 
         [StringLength(32)]
-        public string Password { get; set; }
+        public string password { get; set; }
 
         [StringLength(50)]
-        public string Name { get; set; }
+        public string email { get; set; }
 
         [StringLength(50)]
-        public string Address { get; set; }
+        public string name { get; set; }
 
         [StringLength(50)]
-        public string Email { get; set; }
+        public string phone { get; set; }
 
-        [StringLength(50)]
-        public string Phone { get; set; }
+        [StringLength(100)]
+        public string address { get; set; }
 
-        public DateTime? CreatedDate { get; set; }
+        public int? id_member { get; set; }
 
-        public bool? Status { get; set; }
+        public int? point { get; set; }
+
+        public bool? admin { get; set; }
+
+        public bool? status { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Carts { get; set; }
+
+        public virtual Member Member { get; set; }
     }
 }

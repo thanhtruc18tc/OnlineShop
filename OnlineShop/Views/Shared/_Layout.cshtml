@@ -6,7 +6,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>ShopMax &mdash; Colorlib e-Commerce Template</title>
+    <title>@ViewBag.Title</title>
+    <link rel="icon" href="https://cdn2.iconfinder.com/data/icons/copyright-icons-1/24/Social-Media-512.png"
+          type="image/x-icon">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!--Style Home-->
@@ -61,10 +63,42 @@
         </ul>
     </li>
     -->
-                                <li><a href="/Home/Shop">Trang chủ</a></li>
-                                <li><a href="/Home/Shop">Hàng mới về</a></li>
-                                <li><a href="#">Nam</a></li>
-                                <li><a href="#">Nữ</a></li>
+                                <li><a href="/Home/Shop">Tất cả</a></li>
+                                <li class="has-children">
+                                    <a href="#">Hàng mới về</a>
+                                    <ul class="dropdown">
+                                        <li><a href="#">Nam</a></li>
+                                        <li><a href="#">Nữ</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <a href="#">Nam</a>
+                                    <ul class="dropdown">
+                                        <li><a href="#">Áo sơ mi nam</a></li>
+                                        <li><a href="#">Áo thun nam</a></li>
+                                        <li><a href="#">Áo khoác nam</a></li>
+                                        <li><a href="#">Quần dài nam</a></li>
+                                        <li><a href="#">Quần short nam</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <a href="#">Nữ</a>
+                                    <ul class="dropdown">
+                                        <li><a href="#">Áo kiểu nữ</a></li>
+                                        <li><a href="#">Áo sơ mi nữ</a></li>
+                                        <li><a href="#">Áo thun nữ</a></li>
+                                        <li><a href="#">Áo khoác nữ</a></li>
+                                        <li><a href="#">Váy nữ</a></li>
+                                        <li><a href="#">Quần dài nữ</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <a href="#">Giày</a>
+                                    <ul class="dropdown">
+                                        <li><a href="#">Nam</a></li>
+                                        <li><a href="#">Nữ</a></li>
+                                    </ul>
+                                </li>
                                 <li><a href="/Home/Contact">Liên hệ</a></li>
                             </ul>
                         </nav>
@@ -144,10 +178,10 @@
                         </div>
                         <div class="block-7">
                             <form action="#" method="post">
-                                <label for="email_subscribe" class="footer-heading">Subscribe</label>
+                                <label for="email_subscribe" class="footer-heading">Đăng kí nhận tin tức khuyến mãi</label>
                                 <div class="form-group">
                                     <input type="text" class="form-control py-4" id="email_subscribe" placeholder="Email">
-                                    <input type="submit" class="btn btn-sm btn-primary" value="Send">
+                                    <input type="submit" class="btn btn-sm btn-primary" value="Gửi">
                                 </div>
                             </form>
                         </div>

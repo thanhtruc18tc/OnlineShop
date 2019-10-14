@@ -13,6 +13,7 @@ namespace OnlineShop.Controllers
 {
     public class AccountController : Controller
     {
+        OnlineShopContext context = new OnlineShopContext();
         #region Login
 
         public ActionResult LoginIndex()
@@ -24,7 +25,7 @@ namespace OnlineShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var dao = new UserDao();
+                var dao = new UserDao(context);
                 var result = dao.Login(model.UserName, Encryptor.MD5Hash(model.Password));
                 if (result == 1)
                 {
@@ -95,9 +96,13 @@ namespace OnlineShop.Controllers
                 #endregion
 
                 #region Save to Database
-                var dao = new UserDao();
-                User user = new User(model.Username, model.Password, model.Name, model.Address, model.Email, model.NumberPhone, DateTime.Now, true);
-                long id = dao.Insert(user);
+                
+                var userDao = new UserDao(context);
+                var memberDao = new MemberDao(context);
+                //User user = new User(model.Username, model.Password, model.Name, model.Address, model.Email, model.NumberPhone, DateTime.Now, true);
+                var listMember = memberDao.getAll();
+                User user = new User(model.Username, model.Password, model.Email, model.Name, model.NumberPhone, model.Address, listMember[0], 0, false, true);
+                long id = userDao.Insert(user);
                 #endregion
 
                 message = "Registration successfully done.";
@@ -121,7 +126,7 @@ namespace OnlineShop.Controllers
         [NonAction]
         public bool IsEmailExisted(string email)
         {
-            var dao = new UserDao();
+            var dao = new UserDao(context);
             return dao.IsEmailExisted(email);
         }
         #endregion
