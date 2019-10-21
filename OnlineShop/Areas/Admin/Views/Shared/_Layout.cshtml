@@ -1,6 +1,9 @@
 ﻿
+@using OnlineShop.Common.Constants;
+@using OnlineShop.Common.Session;
 @{
     Layout = null;
+    UserLogin user = (UserLogin)Session[Constants.USER_SESSION];
 }
 
 <!DOCTYPE html>
@@ -14,6 +17,8 @@
     <meta name="author" content="">
     <link rel="icon" href="https://cdn2.iconfinder.com/data/icons/copyright-icons-1/24/Social-Media-512.png"
           type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+
     <title>@ViewBag.Title</title>
     <!-- Bootstrap Core CSS -->
     <link href="~/Areas/Admin/Assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +44,7 @@
             font-family: 'Open Sans', sans-serif;
         }
     </style>
-    @RenderSection("jsSection", required: false)
+    @RenderSection("jsHeader", required: false)
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -85,7 +90,10 @@
                         <a class="nav-toggler open-close waves-effect waves-light hidden-md hidden-lg" href="javascript:void(0)"><i class="fa fa-bars"></i></a>
                     </li>
                     <li>
-                        <a>Hello, Admin !</a>
+                        @if (user != null)
+                        {
+                            <a>Hello, @user.UserName</a>
+                        }
                     </li>
                 </ul>
             </div>
@@ -167,6 +175,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+    @RenderSection("jsFooter", required: false)
 </body>
 
 </html>

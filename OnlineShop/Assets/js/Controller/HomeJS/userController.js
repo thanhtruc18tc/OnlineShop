@@ -4,32 +4,21 @@
     },
 
     registerEvents: function () {
-        var text = document.getElementById("error-message");
-        text.innerHTML = "Begin";
-
-        $("#btn-login").on("click", function (e) {
+       
+        $('.btn-change').off('click').on("click", function (e) {
             e.preventDefault();
-            text.innerHTML = "Loggin in...";
-            $('.error-message').html("Logging in...");
-            var data = {
-                "username": $("#username").val(),
-                "password": $("#password").val()
-            }
-            console.log(data);
+            var btn = $(this);
+            var id = btn.data('id');
+            
             $.ajax({
-                url: "/Home/SignIn",
-                data: JSON.stringify(data),
+                url: "/Admin/Account/Change",
+                data: {id: id},
                 dataType: "json",
                 type: "POST",
-                contentType: "application/json;charset=utf-8",
                 success: function (response) {
-                    
-                    if (response.status == true) {
-                        alert("ok");
-                    } else {
-                        alert("no")
-                    }
-
+                    $('#table').load('Account.cshtml #table', function(){
+                        
+                    });
                 }
             });
         });

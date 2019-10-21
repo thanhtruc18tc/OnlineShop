@@ -8,17 +8,31 @@ using Model.EF;
 using OnlineShop.Areas.Admin.Models;
 using OnlineShop.Common.Constants;
 using OnlineShop.Common.Helper;
+using OnlineShop.Common.Base;
 
 namespace OnlineShop.Areas.Admin.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         OnlineShopContext context = new OnlineShopContext();
+        int isFilterBy = 0;
+
 
         // GET: Admin/Account
         public ActionResult Index()
         {
             ViewBag.ListAccount = getAll();
+            return View("Account");
+        }
+
+        // GET: Admin/Account/Filter
+        public ActionResult Filter(int filterBy)
+        {
+            if (filterBy == 1)
+            {
+                ViewBag.Filter = 1;
+                ViewBag.ListAccount = getAdmin();
+            }
             return View("Account");
         }
 
@@ -32,26 +46,55 @@ namespace OnlineShop.Areas.Admin.Controllers
             {
                 foreach (User user in listAccount)
                 {
-                    AccountModel acc = new AccountModel(user.id_user, user.name, user.username, user.email, user.admin == true ? "Quản trị viên" : "Khách hàng", user.status == true ? "Đang hoạt động" : "Bị khóa");
+                    AccountModel acc = new AccountModel(user.id_user, user.name, user.username, user.email, (bool)user.admin, (bool)user.status);
                     accountModel.Add(acc);
                 }
             }
             return accountModel;
         }
 
-        // GET: Admin/Disable
-        public ActionResult Disable(int id)
+        public List<AccountModel> getAdmin()
+        {
+            List<AccountModel> accountModel = new List<AccountModel>();
+            var dao = new UserDao(context);
+            var listAccount = dao.getAdmin();
+
+            if (listAccount.Count > 0)
+            {
+                foreach (User user in listAccount)
+                {
+                    AccountModel acc = new AccountModel(user.id_user, user.name, user.username, user.email, (bool)user.admin, (bool)user.status);
+                    accountModel.Add(acc);
+                }
+            }
+            return accountModel;
+        }
+
+        // POST: Admin/ChangeStatus
+        [HttpPost]
+        public ActionResult ChangeStatus(int id)
         {
             var dao = new UserDao(context);
-            if (dao.changeStatus(id)) {
-                ViewBag.Message = "Success";
-            }
-            else
+            if (!dao.changeStatus(id))
             {
                 ViewBag.Message = "Failed";
             }
-            ViewBag.ListAccount = getAll();
-            return View("Account");
+            else
+            {
+                ViewBag.ListAccount = getAll();
+            }
+            return Index();
+        }
+
+        // POST: Admin/Change
+        [HttpPost]
+        public JsonResult Change(int id)
+        {
+           var result = new UserDao(context).changeStatus(id);
+           return Json(new
+           {
+               status = result
+           });
         }
     }
 }

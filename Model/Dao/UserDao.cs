@@ -39,6 +39,11 @@ namespace Model.Dao
             return db.Users.SingleOrDefault(x => x.username == username);
         }
 
+        public User GetUser(string username, String password)
+        {
+            return db.Users.SingleOrDefault(x => x.username == username && x.password == password);
+        }
+
         public User GetById(int id)
         {
             return db.Users.SingleOrDefault(x => x.id_user == id);
@@ -79,6 +84,16 @@ namespace Model.Dao
         #region Admin
         public List<User> getAll() {
             return db.Users.ToList<User>();
+        }
+
+        public List<User> getAdmin()
+        {
+            return db.Users.Where(x => x.admin == true).ToList<User>();
+        }
+
+        public List<User> getCustomer()
+        {
+            return db.Users.Where(x => x.admin == false).ToList<User>();
         }
 
         #endregion

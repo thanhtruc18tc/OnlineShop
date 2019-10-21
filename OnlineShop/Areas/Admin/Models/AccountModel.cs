@@ -11,10 +11,10 @@ namespace OnlineShop.Areas.Admin.Models
         public String name { get; set; }
         public String username { get; set; }
         public String email { get; set; }
-        public String role { get; set; }
-        public String status { get; set; }
+        public bool role { get; set; }
+        public bool status { get; set; }
 
-        public AccountModel(int id, String name, String username, String email, String role, String status) {
+        public AccountModel(int id, String name, String username, String email, bool role, bool status) {
             this.id = id;
             this.name = name;
             this.username = username;

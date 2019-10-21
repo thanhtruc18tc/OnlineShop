@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using OnlineShop.Common.Constants;
 using Model.EF;
 using OnlineShop.Common.Helper;
+using OnlineShop.Common.Session;
 
 namespace OnlineShop.Controllers
 {
@@ -16,7 +17,7 @@ namespace OnlineShop.Controllers
         OnlineShopContext context = new OnlineShopContext();
         #region Login
 
-        public ActionResult LoginIndex()
+        public ActionResult _Login()
         {
             return View("Login");
         }
@@ -29,15 +30,18 @@ namespace OnlineShop.Controllers
                 var result = dao.Login(model.UserName, Encryptor.MD5Hash(model.Password));
                 if (result == 1)
                 {
-                    //var user = dao.GetById(model.UserName);
-                    //var userSession = new UserLogin();
-                    //userSession.UserID = user.ID;
-                    //Session.Add(Constants.USER_SESSION, userSession);
+                    var user = dao.GetUser(model.UserName, Encryptor.MD5Hash(model.Password));
+                    var userSession = new UserLogin();
+                    userSession.UserID = user.id_user;
+                    userSession.UserName = user.username;
+                    userSession.isAdmin = (bool)user.admin;
+                    Session.Add(Constants.USER_SESSION, userSession);
                     ViewBag.Message = Constants.LOGIN_SUCCESSFUL;
                     ViewBag.Status = "True";
+                    if ((bool)user.admin) {
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
+                    }
                     return RedirectToAction("Index", "Home");
-                    //return View("Index");
-                    //return View("Index");
                 }
                 else if (result == -1)
                 {
@@ -60,7 +64,7 @@ namespace OnlineShop.Controllers
         #endregion
 
         #region Register
-        public ActionResult SignUpIndex()
+        public ActionResult _SignUp()
         {
             return View("SignUp");
         }
@@ -119,7 +123,7 @@ namespace OnlineShop.Controllers
 
             //ModelState.AddModelError("", Constants.SIGN_UP_SUCCESSFUL);
             //return View("SignUp", model);
-            return RedirectToAction("Index", "Home", model) ;
+            return RedirectToAction("Index", "Home") ;
         }
         // Verify
 
@@ -128,6 +132,14 @@ namespace OnlineShop.Controllers
         {
             var dao = new UserDao(context);
             return dao.IsEmailExisted(email);
+        }
+        #endregion
+
+        #region
+        public ActionResult LogOut()
+        {
+            Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
         #endregion
     }

@@ -206,7 +206,7 @@
     <Compile Include="Common\Base\BaseController.cs" />
     <Compile Include="Common\Constants\Constants.cs" />
     <Compile Include="Common\Helper\Encryptor.cs" />
-    <Compile Include="Common\Response\UserLogin.cs" />
+    <Compile Include="Common\Session\UserLogin.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
