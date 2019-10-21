@@ -17,11 +17,31 @@ namespace Model.Dao
             db = context;
         }
 
+        public bool changeStatus(int id)
+        {
+            var user = GetById(id);
+            if (user != null)
+            {
+                user.status = !user.status;
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public object Encryptor { get; private set; }
 
         public User GetByUserName(string username)
         {
             return db.Users.SingleOrDefault(x => x.username == username);
+        }
+
+        public User GetById(int id)
+        {
+            return db.Users.SingleOrDefault(x => x.id_user == id);
         }
 
         public long Insert(User entity)
@@ -53,9 +73,14 @@ namespace Model.Dao
             } else
             {
                 return -1; // Not exist
-            }
-
-            
+            }  
         }
+
+        #region Admin
+        public List<User> getAll() {
+            return db.Users.ToList<User>();
+        }
+
+        #endregion
     }
 }

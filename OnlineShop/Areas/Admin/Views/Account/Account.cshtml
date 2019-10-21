@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "User - Admin ShopMax";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section jsSection {
+    <script>
+        function btnAllOnClicked() {
+            setSelectedStatus("btn-all")
+            setUnSelectedStatus("btn-admin")
+            setUnSelectedStatus("btn-customer")
+            window.location.href = '@Url.Action("FilterAll", "Account")';
+        }
+        function btnAdminOnClicked() {
+            setUnSelectedStatus("btn-all")
+            setSelectedStatus("btn-admin")
+            setUnSelectedStatus("btn-customer")
+            window.location.href = '@Url.Action("FilterAdmin", "Orders")';
+        }
+        function btnCustomerOnClicked() {
+            setUnSelectedStatus("btn-all")
+            setUnSelectedStatus("btn-admin")
+            setSelectedStatus("btn-customer")
+            window.location.href = '@Url.Action("FilterCustomer", "Orders")';
+        }
+
+        // Extension
+        function setSelectedStatus(buttonClass) {
+            if (document.getElementById(buttonClass).classList.contains('btn-default')) {
+                document.getElementById(buttonClass).classList.remove('btn-default');
+                document.getElementById(buttonClass).classList.add('btn-success');
+            }
+        }
+        function setUnSelectedStatus(buttonClass) {
+            if (document.getElementById(buttonClass).classList.contains('btn-success')) {
+                document.getElementById(buttonClass).classList.remove('btn-success');
+                document.getElementById(buttonClass).classList.add('btn-default');
+            } else {
+            }
+        }
+    </script>
+}
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12" style="width:100%">
+                <p class="page-title">DANH SÁCH TÀI KHOẢN KHÁCH HÀNG</p>
+                <span>Lọc theo: <button id="btn-all" class="btn-success" onclick="btnAllOnClicked()">Tất cả</button>
+                <button id="btn-admin" class="btn-default" style="margin-left:10px" onclick="btnAdminOnClicked()">Admin</button>
+                <button id="btn-customer" class="btn-default" style="margin-left:10px" onclick="btnCustomerOnClicked()">Khách hàng</button></span>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /row -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="white-box">
+                    <div class="table-responsive">
+                        <div>@ViewBag.Message</div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên</th>
+                                    <th>Tên đăng nhập</th>
+                                    <th>Email</th>
+                                    <th>Loại tài khoản</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
+                                @for (var i = 1; i <= ViewBag.ListAccount.Count; i++)
+                                {
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@ViewBag.ListAccount[i-1].name</td>
+                                        <td>@ViewBag.ListAccount[i-1].username</td>
+                                        <td>@ViewBag.ListAccount[i-1].email</td>
+                                        <td>@ViewBag.ListAccount[i-1].role</td>
+                                        <td>@ViewBag.ListAccount[i-1].status</td>
+                                        <td>
+                                            <span><input type="button" class="btn-danger" value="Khóa tài khoản" onclick="location.href='@Url.Action("Disable", "Account", new { @id = @ViewBag.ListAccount[i - 1].id })'" /></span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+
+</div>
+

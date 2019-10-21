@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Orders - Admin ShopMax";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section jsSection {
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+    </script>
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12" style="width:100%">
+                <p class="page-title">DANH SÁCH TẤT CẢ ĐƠN HÀNG </p>
+                <span>
+                    Lọc theo: <button class="btn-success">Tất cả</button>
+                    <button class="btn-default" style="margin-left:10px">Đơn hàng mới</button>
+                    <button class="btn-default" style="margin-left:10px">Đang giao</button>
+                    <button class="btn-default" style="margin-left:10px">Đã giao</button>
+                    <br />
+                    <div class="container">
+                        <div class="row">
+                            <div class='col-sm-6'>
+                                <div class="form-group">
+                                    <div class='input-group date' id='datetimepicker1'>
+                                        <input type='text' class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </span>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /row -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="white-box">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên khách hàng</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Nguyễn Anh Nhật</td>
+                                    <td>15/10/2019</td>
+                                    <td>1.500.000 VND</td>
+                                    <td>Đã giao</td>
+                                    <td>
+                                        <span><button class="btn-warning">Chỉnh sửa đơn hàng</button></span>
+                                        <span><button class="btn-danger">Xóa đơn hàng</button></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Nguyễn Anh Nhật</td>
+                                    <td>15/10/2019</td>
+                                    <td>1.500.000 VND</td>
+                                    <td>Đã giao</td>
+                                    <td>
+                                        <span><button class="btn-warning">Chỉnh sửa đơn hàng</button></span>
+                                        <span><button class="btn-danger">Xóa đơn hàng</button></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Nguyễn Anh Nhật</td>
+                                    <td>15/10/2019</td>
+                                    <td>1.500.000 VND</td>
+                                    <td>Đã giao</td>
+                                    <td>
+                                        <span><button class="btn-warning">Chỉnh sửa đơn hàng</button></span>
+                                        <span><button class="btn-danger">Xóa đơn hàng</button></span>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
