@@ -1,8 +1,8 @@
 ﻿@using OnlineShop.Common.Constants;
-@using OnlineShop.Common.Session;
+@using Model.EF;
 @{
     Layout = null;
-    UserLogin user = (UserLogin)Session[Constants.USER_SESSION];
+    User user = (User)Session[Constants.USER_SESSION];
 }
 
 <!DOCTYPE html>
@@ -115,27 +115,17 @@
                             <span class="number">2</span>
                         </a>
                         <span style="margin-left: 15px">
-                            <span class="icon-user-o" ></span>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                
-                                @if (user == null)
-                                {
-                                    <a class="dropdown-item" href="/Account/_Login">Đăng nhập</a>
-                                    <a class="dropdown-item" href="/Account/_SingUp">Đăng kí</a>
-                                }
-                                else
-                                {
-                                    <a class="dropdown-item" href="/Account/LogOut">Đăng xuất</a>
-                                }
-                            </div>
+                            <span class="icon-user-o" ></span> 
                         </span>
                         @if (user != null)
                         {
-                            <a>Hello, user.UserName</a>
+                            <a href="/Account/MyProfile" >Hello, @user.name</a>
+                            <span> <a href="/Account/LogOut" > / Đăng xuất</a></span>
                         }
                         else
                         {
-                            <a href="/Account/_Login">Đăng xuất / Đăng kí</a>
+                            <a href="/Account/_Login">Đăng nhập / </a>
+                            <span><a href="/Account/_SignUp">Đăng kí</a></span>
                         }
                         <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span class="icon-menu"></span></a>
                     </div>

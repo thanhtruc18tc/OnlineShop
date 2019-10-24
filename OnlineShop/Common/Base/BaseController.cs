@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using OnlineShop.Common.Session;
+using Model.EF;
 
 namespace OnlineShop.Common.Base
 {
@@ -12,8 +12,8 @@ namespace OnlineShop.Common.Base
     {
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            var session = (UserLogin)Session[Constants.Constants.USER_SESSION];
-            if ((session == null) || (!session.isAdmin))
+            var session = (User)Session[Constants.Constants.USER_SESSION];
+            if ((session == null) || (!(bool)session.admin))
             {
                 filterContext.Result = new RedirectResult("~/Account/_Login");
             } 

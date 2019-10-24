@@ -1,0 +1,225 @@
+﻿@using OnlineShop.Common.Constants;
+@using Model.EF;
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    User user = (User)Session[Constants.USER_SESSION];
+    var message = ViewBag.Message;
+}
+
+@section jsFooter{
+    <script>
+        if ('@message' == '@Constants.UPDATE_PROFILE_SUCCESS') {
+            $("#errorModal").modal('show');
+        }
+    </script>
+}
+<style>
+    body {
+        font-family: 'Varela Round', sans-serif;
+    }
+
+    .modal-login {
+        width: 500px;
+    }
+
+        .modal-login .modal-content {
+            margin-top: 100px;
+            padding: 20px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .modal-login .modal-header {
+            border-bottom: none;
+            position: relative;
+            justify-content: center;
+        }
+
+        .modal-login .close {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+        }
+
+        .modal-login h4 {
+            color: #636363;
+            text-align: center;
+            font-size: 26px;
+            margin-top: 0;
+        }
+
+        .modal-login .modal-content {
+            color: #999;
+            border-radius: 1px;
+            margin-bottom: 15px;
+            background: #fff;
+            border: 1px solid #f3f3f3;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            padding: 25px;
+        }
+
+        .modal-login .form-group {
+            margin-bottom: 20px;
+        }
+
+        .modal-login label {
+            font-weight: normal;
+            font-size: 13px;
+        }
+
+        .modal-login .form-control {
+            min-height: 38px;
+            padding-left: 5px;
+            box-shadow: none !important;
+            border-width: 0 0 1px 0;
+            border-radius: 0;
+        }
+
+            .modal-login .form-control:focus {
+                border-color: #ccc;
+            }
+
+        .modal-login .input-group-addon {
+            max-width: 42px;
+            text-align: center;
+            background: none;
+            border-width: 0 0 1px 0;
+            padding-left: 5px;
+            border-radius: 0;
+        }
+
+        .modal-login .btn {
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 3px;
+            border: none;
+            min-width: 140px;
+            outline: none !important;
+            background: #DE6262;
+            color: #fff;
+        }
+
+            .modal-login .btn:hover, .modal-login .btn:focus {
+                background: #179b81;
+            }
+
+        .modal-login .hint-text {
+            text-align: center;
+            padding-top: 5px;
+            font-size: 13px;
+        }
+
+        .modal-login .modal-footer {
+            color: #999;
+            border-color: #dee4e7;
+            text-align: center;
+            margin: 0 -25px -25px;
+            font-size: 13px;
+            justify-content: center;
+        }
+
+        .modal-login a {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+            .modal-login a:hover {
+                text-decoration: none;
+            }
+
+        .modal-login a {
+            color: #19aa8d;
+            text-decoration: none;
+        }
+
+            .modal-login a:hover {
+                text-decoration: underline;
+            }
+
+        .modal-login .fa {
+            font-size: 21px;
+        }
+
+    .trigger-btn {
+        display: inline-block;
+        margin: 100px auto;
+    }
+</style>
+
+
+
+
+<!-- Modal HTML -->
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog modal-login">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Đổi mật khẩu</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body" style="margin-top:10px">
+                @using (Html.BeginForm("UpdatePassword", "Account", FormMethod.Post))
+                {
+                    <div class="form-group">
+                            <label for="old-pass">Mật khẩu cũ</label>
+                            <input type="password" class="form-control" name="oldPassword" required="required">
+                    </div>
+
+                    <div class="form-group">
+                            <label for="new-pass">Mật khẩu mới</label>
+                            <input type="password" class="form-control" name="newPassword" required="required">
+                    </div>
+
+                    <div class="form-group">
+                            <label for="re-pass">Nhập lại mật khẩu</label>
+                            <input type="password" class="form-control" name="rePassword" required="required">
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px">
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">Gửi</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="align-content:center; max-width: 500px; margin: 0 auto; margin-top:100px; margin-bottom:100px" >
+    <div>
+        <h2 class="text-center">Thông tin tài khoản của bạn</h2>
+        @using (Html.BeginForm("Update", "Account", FormMethod.Post))
+        {
+            <div class="form-group">
+                <label for="name">Tên</label>
+                <input type="hidden" value="@user.id_user" name="id" />
+                <input  class = "form-control" value="@user.name" name="name"/>
+            </div>
+            <div class="form-group">
+                <label for="username">Tên đăng nhập</label>
+                <input class="form-control" value="@user.username" name="username"/>
+            </div>
+            <div class="form-group">
+                <label for="email" >Email</label>
+                <input class="form-control" value="@user.email" name="email"/>
+            </div>
+            <div class="form-group">
+                <label for="address" >Địa chỉ</label>
+                <input class="form-control" value="@user.address" name="address"/>
+            </div>
+            <div class="form-group">
+                <label for="phone" >Số điện thoại</label>
+                <input class="form-control" value="@user.phone" name="phone"/>
+            </div>
+
+            <div style="align-self: center">
+                @Html.ValidationSummary(true, "", new { @style = "color: red" })
+            </div>
+            <div><a class="" href="#myModal" data-toggle="modal">Đổi mật khẩu?</a></div>
+            <div style="margin-top:-20px">
+                <button type="submit" class="btn btn-login float-right btn-success" >CẬP NHẬT THÔNG TIN</button>
+            </div>
+        }
+    </div>
+</div>
+

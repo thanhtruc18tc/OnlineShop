@@ -83,6 +83,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -202,22 +203,22 @@
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
-    <Compile Include="Areas\Admin\Models\AccountModel.cs" />
     <Compile Include="Common\Base\BaseController.cs" />
     <Compile Include="Common\Constants\Constants.cs" />
     <Compile Include="Common\Helper\Encryptor.cs" />
-    <Compile Include="Common\Session\UserLogin.cs" />
+    <Compile Include="Common\Helper\MailHelper.cs" />
+    <Compile Include="Common\Helper\RandomHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\RegisterModel.cs" />
-    <Compile Include="Models\Response.cs" />
+    <Compile Include="Param\AccountViewModels.cs" />
+    <Compile Include="Param\IdentityModels.cs" />
+    <Compile Include="Param\LoginModel.cs" />
+    <Compile Include="Param\ManageViewModels.cs" />
+    <Compile Include="Param\RegisterModel.cs" />
+    <Compile Include="Param\Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -879,10 +880,10 @@
     <Content Include="Views\Home\Thankyou.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Common\Param\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>

@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using Model.Dao;
 using Model.EF;
-using OnlineShop.Areas.Admin.Models;
 using OnlineShop.Common.Constants;
 using OnlineShop.Common.Helper;
 using OnlineShop.Common.Base;
@@ -16,7 +15,6 @@ namespace OnlineShop.Areas.Admin.Controllers
     {
         OnlineShopContext context = new OnlineShopContext();
         int isFilterBy = 0;
-
 
         // GET: Admin/Account
         public ActionResult Index()
@@ -36,38 +34,15 @@ namespace OnlineShop.Areas.Admin.Controllers
             return View("Account");
         }
 
-        public List<AccountModel> getAll()
+        public List<User> getAll()
         {
-            List<AccountModel> accountModel = new List<AccountModel>();
-            var dao = new UserDao(context);
-            var listAccount = dao.getAll();
-
-            if (listAccount.Count > 0)
-            {
-                foreach (User user in listAccount)
-                {
-                    AccountModel acc = new AccountModel(user.id_user, user.name, user.username, user.email, (bool)user.admin, (bool)user.status);
-                    accountModel.Add(acc);
-                }
-            }
-            return accountModel;
+            return new UserDao(context).getAll();
         }
 
-        public List<AccountModel> getAdmin()
+        public List<User> getAdmin()
         {
-            List<AccountModel> accountModel = new List<AccountModel>();
-            var dao = new UserDao(context);
-            var listAccount = dao.getAdmin();
-
-            if (listAccount.Count > 0)
-            {
-                foreach (User user in listAccount)
-                {
-                    AccountModel acc = new AccountModel(user.id_user, user.name, user.username, user.email, (bool)user.admin, (bool)user.status);
-                    accountModel.Add(acc);
-                }
-            }
-            return accountModel;
+           
+            return new UserDao(context).getAllAdmin();
         }
 
         // POST: Admin/ChangeStatus
@@ -75,7 +50,7 @@ namespace OnlineShop.Areas.Admin.Controllers
         public ActionResult ChangeStatus(int id)
         {
             var dao = new UserDao(context);
-            if (!dao.changeStatus(id))
+            if (!dao.ChangeStatus(id))
             {
                 ViewBag.Message = "Failed";
             }
@@ -90,7 +65,7 @@ namespace OnlineShop.Areas.Admin.Controllers
         [HttpPost]
         public JsonResult Change(int id)
         {
-           var result = new UserDao(context).changeStatus(id);
+           var result = new UserDao(context).ChangeStatus(id);
            return Json(new
            {
                status = result

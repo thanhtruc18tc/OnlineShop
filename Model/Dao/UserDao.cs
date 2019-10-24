@@ -12,12 +12,47 @@ namespace Model.Dao
     {
         OnlineShopContext db = null;
 
+        public object Encryptor { get; private set; }
+
         public UserDao(OnlineShopContext context)
         {
             db = context;
         }
 
-        public bool changeStatus(int id)
+        public User GetByEmail(string email)
+        {
+            return db.Users.SingleOrDefault(x => x.email == email);
+        }
+
+        public User GetByUsernameAndPassword(string username, String password)
+        {
+            return db.Users.SingleOrDefault(x => x.username == username && x.password == password);
+        }
+
+        public User GetById(int id)
+        {
+            return db.Users.SingleOrDefault(x => x.id_user == id);
+        }
+
+        public User GetByUserName(string username)
+        {
+            return db.Users.SingleOrDefault(x => x.username == username);
+        }
+
+        public bool IsEmailExisted(string email)
+        {
+            return db.Users.Count(x => x.email == email) != 0;
+        }
+
+        // MARK: Register
+        public void Insert(User entity)
+        {
+            db.Users.Add(entity);
+            db.SaveChanges();
+        }
+
+        // MARK: Lock account
+        public bool ChangeStatus(int id)
         {
             var user = GetById(id);
             if (user != null)
@@ -32,35 +67,37 @@ namespace Model.Dao
             }
         }
 
-        public object Encryptor { get; private set; }
-
-        public User GetByUserName(string username)
+        // MARK: Forgot password
+        public bool ChangePassword(string email, string newpass)
         {
-            return db.Users.SingleOrDefault(x => x.username == username);
+            var user = GetByEmail(email);
+            if (user != null) {
+                user.password = newpass;
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public User GetUser(string username, String password)
+        // MARK: Update profile
+        public User Update(string id, string name, string username, string email, string address, string phone)
         {
-            return db.Users.SingleOrDefault(x => x.username == username && x.password == password);
-        }
+            var user = GetById(Convert.ToInt32(id));
 
-        public User GetById(int id)
-        {
-            return db.Users.SingleOrDefault(x => x.id_user == id);
-        }
-
-        public long Insert(User entity)
-        {
-            db.Users.Add(entity);
+            user.name = name;
+            user.username = username;
+            user.email = email;
+            user.address = address;
+            user.phone = phone;
             db.SaveChanges();
-            return entity.id_user;
+            return user;
+
         }
 
-        public bool IsEmailExisted(string email)
-        {
-            return db.Users.Count(x => x.email == email) != 0;
-        }
-
+        // MARK: Login
         public int Login(string username, string password)
         {
             var result = db.Users.Count(x => x.username == username);
@@ -86,16 +123,15 @@ namespace Model.Dao
             return db.Users.ToList<User>();
         }
 
-        public List<User> getAdmin()
+        public List<User> getAllAdmin()
         {
             return db.Users.Where(x => x.admin == true).ToList<User>();
         }
 
-        public List<User> getCustomer()
+        public List<User> getAllCustomer()
         {
             return db.Users.Where(x => x.admin == false).ToList<User>();
         }
-
         #endregion
     }
 }

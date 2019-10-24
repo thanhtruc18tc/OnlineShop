@@ -1,9 +1,9 @@
 ﻿
 @using OnlineShop.Common.Constants;
-@using OnlineShop.Common.Session;
+@using Model.EF;
 @{
     Layout = null;
-    UserLogin user = (UserLogin)Session[Constants.USER_SESSION];
+    User user = (User)Session[Constants.USER_SESSION];
 }
 
 <!DOCTYPE html>
@@ -92,7 +92,7 @@
                     <li>
                         @if (user != null)
                         {
-                            <a>Hello, @user.UserName</a>
+                            <a>Hello, @user.username</a>
                         }
                     </li>
                 </ul>

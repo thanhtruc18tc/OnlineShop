@@ -1,22 +1,18 @@
 ﻿using Model.Dao;
 using OnlineShop.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using OnlineShop.Common.Constants;
 using Model.EF;
 using OnlineShop.Common.Helper;
-using OnlineShop.Common.Session;
 
 namespace OnlineShop.Controllers
 {
     public class AccountController : Controller
     {
         OnlineShopContext context = new OnlineShopContext();
-        #region Login
 
+
+        #region Login
         public ActionResult _Login()
         {
             return View("Login");
@@ -30,14 +26,9 @@ namespace OnlineShop.Controllers
                 var result = dao.Login(model.UserName, Encryptor.MD5Hash(model.Password));
                 if (result == 1)
                 {
-                    var user = dao.GetUser(model.UserName, Encryptor.MD5Hash(model.Password));
-                    var userSession = new UserLogin();
-                    userSession.UserID = user.id_user;
-                    userSession.UserName = user.username;
-                    userSession.isAdmin = (bool)user.admin;
-                    Session.Add(Constants.USER_SESSION, userSession);
-                    ViewBag.Message = Constants.LOGIN_SUCCESSFUL;
-                    ViewBag.Status = "True";
+                    var user = dao.GetByUsernameAndPassword(model.UserName, Encryptor.MD5Hash(model.Password));
+                    Session.Add(Constants.USER_SESSION, user);
+
                     if ((bool)user.admin) {
                         return RedirectToAction("Index", "Home", new { area = "Admin" });
                     }
@@ -46,15 +37,11 @@ namespace OnlineShop.Controllers
                 else if (result == -1)
                 {
                     ModelState.AddModelError("", Constants.USERNAME_NON_EXISTED);
-                    ViewBag.Status = false;
-                    ViewBag.ShowModal = Constants.SHOW_LOGIN_MODAL;
                     return View();
                 }
                 else
                 {
-                    ViewBag.ShowModal = Constants.SHOW_LOGIN_MODAL;
                     ModelState.AddModelError("", Constants.PASSWORD_INCORRECT);
-                    ViewBag.Status = false;
                     return View();
                 }
             }
@@ -72,60 +59,40 @@ namespace OnlineShop.Controllers
         [HttpPost]
         public ActionResult SignUp(RegisterModel model)
         {
-            bool status = false;
-            string message = "";
-            #region Check Model Validation
             if (ModelState.IsValid)
             {
-                #region Validate User Information
+                // MARK: Validate User Information
                 var isExisted = IsEmailExisted(model.Email);
                 if (isExisted)
                 {
                     ModelState.AddModelError("", Constants.EMAIL_EXISTED);
-                    ViewBag.ShowModal = Constants.SHOW_SIGN_UP_MODAL;
-                    ViewBag.Status = false;
                     return View("SignUp");
                 }
                 if (model.Password != model.RePassword)
                 {
                     ModelState.AddModelError("", Constants.REPASSWORD_INCORRECT);
-                    ViewBag.ShowModal = Constants.SHOW_SIGN_UP_MODAL;
-                    ViewBag.Status = false;
                     return View("SignUp");
                 }
-                #endregion
 
-                #region Password hashing
+                // MARK: Password hashing
                 model.Password = Encryptor.MD5Hash(model.Password);
-                #endregion
 
-                #region Save to Database
-                
+                // MARK: Save to Database
                 var userDao = new UserDao(context);
-                var memberDao = new MemberDao(context);
-                //User user = new User(model.Username, model.Password, model.Name, model.Address, model.Email, model.NumberPhone, DateTime.Now, true);
-                var listMember = memberDao.getAll();
-                User user = new User(model.Username, model.Password, model.Email, model.Name, model.NumberPhone, model.Address, listMember[0], 0, false, true);
-                long id = userDao.Insert(user);
-                #endregion
+                User user = new User(model.Username, model.Password, model.Email, model.Name, model.NumberPhone, model.Address, new MemberDao(context).getAll()[0], 0, false, true);
+                userDao.Insert(user);
 
-                message = "Registration successfully done.";
-                status = true;
+                // MARK: Create a session
+                Session.Add(Constants.USER_SESSION, user);
+
             }
             else
             {
-                message = "Invalid request";
+                ViewBag.Message = "Invalid request";
             }
-            #endregion
 
-            ViewBag.Status = status;
-            ViewBag.Message = message;
-
-            //ModelState.AddModelError("", Constants.SIGN_UP_SUCCESSFUL);
-            //return View("SignUp", model);
             return RedirectToAction("Index", "Home") ;
         }
-        // Verify
 
         [NonAction]
         public bool IsEmailExisted(string email)
@@ -135,7 +102,59 @@ namespace OnlineShop.Controllers
         }
         #endregion
 
-        #region
+        #region Forgot password
+        // POST: Account/ForgotPassword
+        public ActionResult ForgotPassword(string email)
+        {
+            string newPassword = RandomHelper.RandomPassword();
+            bool success = new UserDao(context).ChangePassword(email, Encryptor.MD5Hash(newPassword));
+
+            if (success) {
+                new MailHelper().sendMail(email, "Khôi phục mật khẩu", "Mật khẩu mới của bạn là: " + newPassword + ".");
+                ViewBag.Message = Constants.CHANGE_PASSWORD_SUCCESS;
+            }
+            else
+            {
+                ViewBag.Message = Constants.CHANGE_PASSWORD_FAILD;
+            }
+            return View("Login");
+        }
+        #endregion
+
+        #region See Profile
+        public ActionResult MyProfile()
+        {
+            return View("Profile");
+        }
+        #endregion
+
+        #region Update Profilte
+        public ActionResult Update(string id, string name, string username, string email, string address, string phone)
+        {
+            var user = new UserDao(context).Update(id, name, username, email, address, phone);
+
+            User userSession = (User)Session[Constants.USER_SESSION];
+            Session[Constants.USER_SESSION] = user;
+
+            ViewBag.Message = Constants.UPDATE_PROFILE_SUCCESS;
+            return View("Profile");
+        }
+        #endregion
+
+        #region Change Password
+        public ActionResult ChangePassword(string oldPass, string newPass, string rePass)
+        {
+
+            //UserLogin userSession = (UserLogin)Session[Constants.USER_SESSION];
+
+
+
+            //ViewBag.Message = Constants.UPDATE_PASSWORD_SUCCESS;
+            return View("Profile");
+        }
+        #endregion
+
+        #region LogOut
         public ActionResult LogOut()
         {
             Session.Clear();
