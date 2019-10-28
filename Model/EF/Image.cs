@@ -12,10 +12,10 @@ namespace Model.EF
         [Key]
         public int id_image { get; set; }
 
-        [StringLength(100)]
+        [Column(TypeName = "ntext")]
         public string link { get; set; }
 
-        public int id_product { get; set; }
+        public int? id_product { get; set; }
 
         public virtual Product Product { get; set; }
     }

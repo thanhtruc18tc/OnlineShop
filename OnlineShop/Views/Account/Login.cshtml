@@ -1,7 +1,7 @@
 ﻿@using OnlineShop.Common.Constants;
 
 @{
-    ViewBag.Title = "Đăng nhập - ShopMax";
+    ViewBag.Title = "Đăng nhập";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var message = ViewBag.Message;
 }
@@ -17,7 +17,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="~/Assets/css/Controller/AccountCSS/account.css" rel="stylesheet" />
-
 @section jsFooter{
     <script>
         if ('@message' == '@Constants.CHANGE_PASSWORD_FAILD' || '@message' == '@Constants.CHANGE_PASSWORD_SUCCESS') {
@@ -25,141 +24,6 @@
         }
     </script>
 }
-
-
-<style>
-    body {
-    font-family: 'Varela Round', sans-serif;
-}
-
-.modal-login {
-    width: 500px;
-}
-
-    .modal-login .modal-content {
-        margin-top: 100px;
-        padding: 20px;
-        border-radius: 5px;
-        border: none;
-    }
-
-    .modal-login .modal-header {
-        border-bottom: none;
-        position: relative;
-        justify-content: center;
-    }
-
-    .modal-login .close {
-        position: absolute;
-        top: -10px;
-        right: -10px;
-    }
-
-    .modal-login h4 {
-        color: #636363;
-        text-align: center;
-        font-size: 26px;
-        margin-top: 0;
-    }
-
-    .modal-login .modal-content {
-        color: #999;
-        border-radius: 1px;
-        margin-bottom: 15px;
-        background: #fff;
-        border: 1px solid #f3f3f3;
-        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-        padding: 25px;
-    }
-
-    .modal-login .form-group {
-        margin-bottom: 20px;
-    }
-
-    .modal-login label {
-        font-weight: normal;
-        font-size: 13px;
-    }
-
-    .modal-login .form-control {
-        min-height: 38px;
-        padding-left: 5px;
-        box-shadow: none !important;
-        border-width: 0 0 1px 0;
-        border-radius: 0;
-    }
-
-        .modal-login .form-control:focus {
-            border-color: #ccc;
-        }
-
-    .modal-login .input-group-addon {
-        max-width: 42px;
-        text-align: center;
-        background: none;
-        border-width: 0 0 1px 0;
-        padding-left: 5px;
-        border-radius: 0;
-    }
-
-    .modal-login .btn {
-        font-size: 16px;
-        font-weight: bold;
-        border-radius: 3px;
-        border: none;
-        min-width: 140px;
-        outline: none !important;
-        background: #DE6262;
-        color: #fff;
-    }
-
-        .modal-login .btn:hover, .modal-login .btn:focus {
-            background: #179b81;
-        }
-
-    .modal-login .hint-text {
-        text-align: center;
-        padding-top: 5px;
-        font-size: 13px;
-    }
-
-    .modal-login .modal-footer {
-        color: #999;
-        border-color: #dee4e7;
-        text-align: center;
-        margin: 0 -25px -25px;
-        font-size: 13px;
-        justify-content: center;
-    }
-
-    .modal-login a {
-        color: #fff;
-        text-decoration: underline;
-    }
-
-        .modal-login a:hover {
-            text-decoration: none;
-        }
-
-    .modal-login a {
-        color: #19aa8d;
-        text-decoration: none;
-    }
-
-        .modal-login a:hover {
-            text-decoration: underline;
-        }
-
-    .modal-login .fa {
-        font-size: 21px;
-    }
-
-.trigger-btn {
-    display: inline-block;
-    margin: 100px auto;
-}
-
-</style>
 
 <!-- Modal HTML -->
 <div id="myModal" class="modal fade">
@@ -198,12 +62,11 @@
         </div>
     </div>
 </div>                             
-
 <section class="login-block">
     <div class="container">
         <div class="row">
             <div class="col-md-4 login-sec">
-                <h2 class="text-center">Đăng nhập ngay bây giờ</h2>
+                <h2 class="text-center" style="font-family: 'Verdana', sans-serif;">Đăng nhập ngay bây giờ</h2>
                 @using (Html.BeginForm("Login", "Account", FormMethod.Post))
                 {
                     <div class="form-group">
@@ -224,7 +87,7 @@
                 }
                 <div>
                     <span>Bạn chưa là thành viên?</span><br />
-                    <a href="/Account/_SignUp" class="blue-text ml-1">
+                    <a href="/register" class="blue-text ml-1">
                         Đăng kí
                     </a>
                 </div>

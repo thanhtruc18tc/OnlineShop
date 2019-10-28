@@ -6,27 +6,21 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Member")]
-    public partial class Member
+    [Table("UserType")]
+    public partial class UserType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Member()
+        public UserType()
         {
             Users = new HashSet<User>();
         }
 
-        public Member(String name, float discount) {
-            this.name = name;
-            this.discount = discount;
-        }
-
         [Key]
-        public int id_member { get; set; }
+        public int id_type { get; set; }
 
+        [Required]
         [StringLength(20)]
         public string name { get; set; }
-
-        public double? discount { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }

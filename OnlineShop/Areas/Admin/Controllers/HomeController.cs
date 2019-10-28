@@ -7,7 +7,7 @@ using OnlineShop.Common.Base;
 
 namespace OnlineShop.Areas.Admin.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : AdminBaseController
     {
         // GET: Admin/Home
         public ActionResult Index()

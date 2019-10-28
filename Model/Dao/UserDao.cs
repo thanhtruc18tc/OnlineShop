@@ -19,6 +19,89 @@ namespace Model.Dao
             db = context;
         }
 
+        public void test()
+        {
+
+            if (db.Categories.Count() == 0)
+            {
+                db.Categories.Add(new Category { name = "Áo sơ mi nam" });
+                db.Categories.Add(new Category { name = "Áo thun nam" });
+                db.Categories.Add(new Category { name = "Áo khoác nam" });
+                db.Categories.Add(new Category { name = "Quần dài nam" });
+                db.Categories.Add(new Category { name = "Quần short nam" });
+                db.Categories.Add(new Category { name = "Áo kiểu nữ" });
+                db.Categories.Add(new Category { name = "Áo sơ mi nữ" });
+                db.Categories.Add(new Category { name = "Áo thun nữ" });
+                db.Categories.Add(new Category { name = "Áo khoác nữ" });
+                db.Categories.Add(new Category { name = "Váy nữ" });
+                db.Categories.Add(new Category { name = "Quần dài nữ" });
+                db.SaveChanges();
+            }
+
+            if (db.Sizes.Count() == 0)
+            {
+                db.Sizes.Add(new Size { name = "S"});
+                db.Sizes.Add(new Size { name = "M" });
+                db.Sizes.Add(new Size { name = "L" });
+                db.Sizes.Add(new Size { name = "XL" });
+                db.Sizes.Add(new Size { name = "XXL" });
+                db.Sizes.Add(new Size { name = "24" });
+                db.Sizes.Add(new Size { name = "25" });
+                db.Sizes.Add(new Size { name = "26" });
+                db.Sizes.Add(new Size { name = "27" });
+                db.Sizes.Add(new Size { name = "28" });
+                db.Sizes.Add(new Size { name = "29" });
+                db.Sizes.Add(new Size { name = "30" });
+                db.Sizes.Add(new Size { name = "31" });
+                db.Sizes.Add(new Size { name = "32" });
+                db.Sizes.Add(new Size { name = "33" });
+                db.Sizes.Add(new Size { name = "34" });
+                db.Sizes.Add(new Size { name = "35" });
+                db.Sizes.Add(new Size { name = "36" });
+                db.Sizes.Add(new Size { name = "37" });
+                db.Sizes.Add(new Size { name = "38" });
+                db.Sizes.Add(new Size { name = "39" });
+                db.Sizes.Add(new Size { name = "40" });
+                db.Sizes.Add(new Size { name = "41" });
+                db.Sizes.Add(new Size { name = "42" });
+                db.SaveChanges();
+            }
+
+            if (db.Colors.Count() == 0)
+            {
+                db.Colors.Add(new Color { name = "Trắng" });
+                db.Colors.Add(new Color { name = "Đen" });
+                db.Colors.Add(new Color { name = "Vàng" });
+                db.SaveChanges();
+            }
+
+            if (db.Products.Count() == 0)
+            {
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 1", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now  });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 2", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 3", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 4", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 5", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 6", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 7", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 8", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 9", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 10", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 11", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 12", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 13", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 14", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 15", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 16", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 17", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 18", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 19", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.Products.Add(new Product { name = "Áo sơ mi cổ trụ 20", id_category = 1, description = "Áo đẹp lắm", price = 250000, promotionPrice = null, dateCreate = DateTime.Now });
+                db.SaveChanges();
+            }
+        }
+
+
         public User GetByEmail(string email)
         {
             return db.Users.SingleOrDefault(x => x.email == email);
@@ -57,7 +140,7 @@ namespace Model.Dao
             var user = GetById(id);
             if (user != null)
             {
-                user.status = !user.status;
+                user.isActive = !user.isActive;
                 db.SaveChanges();
                 return true;
             }
@@ -97,6 +180,14 @@ namespace Model.Dao
 
         }
 
+        // MARK: Change password
+        public void ChangePassword(int id, string newPass)
+        {
+            var user = GetById(id);
+            user.password = newPass;
+            db.SaveChanges();
+        }
+
         // MARK: Login
         public int Login(string username, string password)
         {
@@ -125,12 +216,12 @@ namespace Model.Dao
 
         public List<User> getAllAdmin()
         {
-            return db.Users.Where(x => x.admin == true).ToList<User>();
+            return db.Users.Where(x => x.isAdmin == true).ToList<User>();
         }
 
         public List<User> getAllCustomer()
         {
-            return db.Users.Where(x => x.admin == false).ToList<User>();
+            return db.Users.Where(x => x.isAdmin == false).ToList<User>();
         }
         #endregion
     }

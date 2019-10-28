@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "User - Admin ShopMax";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var listUser = ViewBag.ListAccount;
 }
 @section jsHeader {
     <script>
@@ -73,20 +74,20 @@
                             </thead>
                             <tbody>
 
-                                @for (var i = 1; i <= ViewBag.ListAccount.Count; i++)
+                                @for (var i = 1; i <= listUser.Count; i++)
                                 {
                                     <tr>
                                         <td>@i</td>
-                                        <td>@ViewBag.ListAccount[i - 1].name</td>
-                                        <td>@ViewBag.ListAccount[i - 1].username</td>
-                                        <td>@ViewBag.ListAccount[i - 1].email</td>
-                                        <td>@(ViewBag.ListAccount[i - 1].role == true ? "Admin" : "Khách hàng")</td>
-                                        <td>@(ViewBag.ListAccount[i - 1].status == true ? "Đang hoạt động" : "Bị Khóa")</td>
+                                        <td>@listUser[i - 1].name</td>
+                                        <td>@listUser[i - 1].username</td>
+                                        <td>@listUser[i - 1].email</td>
+                                        <td>@(listUser[i - 1].admin == true ? "Quản trị viên" : "Khách hàng")</td>
+                                        <td>@(listUser[i - 1].status == true ? "Đang hoạt động" : "Bị Khóa")</td>
                                         <td>
                                             @using (@Html.BeginForm("ChangeStatus", "Account", FormMethod.Post))
                                             {
-                                                <input type="hidden" name="id" value="@ViewBag.ListAccount[i-1].id" />
-                                                <input type="submit" value="@(ViewBag.ListAccount[i-1].status == true ? "Khóa tài khoản" : "Kích hoạt tài khoản")" class="btn-change @(ViewBag.ListAccount[i-1].status == true ? "btn-danger" : "btn-success")" />
+                                                <input type="hidden" name="id" value="@listUser[i-1].id_user" />
+                                                <input type="submit" value="@(listUser[i-1].status == true ? "Khóa tài khoản" : "Kích hoạt tài khoản")" class="btn-change @(listUser[i-1].status == true ? "btn-danger" : "btn-success")" />
                                             }
                                         </td>
                                     </tr>

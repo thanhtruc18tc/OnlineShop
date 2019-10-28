@@ -12,44 +12,58 @@ namespace Model.EF
         {
         }
 
-        public virtual DbSet<Cart> Carts { get; set; }
-        public virtual DbSet<CartDetail> CartDetails { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Color> Colors { get; set; }
+        public virtual DbSet<ColorDetail> ColorDetails { get; set; }
         public virtual DbSet<Image> Images { get; set; }
-        public virtual DbSet<Member> Members { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<SizeColor> SizeColors { get; set; }
+        public virtual DbSet<Size> Sizes { get; set; }
+        public virtual DbSet<SizeDetail> SizeDetails { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserType> UserTypes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Cart>()
-                .HasMany(e => e.CartDetails)
-                .WithRequired(e => e.Cart)
+            modelBuilder.Entity<Category>()
+                .HasMany(e => e.Products)
+                .WithRequired(e => e.Category)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Member>()
+            modelBuilder.Entity<Color>()
+                .HasMany(e => e.ColorDetails)
+                .WithRequired(e => e.Color)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Order>()
+                .HasMany(e => e.OrderDetails)
+                .WithRequired(e => e.Order)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Product>()
+                .HasMany(e => e.ColorDetails)
+                .WithRequired(e => e.Product)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Product>()
+                .HasMany(e => e.OrderDetails)
+                .WithRequired(e => e.Product)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Product>()
+                .HasMany(e => e.SizeDetails)
+                .WithRequired(e => e.Product)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Size>()
                 .Property(e => e.name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Product>()
-                .HasMany(e => e.CartDetails)
-                .WithRequired(e => e.Product)
+            modelBuilder.Entity<Size>()
+                .HasMany(e => e.SizeDetails)
+                .WithRequired(e => e.Size)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Product>()
-                .HasMany(e => e.Images)
-                .WithRequired(e => e.Product)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Product>()
-                .HasMany(e => e.SizeColors)
-                .WithRequired(e => e.Product)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<SizeColor>()
-                .Property(e => e.size)
-                .IsUnicode(false);
 
             modelBuilder.Entity<User>()
                 .Property(e => e.username)
@@ -60,17 +74,20 @@ namespace Model.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()
-                .Property(e => e.email)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<User>()
                 .Property(e => e.phone)
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()
-                .HasMany(e => e.Carts)
-                .WithRequired(e => e.User)
-                .HasForeignKey(e => e.id_customer)
+                .Property(e => e.email)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
+                .HasOptional(e => e.Order)
+                .WithRequired(e => e.User);
+
+            modelBuilder.Entity<UserType>()
+                .HasMany(e => e.Users)
+                .WithRequired(e => e.UserType)
                 .WillCascadeOnDelete(false);
         }
     }

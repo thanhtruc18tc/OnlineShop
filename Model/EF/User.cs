@@ -9,59 +9,52 @@ namespace Model.EF
     [Table("User")]
     public partial class User
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
-        {
-            Carts = new HashSet<Cart>();
-        }
-
-        public User(String username, String password, String email, String name, String phone, String address, Member member, int point, bool admin, bool status)
-        {
+        public  User(string username, string password, string email, string name, string phone, string address, int id_type, bool isAdmin, bool isActive) {
             this.username = username;
             this.password = password;
             this.email = email;
             this.name = name;
             this.phone = phone;
             this.address = address;
-            this.Member = member;
-            this.point = point;
-            this.admin = admin;
-            this.status = status;
-
+            this.id_type = id_type;
+            this.isAdmin = isAdmin;
+            this.isActive = isActive;
         }
+    
 
         [Key]
         public int id_user { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string username { get; set; }
 
+        [Required]
         [StringLength(32)]
         public string password { get; set; }
 
+        [Required]
+        [StringLength(100)]
+        public string name { get; set; }
+
+        [StringLength(10)]
+        public string phone { get; set; }
+
+        [Required]
         [StringLength(50)]
         public string email { get; set; }
 
-        [StringLength(50)]
-        public string name { get; set; }
-
-        [StringLength(50)]
-        public string phone { get; set; }
-
-        [StringLength(100)]
+        [StringLength(200)]
         public string address { get; set; }
 
-        public int? id_member { get; set; }
+        public bool isAdmin { get; set; }
 
-        public int? point { get; set; }
+        public bool isActive { get; set; }
 
-        public bool? admin { get; set; }
+        public int id_type { get; set; }
 
-        public bool? status { get; set; }
+        public virtual Order Order { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cart> Carts { get; set; }
-
-        public virtual Member Member { get; set; }
+        public virtual UserType UserType { get; set; }
     }
 }

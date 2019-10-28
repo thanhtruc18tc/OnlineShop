@@ -15,6 +15,7 @@ namespace OnlineShop.Controllers
     {
         public ActionResult Index()
         {
+            new UserDao(new OnlineShopContext()).test();
             return View();
         }
 

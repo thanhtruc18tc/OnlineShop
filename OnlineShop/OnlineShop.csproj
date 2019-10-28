@@ -80,6 +80,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -203,22 +211,26 @@
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
+    <Compile Include="Common\Base\AdminBaseController.cs" />
     <Compile Include="Common\Base\BaseController.cs" />
     <Compile Include="Common\Constants\Constants.cs" />
     <Compile Include="Common\Helper\Encryptor.cs" />
     <Compile Include="Common\Helper\MailHelper.cs" />
     <Compile Include="Common\Helper\RandomHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CollectionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Param\AccountViewModels.cs" />
-    <Compile Include="Param\IdentityModels.cs" />
-    <Compile Include="Param\LoginModel.cs" />
-    <Compile Include="Param\ManageViewModels.cs" />
-    <Compile Include="Param\RegisterModel.cs" />
-    <Compile Include="Param\Response.cs" />
+    <Compile Include="System_Models\AccountViewModels.cs" />
+    <Compile Include="System_Models\IdentityModels.cs" />
+    <Compile Include="Common\Param\LoginModel.cs" />
+    <Compile Include="System_Models\ManageViewModels.cs" />
+    <Compile Include="Common\Param\RegisterModel.cs" />
+    <Compile Include="Common\Response\Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -507,6 +519,7 @@
     <Content Include="Assets\images\hero_1.jpg" />
     <Content Include="Assets\images\hero_1.png" />
     <Content Include="Assets\images\hero_2.jpg" />
+    <Content Include="Assets\images\men-shirt.jpg" />
     <Content Include="Assets\images\men.jpg" />
     <Content Include="Assets\images\model_1.png" />
     <Content Include="Assets\images\model_2.png" />
@@ -535,12 +548,15 @@
     <Content Include="Assets\js\jquery-ui.js" />
     <Content Include="Assets\js\jquery.magnific-popup.min.js" />
     <Content Include="Assets\js\main.js" />
+    <Content Include="Assets\js\MD5Hash\md5.js" />
+    <Content Include="Assets\js\MD5Hash\md5.min.js" />
     <Content Include="Assets\js\owl.carousel.min.js" />
     <Content Include="Assets\js\popper.min.js" />
     <Content Include="Assets\js\slick.min.js" />
     <Content Include="Assets\css\Controller\HomeCSS\modal.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -850,6 +866,7 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Account.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Orders.cshtml" />
+    <Content Include="Assets\js\MD5Hash\md5.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -862,7 +879,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -881,11 +900,12 @@
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\Collection\Collection.cshtml" />
+    <Content Include="Views\Product\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Base\" />
-    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

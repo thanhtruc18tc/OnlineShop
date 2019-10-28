@@ -1,0 +1,98 @@
+﻿@model PagedList.IPagedList<Model.EF.Product>
+@using PagedList.Mvc;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int page = ViewBag.Page;
+    int total = ViewBag.Total;
+    string filterBy = ViewBag.FilterBy;
+    int numOfPage = (total % 9 == 0) ? (total / 9) : ((total / 9) + 1);
+    if (Model.Count() == 0) {
+        numOfPage = 0;
+    }
+}
+
+<div class="site-section">
+    <div class="container">
+
+        <div class="row mb-5">
+            <div class="col-md-12 order-1">
+
+                <div class="row align">
+                    <div class="col-md-12 mb-5">
+                        <div class="title-section float-md-left">
+                            <h2 class="text-uppercase">@ViewBag.Title</h2>
+                        </div>
+
+                        <div class="d-flex">
+                            <div class="dropdown mr-1 ml-md-auto">
+                                <button type="button" class="btn btn-white btn-sm dropdown-toggle px-4" id="dropdownMenuReference" data-toggle="dropdown">Sắp xếp</button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+                                    <a class="dropdown-item" href="#">Mới nhất</a>
+                                    <a class="dropdown-item" href="#">Cũ nhất</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Tên: A - Z</a>
+                                    <a class="dropdown-item" href="#">Tên: Z - A</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Giá: Tăng dần</a>
+                                    <a class="dropdown-item" href="#">Giá: Giảm dần</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.Count() == 0)
+                {
+                    <h4 style="text-align:center; width:100%">Không có sản phẩm nào.</h4>
+                }
+                <div class="row mb-5">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-4 col-md-4 item-entry mb-4" sty>
+                            <a href="/product?id=@item.id_product" class="product-item md-height bg-gray d-block">
+                                <img src="~/Assets/images/model_5.png" alt="Image" class="img-fluid">
+                            </a>
+                            <h2 class="item-title"><a href="#">@item.name</a></h2>
+                            <strong class="item-price"> @String.Format("{0:n0}", item.price)đ </strong>
+
+                            @*<div class="star-rating">
+                                <span class="icon-star2 text-warning"></span>
+                                <span class="icon-star2 text-warning"></span>
+                                <span class="icon-star2 text-warning"></span>
+                                <span class="icon-star2 text-warning"></span>
+                                <span class="icon-star2 text-warning"></span>
+                            </div>*@
+
+                        </div>
+                    }
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="site-block-27">
+                            <ul>
+                                
+                                @if (numOfPage != 0)
+                                {
+                                    for (int i = 1; i <= numOfPage; i++)
+                                    {
+                                        if (i == page)
+                                        {
+                                            <li class="active"><span>@i</span></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="/Collection/Filter/@filterBy?page=@i">@i</a></li>
+                                        }
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

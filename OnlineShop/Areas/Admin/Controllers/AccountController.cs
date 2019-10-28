@@ -11,7 +11,7 @@ using OnlineShop.Common.Base;
 
 namespace OnlineShop.Areas.Admin.Controllers
 {
-    public class AccountController : BaseController
+    public class AccountController : AdminBaseController
     {
         OnlineShopContext context = new OnlineShopContext();
         int isFilterBy = 0;

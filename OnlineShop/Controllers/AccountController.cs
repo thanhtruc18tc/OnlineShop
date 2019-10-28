@@ -4,13 +4,13 @@ using System.Web.Mvc;
 using OnlineShop.Common.Constants;
 using Model.EF;
 using OnlineShop.Common.Helper;
+using OnlineShop.Common.Base;
 
 namespace OnlineShop.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
-        OnlineShopContext context = new OnlineShopContext();
-
+        
 
         #region Login
         public ActionResult _Login()
@@ -29,7 +29,7 @@ namespace OnlineShop.Controllers
                     var user = dao.GetByUsernameAndPassword(model.UserName, Encryptor.MD5Hash(model.Password));
                     Session.Add(Constants.USER_SESSION, user);
 
-                    if ((bool)user.admin) {
+                    if ((bool)user.isAdmin) {
                         return RedirectToAction("Index", "Home", new { area = "Admin" });
                     }
                     return RedirectToAction("Index", "Home");
@@ -37,16 +37,16 @@ namespace OnlineShop.Controllers
                 else if (result == -1)
                 {
                     ModelState.AddModelError("", Constants.USERNAME_NON_EXISTED);
-                    return View();
+                    return View("Login");
                 }
                 else
                 {
                     ModelState.AddModelError("", Constants.PASSWORD_INCORRECT);
-                    return View();
+                    return View("Login");
                 }
             }
             ViewBag.Status = false;
-            return View();
+            return View("Login");
         }
         #endregion
 
@@ -79,7 +79,7 @@ namespace OnlineShop.Controllers
 
                 // MARK: Save to Database
                 var userDao = new UserDao(context);
-                User user = new User(model.Username, model.Password, model.Email, model.Name, model.NumberPhone, model.Address, new MemberDao(context).getAll()[0], 0, false, true);
+                User user = new User(model.Username, model.Password, model.Email, model.Name, model.NumberPhone, model.Address, 1, false, true);
                 userDao.Insert(user);
 
                 // MARK: Create a session
@@ -88,7 +88,7 @@ namespace OnlineShop.Controllers
             }
             else
             {
-                ViewBag.Message = "Invalid request";
+                setMessage("Yêu cầu không hợp lệ");
             }
 
             return RedirectToAction("Index", "Home") ;
@@ -111,11 +111,11 @@ namespace OnlineShop.Controllers
 
             if (success) {
                 new MailHelper().sendMail(email, "Khôi phục mật khẩu", "Mật khẩu mới của bạn là: " + newPassword + ".");
-                ViewBag.Message = Constants.CHANGE_PASSWORD_SUCCESS;
+                setMessage(Constants.CHANGE_PASSWORD_SUCCESS);
             }
             else
             {
-                ViewBag.Message = Constants.CHANGE_PASSWORD_FAILD;
+                setMessage(Constants.CHANGE_PASSWORD_FAILD);
             }
             return View("Login");
         }
@@ -136,20 +136,20 @@ namespace OnlineShop.Controllers
             User userSession = (User)Session[Constants.USER_SESSION];
             Session[Constants.USER_SESSION] = user;
 
-            ViewBag.Message = Constants.UPDATE_PROFILE_SUCCESS;
+            setMessage(Constants.UPDATE_PROFILE_SUCCESS);
             return View("Profile");
         }
         #endregion
 
         #region Change Password
-        public ActionResult ChangePassword(string oldPass, string newPass, string rePass)
+        public ActionResult ChangePassword(string newPassword)
         {
+            User userSession = (User)Session[Constants.USER_SESSION];
+            var newPass = Encryptor.MD5Hash(newPassword);
+            userSession.password = newPass;
+            new UserDao(context).ChangePassword(userSession.id_user, newPass);
 
-            //UserLogin userSession = (UserLogin)Session[Constants.USER_SESSION];
-
-
-
-            //ViewBag.Message = Constants.UPDATE_PASSWORD_SUCCESS;
+            setMessage(Constants.UPDATE_PASSWORD_SUCCESS);
             return View("Profile");
         }
         #endregion

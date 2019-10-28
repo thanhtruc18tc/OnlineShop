@@ -3,12 +3,13 @@
 @{
     Layout = null;
     User user = (User)Session[Constants.USER_SESSION];
+    var message = TempData["Message"] != null ? TempData["Message"] : "";
 }
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title - THE SHOPMAX</title>
     <link rel="icon" href="https://cdn2.iconfinder.com/data/icons/copyright-icons-1/24/Social-Media-512.png"
           type="image/x-icon">
     <meta charset="utf-8">
@@ -24,11 +25,156 @@
     <link rel="stylesheet" href="~/Assets/css/style.css">
 
     <!--/Style Home-->
+    <style>
+        body {
+            font-family: 'Varela Round', sans-serif;
+        }
+
+        .modal-login {
+            width: 500px;
+        }
+
+            .modal-login .modal-content {
+                margin-top: 100px;
+                padding: 20px;
+                border-radius: 5px;
+                border: none;
+            }
+
+            .modal-login .modal-header {
+                border-bottom: none;
+                position: relative;
+                justify-content: center;
+            }
+
+            .modal-login .close {
+                position: absolute;
+                top: -10px;
+                right: -10px;
+            }
+
+            .modal-login h4 {
+                color: #636363;
+                text-align: center;
+                font-size: 26px;
+                margin-top: 0;
+            }
+
+            .modal-login .modal-content {
+                color: #999;
+                border-radius: 1px;
+                margin-bottom: 15px;
+                background: #fff;
+                border: 1px solid #f3f3f3;
+                box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+                padding: 25px;
+            }
+
+            .modal-login .form-group {
+                margin-bottom: 20px;
+            }
+
+            .modal-login label {
+                font-weight: normal;
+                font-size: 13px;
+            }
+
+            .modal-login .form-control {
+                min-height: 38px;
+                padding-left: 5px;
+                box-shadow: none !important;
+                border-width: 0 0 1px 0;
+                border-radius: 0;
+            }
+
+                .modal-login .form-control:focus {
+                    border-color: #ccc;
+                }
+
+            .modal-login .input-group-addon {
+                max-width: 42px;
+                text-align: center;
+                background: none;
+                border-width: 0 0 1px 0;
+                padding-left: 5px;
+                border-radius: 0;
+            }
+
+            .modal-login .btn {
+                font-size: 16px;
+                font-weight: bold;
+                border-radius: 3px;
+                border: none;
+                min-width: 140px;
+                outline: none !important;
+                background: #DE6262;
+                color: #fff;
+            }
+
+                .modal-login .btn:hover, .modal-login .btn:focus {
+                    background: #179b81;
+                }
+
+            .modal-login .hint-text {
+                text-align: center;
+                padding-top: 5px;
+                font-size: 13px;
+            }
+
+            .modal-login .modal-footer {
+                color: #999;
+                border-color: #dee4e7;
+                text-align: center;
+                margin: 0 -25px -25px;
+                font-size: 13px;
+                justify-content: center;
+            }
+
+            .modal-login a {
+                color: #fff;
+                text-decoration: underline;
+            }
+
+                .modal-login a:hover {
+                    text-decoration: none;
+                }
+
+            .modal-login a {
+                color: #19aa8d;
+                text-decoration: none;
+            }
+
+                .modal-login a:hover {
+                    text-decoration: underline;
+                }
+
+            .modal-login .fa {
+                font-size: 21px;
+            }
+
+        .trigger-btn {
+            display: inline-block;
+            margin: 100px auto;
+        }
+    </style>
+
     @RenderSection("Styles", false)
     @RenderSection("jsHeader", required: false)
 
 </head>
 <body>
+    <!-- Message Modal-->
+    <div id="messageModal" class="modal fade">
+        <div class="modal-dialog modal-login">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>@message</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="site-wrap">
 
         <div class="site-navbar bg-white py-2">
@@ -44,64 +190,66 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div class="logo">
                         <div class="site-logo">
-                            <a href="/Home/Index" class="js-logo-clone">ShopMax</a>
+                            @Html.ActionLink("ShopMax","Index", new { controller = "Home" }, new { @class = "js-logo-clone" })
                         </div>
                     </div>
                     <div class="main-nav d-none d-lg-block">
                         <nav class="site-navigation text-right text-md-center" role="navigation">
                             <ul class="site-menu js-clone-nav d-none d-lg-block">
-                                <!--
-                                <li class="has-children active">
-                                    <a href="/Home/Index">Home</a>
+
+                                <li>@Html.ActionLink("Đang giảm giá", "Filter", "Collection", new { id = "giam-gia" }, new { @class = "text-danger"})</li>
+                                <li class="has-children">
+                                    @Html.ActionLink("Hàng mới về", "Filter", "Collection", new { id = "tat-ca-hang-moi" }, null)
                                     <ul class="dropdown">
-                                        <li><a href="#">Menu One</a></li>
-                                        <li><a href="#">Menu Two</a></li>
-                                        <li><a href="#">Menu Three</a></li>
-                                        <li class="has-children">
-                                            <a href="#">Sub Menu</a>
-                                            <ul class="dropdown">
-                                                <li><a href="#">Menu One</a></li>
-                                                <li><a href="#">Menu Two</a></li>
-                                                <li><a href="#">Menu Three</a></li>
-                                            </ul>
+                                        <li>
+                                            @Html.ActionLink("Nam", "Filter", "Collection", new { id = "hang-nam-moi" }, null)
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Nữ", "Filter", "Collection", new { id = "hang-nu-moi" }, null)
                                         </li>
                                     </ul>
                                 </li>
-                                -->
-                                <li><a href="/Home/Shop">Tất cả</a></li>
                                 <li class="has-children">
-                                    <a href="#">Hàng mới về</a>
+                                    @Html.ActionLink("Nam", "Filter", "Collection", new { id = "tat-ca-quan-ao-nam" }, null)
                                     <ul class="dropdown">
-                                        <li><a href="#">Nam</a></li>
-                                        <li><a href="#">Nữ</a></li>
+                                        <li>
+                                            @Html.ActionLink("Áo sơ mi nam", "Filter", "Collection", new { id = "ao-so-mi-nam" }, null)
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Áo thun nam", "Filter", "Collection", new { id = "ao-thun-nam" }, null)
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Áo khoác nam", "Filter", "Collection", new { id = "ao-khoac-nam" }, null)
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Quần dài nam", "Filter", "Collection", new { id = "quan-dai-nam" }, null)
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Quần short nam", "Filter", "Collection", new { id = "quan-short-nam" }, null)
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="has-children">
-                                    <a href="#">Nam</a>
+                                    @Html.ActionLink("Nữ", "Filter", "Collection", new { id = "tat-ca-quan-ao-nu" }, null)
                                     <ul class="dropdown">
-                                        <li><a href="#">Áo sơ mi nam</a></li>
-                                        <li><a href="#">Áo thun nam</a></li>
-                                        <li><a href="#">Áo khoác nam</a></li>
-                                        <li><a href="#">Quần dài nam</a></li>
-                                        <li><a href="#">Quần short nam</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-children">
-                                    <a href="#">Nữ</a>
-                                    <ul class="dropdown">
-                                        <li><a href="#">Áo kiểu nữ</a></li>
-                                        <li><a href="#">Áo sơ mi nữ</a></li>
-                                        <li><a href="#">Áo thun nữ</a></li>
-                                        <li><a href="#">Áo khoác nữ</a></li>
-                                        <li><a href="#">Váy nữ</a></li>
-                                        <li><a href="#">Quần dài nữ</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-children">
-                                    <a href="#">Giày</a>
-                                    <ul class="dropdown">
-                                        <li><a href="#">Nam</a></li>
-                                        <li><a href="#">Nữ</a></li>
+                                        <li>
+                                            @Html.ActionLink("Áo kiểu nữ", "Filter", "Collection", new { id = "ao-kieu-nu" }, null)
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Áo sơ mi nữ", "Filter", "Collection", new { id = "ao-so-mi-nu" }, null)
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Áo thun nữ", "Filter", "Collection", new { id = "ao-thun-nu" }, null)
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Áo khoác nữ", "Filter", "Collection", new { id = "ao-khoac-nu" }, null)
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Váy nữ", "Filter", "Collection", new { id = "vay-nu" }, null)
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Quần dài nữ", "Filter", "Collection", new { id = "quan-dai-nu" }, null)
+                                        </li>
                                     </ul>
                                 </li>
                                 <li><a href="/Home/Contact">Liên hệ</a></li>
@@ -119,13 +267,13 @@
                         </span>
                         @if (user != null)
                         {
-                            <a href="/Account/MyProfile" >Hello, @user.name</a>
-                            <span> <a href="/Account/LogOut" > / Đăng xuất</a></span>
+                            <a href="/profile" >Hello, @user.name</a>
+                            <span> <a href="/logout" > / Đăng xuất</a></span>
                         }
                         else
                         {
-                            <a href="/Account/_Login">Đăng nhập / </a>
-                            <span><a href="/Account/_SignUp">Đăng kí</a></span>
+                            <a href="/login">Đăng nhập / </a>
+                            <span><a href="/register">Đăng kí</a></span>
                         }
                         <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span class="icon-menu"></span></a>
                     </div>
@@ -219,6 +367,11 @@
     <script src="~/Assets/js/jquery.magnific-popup.min.js"></script>
     <script src="~/Assets/js/aos.js"></script>
     <script src="~/Assets/js/main.js"></script>
+    <script>
+        if ('@message' != '') {
+            $("#messageModal").modal('show');
+        }
+    </script>
     <script>
         $('.dropdown').hover(function () {
             $('.dropdown-toggle', this).trigger('click');

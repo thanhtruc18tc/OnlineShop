@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Đăng kí - ShopMax";
+    ViewBag.Title = "Đăng kí";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -16,7 +16,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 login-sec">
-                <h2 class="text-center">Đăng kí ngay bây giờ</h2>
+                <h2 class="text-center" style="font-family: 'Verdana', sans-serif;">Đăng kí ngay bây giờ</h2>
                 @using (Html.BeginForm("SignUp", "Account", FormMethod.Post))
                 {
                     <div class="form-group">
@@ -66,7 +66,7 @@
                     <span>
                         Bạn đã có tài khoản?
                     </span><br />
-                    <a href="/Account/_Login" class="blue-text ml-1">
+                    <a href="/login" class="blue-text ml-1">
                         Đăng nhập
                     </a>
                 </div>

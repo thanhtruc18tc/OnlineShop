@@ -6,34 +6,33 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Cart")]
-    public partial class Cart
+    [Table("Order")]
+    public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cart()
+        public Order()
         {
-            CartDetails = new HashSet<CartDetail>();
+            OrderDetails = new HashSet<OrderDetail>();
         }
 
         [Key]
-        public int id_cart { get; set; }
+        public int id_order { get; set; }
 
         public int id_customer { get; set; }
 
-        public int? totalPrice { get; set; }
+        public int totalPrice { get; set; }
 
-        public DateTime? date { get; set; }
-
-        public bool? paid { get; set; }
-
-        public bool? deliveried { get; set; }
-
-        [StringLength(100)]
+        [Required]
+        [StringLength(50)]
         public string status { get; set; }
+
+        public bool isPaid { get; set; }
+
+        public DateTime createDate { get; set; }
 
         public virtual User User { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CartDetail> CartDetails { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

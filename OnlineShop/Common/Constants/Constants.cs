@@ -25,5 +25,24 @@ namespace OnlineShop.Common.Constants
         public static string UPDATE_PROFILE_SUCCESS = "Cập nhật thông tin thành công.";
         public static string UPDATE_PASSWORD_SUCCESS = "Cập nhật mật khẩu thành công.";
 
+        // MARK: Men Collection
+        public static string MenShirt = "Áo sơ mi nam";
+        public static string MenTShirt = "Áo thun nam";
+        public static string MenJacket = "Áo khoác nam";
+        public static string MenTrouser = "Quần dài nam";
+        public static string MenShort = "Quần short nam";
+        public static string MenAll = "Tất cả quần áo nam";
+        public static string MenArrival = "Quần áo nam mới về ";
+
+        // MARK: Women Collection
+        public static string WomenBlouse = "Áo kiểu nữ";
+        public static string WomenShirt = "Áo sơ mi nữ";
+        public static string WomenTShirt = "Áo thun nữ";
+        public static string WomenJacket = "Áo khoác nữ";
+        public static string WomenDress = "Váy nữ";
+        public static string WomenTrouser = "Quần dài nữ";
+        public static string WomenAll = "Tất cả quần áo nữ";
+        public static string WomenArrival = "Quần áo nữ mới về";
+
     }
 }

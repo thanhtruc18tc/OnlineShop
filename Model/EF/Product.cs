@@ -12,9 +12,10 @@ namespace Model.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            CartDetails = new HashSet<CartDetail>();
+            ColorDetails = new HashSet<ColorDetail>();
             Images = new HashSet<Image>();
-            SizeColors = new HashSet<SizeColor>();
+            OrderDetails = new HashSet<OrderDetail>();
+            SizeDetails = new HashSet<SizeDetail>();
         }
 
         [Key]
@@ -26,25 +27,26 @@ namespace Model.EF
         [Column(TypeName = "ntext")]
         public string description { get; set; }
 
-        public int? originalPrice { get; set; }
+        public int? price { get; set; }
 
-        public int? currentPrice { get; set; }
+        public int? promotionPrice { get; set; }
 
-        public DateTime? date { get; set; }
+        public DateTime? dateCreate { get; set; }
 
-        public int? id_category { get; set; }
-
-        public int? id_image { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CartDetail> CartDetails { get; set; }
+        public int id_category { get; set; }
 
         public virtual Category Category { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ColorDetail> ColorDetails { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Image> Images { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SizeColor> SizeColors { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SizeDetail> SizeDetails { get; set; }
     }
 }

@@ -16,8 +16,8 @@ namespace Model.Dao
             db = context;
         }
 
-        public List<Member> getAll() {
-            return db.Members.ToList<Member>();
+        public List<UserType> getAll() {
+            return db.UserTypes.ToList<UserType>();
         }
 
     }
