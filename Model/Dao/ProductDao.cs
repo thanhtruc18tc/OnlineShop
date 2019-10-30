@@ -50,7 +50,7 @@ namespace Model.Dao
 
         public Product GetDetail(int id)
         {
-            return db.Products.Where(x => x.id_product == id).SingleOrDefault<Product>();
+            return db.Products.SingleOrDefault(x => x.id_product == id);
         }
     }
 }

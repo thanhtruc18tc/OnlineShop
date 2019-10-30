@@ -6,12 +6,19 @@
     int page = ViewBag.Page;
     int total = ViewBag.Total;
     string filterBy = ViewBag.FilterBy;
+    List<Model.EF.Image> listImage = (List<Model.EF.Image>)ViewBag.ListImage;
     int numOfPage = (total % 9 == 0) ? (total / 9) : ((total / 9) + 1);
     if (Model.Count() == 0) {
         numOfPage = 0;
     }
 }
-
+@section Styles{
+    <style>
+        {
+  ;
+}
+    </style>
+    }
 <div class="site-section">
     <div class="container">
 
@@ -48,13 +55,22 @@
                 <div class="row mb-5">
                     @foreach (var item in Model)
                     {
-                        <div class="col-lg-4 col-md-4 item-entry mb-4" sty>
-                            <a href="/product?id=@item.id_product" class="product-item md-height bg-gray d-block">
-                                <img src="~/Assets/images/model_5.png" alt="Image" class="img-fluid">
+                        <div class="col-lg-4 col-md-4 item-entry mb-4">
+                            <a href="/product?id=@item.id_product" class="md-height d-block">
+                                @*<img src="~/Assets/images/model_5.png" alt="Image" class="img-fluid">*@
+                                @foreach (var image in listImage)
+                                {
+                                    if (image.id_product == item.id_product)
+                                    {
+                                        <img src="@image.link" alt="Image" class="image" style="width:100%; height:100%;" /><!--  onmouseover="this.style.opacity=0.3" onmouseout="this.style.opacity=1" -->
+                                    }
+                                }
                             </a>
-                            <h2 class="item-title"><a href="#">@item.name</a></h2>
+                            <h2 class="item-title" style="margin-top:15px"><a href="/product?id=@item.id_product">@item.name</a></h2>
                             <strong class="item-price"> @String.Format("{0:n0}", item.price)đ </strong>
-
+                            <div class="middle">
+                                <div class="text">John Doe</div>
+                            </div>
                             @*<div class="star-rating">
                                 <span class="icon-star2 text-warning"></span>
                                 <span class="icon-star2 text-warning"></span>

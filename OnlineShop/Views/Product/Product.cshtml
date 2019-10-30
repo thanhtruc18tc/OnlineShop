@@ -1,7 +1,7 @@
-﻿
+﻿@model Model.EF.Product
 @{
-    ViewBag.Title = "Áo sơ mi jacob shirt";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<string> listImage = ViewBag.ListImage;
 }
 
 <div class="site-section">
@@ -9,44 +9,38 @@
         <div class="row col-md-12">
             <div class="col-md-8 mb-5 oder-1">
                 <div class="row mb-5">
-                    <div class="col-lg-6 col-md-6 item-entry">
-                        <a href="#" class="product-item md-height bg-gray d-block">
-                            <img src="~/Assets/images/prod_2.png" alt="Image" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="col-lg-6 col-md-6 item-entry">
-                        <a href="#" class="product-item md-height bg-gray d-block">
-                            <img src="~/Assets/images/prod_2.png" alt="Image" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="col-lg-6 col-md-6 item-entry">
-                        <a href="#" class="product-item md-height bg-gray d-block">
-                            <img src="~/Assets/images/prod_2.png" alt="Image" class="img-fluid">
-                        </a>
-                    </div>
-                    <div class="col-lg-6 col-md-6 item-entry">
-                        <a href="#" class="product-item md-height bg-gray d-block">
-                            <img src="~/Assets/images/prod_2.png" alt="Image" class="img-fluid">
-                        </a>
-                    </div>
+                    @foreach (var item in listImage)
+                    {
+                        <div class="col-lg-6 col-md-6 item-entry" style="margin-bottom:20px; margin-left:-10px">
+                            <a href="#" class="md-height d-block">
+                                <img src="@item" alt="Image" class="img-fluid">
+                            </a>
+                        </div>
+                    }
                 </div>
             </div>
             <div class="col-md-4">
-                <h2 class="text-black">Gray Shoe</h2>
-                <p class="text-justify" style="font-size:14px;">Đối với khí hậu nhiệt đới ở Việt Nam, những chiếc áo sơ mi làm từ chất liệu vải thiên như cotton luôn là lựa chọn hoàn hảo cho các chàng trai. Vì những mẫu áo như Jacob Shirt này thì bên cạnh vẻ lịch lãm, nam tính thường thấy, còn đảm bảo sự thấm hút mồ hôi liên tục, lại không hề gây khó chịu cho làn da của phái mạnh.
-<br>Áo có thiết kế cổ trụ, tay dài, phom suông, chất vải 100% cotton mỏng nhẹ và siêu thoáng mát. Nếu đã quá quen thuộc với sự kết hợp của "bộ đôi hoàn hảo" sơ mi - quần tây lịch lãm hay sơ mi - jeans dài phóng khoáng, sao bạn không thử kết hợp cùng quần chinos xắn gấu và sơ vin áo theo phong cách vạt high-low cho phong cách thời trang mới mẻ và trẻ trung hơn?
-<br>Người mẫu mặc size L, ngực 98cm, eo 78cm, mông 88cm</p>
-                <p class="d-flex justify-content-center"><strong class="text-primary h4">250.000 VNĐ</strong></p>
+                <h2 class="text-black">@Model.name</h2>
+                <p class="text-justify" style="font-size:14px;">@Model.description</p>
+                <p class="d-flex justify-content-center"><strong class="text-primary h4">@String.Format("{0:n0}", @Model.price)đ</strong></p>
                 <div class="mb-1 d-flex justify-content-center">
-                    <label for="option-sm" class="d-flex mr-3 mb-3">
-                        <span class="d-inline-block mr-2" style="top:-2px; position: relative;"><input type="radio" id="option-sm" name="shop-sizes"></span> <span class="d-inline-block text-black">S</span>
-                    </label>
-                    <label for="option-md" class="d-flex mr-3 mb-3">
-                        <span class="d-inline-block mr-2" style="top:-2px; position: relative;"><input type="radio" id="option-md" name="shop-sizes"></span> <span class="d-inline-block text-black">M</span>
-                    </label>
-                    <label for="option-lg" class="d-flex mr-3 mb-3">
-                        <span class="d-inline-block mr-2" style="top:-2px; position: relative;"><input type="radio" id="option-lg" name="shop-sizes"></span> <span class="d-inline-block text-black">L</span>
-                    </label>
+                    <!-- Default inline 1-->
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="defaultInline1" name="inlineDefaultRadiosExample">
+                        <label class="custom-control-label" for="defaultInline1">S</label>
+                    </div>
+
+                    <!-- Default inline 2-->
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="defaultInline2" name="inlineDefaultRadiosExample">
+                        <label class="custom-control-label" for="defaultInline2">M</label>
+                    </div>
+
+                    <!-- Default inline 3-->
+                    <div class="custom-control custom-radio custom-control-inline" style="margin-bottom:20px">
+                        <input type="radio" class="custom-control-input" id="defaultInline3" name="inlineDefaultRadiosExample">
+                        <label class="custom-control-label" for="defaultInline3">L</label>
+                    </div>
                     
                 </div>
                 <div class="mb-5 d-flex justify-content-around">

@@ -15,6 +15,9 @@ namespace OnlineShop.Controllers
         {
             var dao = new ProductDao(context);
             var model = dao.GetDetail(id);
+
+            var listImage = new ImageDao(context).GetAllImage(id);
+            ViewBag.ListImage = listImage;
             return View("Product", model);
         }
     }

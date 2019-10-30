@@ -69,7 +69,20 @@ namespace OnlineShop.Controllers
             }
             ViewBag.Title = categoryName;
             var list = dao.GetAll(categoryName, page, pageSize);
+            var listImage = GetListImage(list);
+            ViewBag.ListImage = listImage;
             return View("Collection", list);
+        }
+
+        private List<Image> GetListImage(IEnumerable<Product> list)
+        {
+            List<Image> listImage = new List<Image>();
+            var dao = new ImageDao(context);
+            foreach (var item in list)
+            {
+                listImage.Add(dao.GetByIdProduct(item.id_product));
+            }
+            return listImage;
         }
     }
 }
