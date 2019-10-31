@@ -9,7 +9,8 @@ namespace Model.EF
     [Table("User")]
     public partial class User
     {
-        public  User(string username, string password, string email, string name, string phone, string address, int id_type, bool isAdmin, bool isActive) {
+        public User(string username, string password, string email, string name, string phone, string address, int id_type, bool isAdmin, bool isActive)
+        {
             this.username = username;
             this.password = password;
             this.email = email;
@@ -20,7 +21,10 @@ namespace Model.EF
             this.isAdmin = isAdmin;
             this.isActive = isActive;
         }
-    
+        public User()
+        {
+
+        }
 
         [Key]
         public int id_user { get; set; }

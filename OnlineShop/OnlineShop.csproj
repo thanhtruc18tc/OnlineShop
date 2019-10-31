@@ -218,6 +218,7 @@
     <Compile Include="Common\Helper\MailHelper.cs" />
     <Compile Include="Common\Helper\RandomHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CollectionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Model\ProductDetailPage.cs" />
     <Compile Include="System_Models\AccountViewModels.cs" />
     <Compile Include="System_Models\IdentityModels.cs" />
     <Compile Include="Common\Param\LoginModel.cs" />
@@ -891,7 +893,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Cart.cshtml" />
+    <Content Include="Views\Cart\Cart.cshtml" />
     <Content Include="Views\Home\Checkout.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Product.cshtml" />

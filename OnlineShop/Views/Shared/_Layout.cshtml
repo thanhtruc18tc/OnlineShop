@@ -26,6 +26,28 @@
 
     <!--/Style Home-->
     <style>
+        #aa:hover{
+            display: block;
+        }
+        #bb{
+            position:center;
+        }
+        #MyImage {
+    position: relative;
+    margin: 20px auto 0;
+    width: 100%;
+    max-width: 400px;
+}
+#theImage {
+    display: block;
+    position: relative;
+    width: 100%;
+}
+#myButton {
+    position: absolute;
+    align-items:center;
+    bottom: 47px;
+}
         body {
             font-family: 'Varela Round', sans-serif;
         }
@@ -252,13 +274,24 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <li class="has-children">
+                                    @Html.ActionLink("Giày", "Filter", "Collection", new { id = "giay" }, null)
+                                    <ul class="dropdown">
+                                        <li>
+                                            @Html.ActionLink("Giày nam", "Filter", "Collection", new { id = "giay-nam" }, null)
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Giày nữ", "Filter", "Collection", new { id = "giay-nu" }, null)
+                                        </li>
+                                    </ul>
+                                </li>
                                 <li><a href="/Home/Contact">Liên hệ</a></li>
                             </ul>
                         </nav>
                     </div>
                     <div class="icons">
                         <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
-                        <a href="/Home/Cart" class="icons-btn d-inline-block bag">
+                        <a href="/Cart" class="icons-btn d-inline-block bag">
                             <span class="icon-shopping-bag"></span>
                             <span class="number">2</span>
                         </a>

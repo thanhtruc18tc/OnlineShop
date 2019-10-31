@@ -24,6 +24,18 @@ namespace OnlineShop.Controllers
             ViewBag.FilterBy = id;
             switch (id)
             {
+                case "giam-gia":
+                    categoryName = Constants.Sale;
+                    break;
+                case "tat-ca-hang-moi":
+                    categoryName = Constants.New;
+                    break;
+                case "hang-nam-moi":
+                    categoryName = Constants.MenArrival;
+                    break;
+                case "hang-nu-moi":
+                    categoryName = Constants.WomenArrival;
+                    break;
                 case "ao-so-mi-nam":
                     categoryName = Constants.MenShirt;
                     break;
@@ -68,7 +80,7 @@ namespace OnlineShop.Controllers
 
             }
             ViewBag.Title = categoryName;
-            var list = dao.GetAll(categoryName, page, pageSize);
+            var list = dao.GetProduct(categoryName, page, pageSize);
             var listImage = GetListImage(list);
             ViewBag.ListImage = listImage;
             return View("Collection", list);

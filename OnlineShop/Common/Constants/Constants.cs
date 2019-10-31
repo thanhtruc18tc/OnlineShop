@@ -32,7 +32,10 @@ namespace OnlineShop.Common.Constants
         public static string MenTrouser = "Quần dài nam";
         public static string MenShort = "Quần short nam";
         public static string MenAll = "Tất cả quần áo nam";
-        public static string MenArrival = "Quần áo nam mới về ";
+        public static string MenArrival = "Quần áo nam mới về";
+
+        public static string Sale = "Đang giảm giá";
+        public static string New = "Hàng mới";
 
         // MARK: Women Collection
         public static string WomenBlouse = "Áo kiểu nữ";

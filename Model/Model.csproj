@@ -63,6 +63,7 @@
     <Compile Include="Dao\ImageDao.cs" />
     <Compile Include="Dao\MemberDAO.cs" />
     <Compile Include="Dao\ProductDao.cs" />
+    <Compile Include="Dao\SizeDao.cs" />
     <Compile Include="Dao\UserDao.cs" />
     <Compile Include="EF\Category.cs" />
     <Compile Include="EF\Color.cs" />

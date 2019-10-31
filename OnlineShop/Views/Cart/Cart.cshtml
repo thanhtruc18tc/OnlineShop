@@ -1,0 +1,197 @@
+﻿@using OnlineShop.Common.Constants;
+@{
+    ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section jsFooter{
+    <script>
+        $("#option2").hide();
+        $('#defaultGroupExample1').click(function () {
+            // if ($(this).is(':checked')) alert('is checked'); 
+            $("#option2").hide();
+            $("#option1").show();
+
+        });
+        $('#defaultGroupExample2').click(function () {
+            // if ($(this).is(':checked')) alert('is checked'); 
+            $("#option1").hide();
+            $("#option2").show();
+        });
+    </script>
+    }
+
+<!-- Body -->
+
+<div class="site-section">
+    <div class="container">
+        <div class="row mb-5">
+            <form class="col-md-12" method="post">
+                <div class="site-blocks-table">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="product-thumbnail" colspan="2">Sản phẩm</th>
+                                <th class="product-price">Đơn giá</th>
+                                <th class="product-quantity">Số lượng</th>
+                                <th class="product-total">Giá</th>
+                                <th class="product-remove">Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="product-thumbnail">
+                                    <img src="~/Assets/images/cloth_1.jpg" alt="Image" class="img-fluid">
+                                </td>
+                                <td class="product-name">
+                                    <h2 class="h5 text-black">Top Up T-Shirt</h2>
+                                </td>
+                                <td>$49.00</td>
+                                <td>
+                                    <div class="input-group mb-3" style="max-width: 120px;">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                                        </div>
+                                        <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                                        </div>
+                                    </div>
+
+                                </td>
+                                <td>$49.00</td>
+                                <td><a href="#" class="btn btn-primary height-auto btn-sm">X</a></td>
+                            </tr>
+
+                            <tr>
+                                <td class="product-thumbnail">
+                                    <img src="~/Assets/images/cloth_2.jpg" alt="Image" class="img-fluid">
+                                </td>
+                                <td class="product-name">
+                                    <h2 class="h5 text-black">Polo Shirt</h2>
+                                </td>
+                                <td>$49.00</td>
+                                <td>
+                                    <div class="input-group mb-3" style="max-width: 120px;">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                                        </div>
+                                        <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                                        </div>
+                                    </div>
+
+                                </td>
+                                <td>$49.00</td>
+                                <td><a href="#" class="btn btn-primary height-auto btn-sm">X</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <p>Bạn đã đăng nhập hay chưa?</p>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-outline-primary btn-sm btn-block">Đăng nhập</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-left border-bottom mb-5" style="margin-top:50px">
+                        <h3 class="text-black h4">Thông tin giao hàng</h3>
+                    </div>
+                    <div class="col-md-12" style="margin-top:-40px">
+                        <p>Phương thức thanh toán</p>
+                    </div>
+                    <!-- Group of default radios - option 1 -->
+                    <div class="custom-control custom-radio col-md-12">
+                        <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="groupOfDefaultRadios" checked>
+                        <label class="custom-control-label" for="defaultGroupExample1">Thanh toán khi giao hàng (COD)</label>
+                        <p id="option1"> - Được kiểm tra hàng trước khi nhận hàng.<br />- Miễn phí ship với các đơn hàng trên 500.000 đ.</p>
+                    </div>
+
+                    <!-- Group of default radios - option 2 -->
+                    <div class="custom-control custom-radio col-md-12">
+                        <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="groupOfDefaultRadios" >
+                        <label class="custom-control-label" for="defaultGroupExample2">Chuyển khoản qua ngân hàng</label>
+                        <p id="option2">-Vietcombank: Số tài khoản: 0531002495503 Chủ tài khoản: Trần Đại Dương Chi nhánh Bình Thạnh, HCM<br />-ACB: Số tài khoản: 157340939 Chủ tài khoản: Trần Đại Dương Chi nhánh Hàng Xanh, HCM</p>
+                    </div>
+
+                    <hr style="width:100%" />
+                    <div class="col-md-12" style="margin-bottom:-10px">
+                        <p>Họ và tên<span class="text-danger">*</span></p>
+                    </div>
+                    <div class="col-md-12 mb-3 mb-md-0">
+                        <input type="text" class="form-control py-3" id="name">
+                    </div>
+                    <div class="col-md-12" style="margin-top: 15px; margin-bottom:-10px">
+                        <p>Số điện thoại<span class="text-danger">*</span></p>
+                    </div>
+                    <div class="col-md-12 mb-3 mb-md-0">
+                        <input type="text" class="form-control py-3" id="phone">
+                    </div>
+                    <div class="col-md-12" style="margin-top: 15px; margin-bottom:-10px">
+                        <p>Email<span class="text-danger">*</span></p>
+                    </div>
+                    <div class="col-md-12 mb-3 mb-md-0">
+                        <input type="text" class="form-control py-3" id="email">
+                    </div>
+                    <div class="col-md-12" style="margin-top: 15px; margin-bottom:-10px">
+                        <p>Địa chỉ<span class="text-danger">*</span></p>
+                    </div>
+                    <div class="col-md-12 mb-3 mb-md-0">
+                        <input type="text" class="form-control py-3" id="address">
+                    </div>
+                    <div class="col-md-12 mb-3 mb-md-0" style="margin-top: 30px">
+                        <button class="btn btn-primary btn-lg btn-block" onclick="window.location='checkout.html'" style="float:right;width:200px">Gửi đơn hàng</button>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-md-6" style="float:right">
+                <div class="row justify-content-end">
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-12 text-right border-bottom mb-5">
+                                <h3 class="text-black h4 text-uppercase">Tổng giỏ hàng</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <span class="text-black">Tổng tiền</span>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <strong class="text-black">$230.00</strong>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <span class="text-black">Giá giảm</span>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <strong class="text-black">$30.00</strong>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <span class="text-black">Giá phải trả</span>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <strong class="text-danger">$200.00</strong>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Body -->
