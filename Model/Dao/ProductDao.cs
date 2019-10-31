@@ -22,6 +22,24 @@ namespace Model.Dao
             return db.Products.Count();
         }
 
+        public int GetCount(string name)
+        {
+            var dao = new CategoryDao(db);
+            if (name == "Hàng nam")
+            {
+                var listIdForMen = dao.GetIdForMenClothes();
+                return db.Products.Where(x => listIdForMen.Contains(x.id_category)).Count();
+            } else if (name == "Hàng nữ")
+            {
+                var listIdForWomen = dao.GetIdForWomenClothes();
+                return db.Products.Where(x => listIdForWomen.Contains(x.id_category)).Count();
+            } else
+            {
+                var id = dao.GetIdByName(name);
+                return db.Products.Where(x => x.id_category == id).Count();
+            }
+        }
+
         public IEnumerable<Product> GetProduct(string name, int page, int pageSize)
         {
             var dao = new CategoryDao(db);
@@ -31,7 +49,8 @@ namespace Model.Dao
                 .OrderByDescending(x => x.id_product)
                 .ToPagedList<Product>(1, 15);
             }
-            else if (name == "Hàng mới") {
+            else if (name == "Hàng mới")
+            {
                 var listIdForMen = dao.GetIdForMenClothes();
                 var listIdForWomen = dao.GetIdForWomenClothes();
                 List<int> listId = new List<int>();
@@ -47,27 +66,29 @@ namespace Model.Dao
                 .OrderByDescending(x => x.dateCreate)
                 .ToPagedList<Product>(1, 20);
             }
-            else if (name == "Quần áo nam mới về")
+            else if (name == "Hàng nam mới về")
             {
                 var listId = dao.GetIdForMenClothes();
                 return db.Products.Where(item => listId.Contains(item.id_category))
                 .OrderByDescending(x => x.dateCreate)
                 .ToPagedList<Product>(1, 15);
             }
-            else if(name == "Quần áo nữ mới về")
+            else if (name == "Hàng nữ mới về")
             {
                 var listId = dao.GetIdForWomenClothes();
                 return db.Products.Where(item => listId.Contains(item.id_category))
                 .OrderByDescending(x => x.dateCreate)
                 .ToPagedList<Product>(1, 15);
             }
-            else if (name == "Tất cả quần áo nam") {
+            else if (name == "Hàng nam")
+            {
                 var listId = dao.GetIdForMenClothes();
+
                 return db.Products.Where(item => listId.Contains(item.id_category))
                 .OrderByDescending(x => x.id_product)
                 .ToPagedList<Product>(page, pageSize);
             }
-            else if (name == "Tất cả quần áo nữ")
+            else if (name == "Hàng nữ")
             {
                 var listId = dao.GetIdForWomenClothes();
                 return db.Products.Where(item => listId.Contains(item.id_category))
@@ -91,6 +112,7 @@ namespace Model.Dao
 
         public IEnumerable<Product> GetRelativeProduct(string name, int ignoreId)
         {
+            var rand = new Random();
             var dao = new CategoryDao(db);
             if (this.name.Contains("nam"))
             {
@@ -98,7 +120,7 @@ namespace Model.Dao
                 listId.Remove(ignoreId);
                 return db.Products.Where(item => listId.Contains(item.id_category))
                .OrderByDescending(x => x.name)
-               .ToPagedList<Product>(1, 6);
+               .ToPagedList<Product>(1, 15);
             }
             else if (this.name.Contains("nữ"))
             {
@@ -107,7 +129,7 @@ namespace Model.Dao
 
                 return db.Products.Where(item => listId.Contains(item.id_category))
                .OrderByDescending(x => x.name)
-               .ToPagedList<Product>(1, 6);
+               .ToPagedList<Product>(1, 15);
             } else
             {
                 var listForMen = dao.GetIdForMenClothes();
@@ -125,7 +147,7 @@ namespace Model.Dao
 
                 return db.Products.Where(item => listId.Contains(item.id_category))
                .OrderByDescending(x => x.dateCreate)
-               .ToPagedList<Product>(1, 6);
+               .ToPagedList<Product>(1, 50).AsEnumerable<Product>().OrderBy(r => rand.Next());
             }
            
         }

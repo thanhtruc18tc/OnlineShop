@@ -79,7 +79,14 @@
                         </div>
                     </div>
                 </div>
-                <p><a href="cart.html" class="buy-now btn btn-sm height-auto px-4 py-3 btn-primary d-flex justify-content-around">Thêm vào giỏ</a></p>
+                @if (listSize.Count() == 0)
+                {
+                    <p><a class="buy-now btn btn-sm height-auto px-4 py-3 btn-secondary d-flex justify-content-around" style="color:white">Thêm vào giỏ</a></p>
+                }
+                else
+                {
+                    <p><a href="/cart?id=@productDetail.id_product&quantity=1" class="buy-now btn btn-sm height-auto px-4 py-3 btn-danger d-flex justify-content-around" style="color:white">Thêm vào giỏ</a></p>
+                }
             </div>
         </div>
     </div>

@@ -8,19 +8,21 @@ namespace Model.EF
     public partial class OnlineShopContext : DbContext
     {
         public OnlineShopContext()
-            : base(@"Data Source=DESKTOP-CB9P5OP\SQLEXPRESS;Initial Catalog=test2;Integrated Security=True")
+            : base(@"Data Source=DESKTOP-CB9P5OP\SQLEXPRESS;Initial Catalog=test6;Integrated Security=True")
         {
         }
 
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Color> Colors { get; set; }
         public virtual DbSet<ColorDetail> ColorDetails { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<SizeDetail> SizeDetails { get; set; }
+        public virtual DbSet<Subscriber> Subscribers { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserType> UserTypes { get; set; }
 
@@ -35,6 +37,22 @@ namespace Model.EF
                 .HasMany(e => e.ColorDetails)
                 .WithRequired(e => e.Color)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Feedback>()
+                .Property(e => e.email)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Feedback>()
+                .Property(e => e.feedback1)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Order>()
+                .Property(e => e.shipMobile)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Order>()
+                .Property(e => e.shipEmail)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Order>()
                 .HasMany(e => e.OrderDetails)
@@ -64,6 +82,10 @@ namespace Model.EF
                 .HasMany(e => e.SizeDetails)
                 .WithRequired(e => e.Size)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Subscriber>()
+                .Property(e => e.email)
+                .IsUnicode(false);
 
             modelBuilder.Entity<User>()
                 .Property(e => e.username)

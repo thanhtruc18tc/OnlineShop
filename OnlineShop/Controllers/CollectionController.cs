@@ -12,7 +12,6 @@ namespace OnlineShop.Controllers
 {
     public class CollectionController : BaseController
     {
-        string lastestFiler = "";
         // GET: Collection
         public ActionResult Filter(string id, int page = 1)
         {
@@ -20,7 +19,7 @@ namespace OnlineShop.Controllers
 
             var categoryName = "";
             ViewBag.Page = page;
-            ViewBag.Total = dao.GetCount();
+            //ViewBag.Total = dao.GetCount();
             ViewBag.FilterBy = id;
             switch (id)
             {
@@ -75,10 +74,17 @@ namespace OnlineShop.Controllers
                 case "tat-ca-quan-ao-nu":
                     categoryName = Constants.WomenAll;
                     break;
+                case "giay-nam":
+                    categoryName = Constants.MenShoe;
+                    break;
+                case "giay-nu":
+                    categoryName = Constants.WomenShoe;
+                    break;
                 default:
                     break;
 
             }
+            ViewBag.Total = dao.GetCount(categoryName);
             ViewBag.Title = categoryName;
             var list = dao.GetProduct(categoryName, page, pageSize);
             var listImage = GetListImage(list);

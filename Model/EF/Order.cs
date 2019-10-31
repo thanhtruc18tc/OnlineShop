@@ -16,9 +16,22 @@ namespace Model.EF
         }
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id_order { get; set; }
 
-        public int id_customer { get; set; }
+        [StringLength(50)]
+        public string shipName { get; set; }
+
+        [StringLength(10)]
+        public string shipMobile { get; set; }
+
+        [StringLength(100)]
+        public string shipAddress { get; set; }
+
+        [StringLength(50)]
+        public string shipEmail { get; set; }
+
+        public int? id_customer { get; set; }
 
         public int totalPrice { get; set; }
 

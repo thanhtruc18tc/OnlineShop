@@ -31,8 +31,9 @@ namespace OnlineShop.Common.Constants
         public static string MenJacket = "Áo khoác nam";
         public static string MenTrouser = "Quần dài nam";
         public static string MenShort = "Quần short nam";
-        public static string MenAll = "Tất cả quần áo nam";
-        public static string MenArrival = "Quần áo nam mới về";
+        public static string MenAll = "Hàng nam";
+        public static string MenArrival = "Hàng nam mới về";
+        public static string MenShoe = "Giày nam";
 
         public static string Sale = "Đang giảm giá";
         public static string New = "Hàng mới";
@@ -44,8 +45,13 @@ namespace OnlineShop.Common.Constants
         public static string WomenJacket = "Áo khoác nữ";
         public static string WomenDress = "Váy nữ";
         public static string WomenTrouser = "Quần dài nữ";
-        public static string WomenAll = "Tất cả quần áo nữ";
-        public static string WomenArrival = "Quần áo nữ mới về";
+        public static string WomenAll = "Hàng nữ";
+        public static string WomenArrival = "Hàng nữ mới về";
+        public static string WomenShoe = "Giày nữ";
+
+
+        // MARK: Cart
+        public static string CART_SESSION = "CART_SESSION";
 
     }
 }

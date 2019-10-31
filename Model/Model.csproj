@@ -68,6 +68,7 @@
     <Compile Include="EF\Category.cs" />
     <Compile Include="EF\Color.cs" />
     <Compile Include="EF\ColorDetail.cs" />
+    <Compile Include="EF\Feedback.cs" />
     <Compile Include="EF\Image.cs" />
     <Compile Include="EF\OnlineShopContext.cs" />
     <Compile Include="EF\Order.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="EF\Product.cs" />
     <Compile Include="EF\Size.cs" />
     <Compile Include="EF\SizeDetail.cs" />
+    <Compile Include="EF\Subscriber.cs" />
     <Compile Include="EF\User.cs" />
     <Compile Include="EF\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +90,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -25,7 +25,6 @@ namespace Model.EF
         {
 
         }
-
         [Key]
         public int id_user { get; set; }
 
