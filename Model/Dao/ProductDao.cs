@@ -1,10 +1,7 @@
 ﻿using Model.EF;
-using System;
+using PagedList;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PagedList;
 
 namespace Model.Dao
 {
@@ -16,7 +13,7 @@ namespace Model.Dao
         {
             db = context;
         }
-        
+
         public int GetCount()
         {
             return db.Products.Count();
@@ -25,7 +22,8 @@ namespace Model.Dao
         public IEnumerable<Product> GetAll(string name, int page, int pageSize)
         {
             var dao = new CategoryDao(db);
-            if (name == "Tất cả quần áo nam") {
+            if (name == "Tất cả quần áo nam")
+            {
                 var listId = dao.GetIdForMenClothes();
                 return db.Products.Where(item => listId.Contains(item.id_category))
                 .OrderByDescending(x => x.id_product)
@@ -51,6 +49,26 @@ namespace Model.Dao
         public Product GetDetail(int id)
         {
             return db.Products.SingleOrDefault(x => x.id_product == id);
+        }
+
+        public IEnumerable<Product> Search(string keywords)
+        {
+            keywords = Helper.StringHelper.RemoveVietnameseTone(keywords);
+            List<Product> products = new List<Product>();
+
+            foreach (var p in db.Products.ToList<Product>())
+            {
+                p.name = Helper.StringHelper.RemoveVietnameseTone(p.name);
+                if (p.name.Contains(keywords.ToLower()))
+                {
+                    products.Add(p);
+                }
+            }
+            //return db.Products
+            //    .Where(x => x.name.Contains(keywords.ToLower()))
+            return products
+                .OrderByDescending(x => x.id_product)
+                .ToPagedList<Product>(1, 10);
         }
     }
 }

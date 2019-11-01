@@ -13,6 +13,20 @@ namespace OnlineShop.Controllers
     public class CollectionController : BaseController
     {
         string lastestFiler = "";
+       
+        public ActionResult Search(string keywords)
+        {
+            var dao = new ProductDao(context);
+            ViewBag.Page = 1;
+            ViewBag.Total = 1;
+            ViewBag.FilterBy = "ao-so-mi-nam";
+            ViewBag.Title = Constants.Search+": "+keywords;
+            var list = dao.Search(keywords);
+            var listImage = GetListImage(list);
+            ViewBag.ListImage = listImage;
+            return View("Collection",list);
+        }
+
         // GET: Collection
         public ActionResult Filter(string id, int page = 1)
         {

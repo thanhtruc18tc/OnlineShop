@@ -541,7 +541,7 @@
     <Content Include="Assets\js\aos.js" />
     <Content Include="Assets\js\bootstrap.min.js" />
     <Content Include="Assets\js\Controller\Account\account.js" />
-    <Content Include="Assets\js\Controller\HomeJS\goToModal.js" />
+    <Content Include="Assets\js\Controller\HomeJS\goToModal1.js" />
     <Content Include="Assets\js\Controller\HomeJS\login.js" />
     <Content Include="Assets\js\Controller\HomeJS\userController.js" />
     <Content Include="Assets\js\jquery-3.3.1.min.js" />

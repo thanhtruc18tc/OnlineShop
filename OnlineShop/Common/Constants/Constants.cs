@@ -44,5 +44,8 @@ namespace OnlineShop.Common.Constants
         public static string WomenAll = "Tất cả quần áo nữ";
         public static string WomenArrival = "Quần áo nữ mới về";
 
+        // MARK: SEARCH
+        public static string Search = "Tìm kiếm sản phẩm";
+
     }
 }

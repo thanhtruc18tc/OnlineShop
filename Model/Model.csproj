@@ -76,6 +76,7 @@
     <Compile Include="EF\SizeDetail.cs" />
     <Compile Include="EF\User.cs" />
     <Compile Include="EF\UserType.cs" />
+    <Compile Include="Helper\SringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

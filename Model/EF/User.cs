@@ -20,7 +20,11 @@ namespace Model.EF
             this.isAdmin = isAdmin;
             this.isActive = isActive;
         }
-    
+
+        public User()
+        {
+
+        }
 
         [Key]
         public int id_user { get; set; }
