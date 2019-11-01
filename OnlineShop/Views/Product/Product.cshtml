@@ -9,35 +9,30 @@
 }
 @section jsFooter{
     <script>
-        //$("#btn-minus").click(function (e) {
-        //    if (("#quantity").val() == 1){
-        //        return false;
-        //    }
-        //});
-        $("#btn-add").click(function (e) {
-            //if ((e.target).tagName == 'INPUT') return true;
-            //e.preventDefault();
-            //$("#mode").prop("checked", !$("#mode").prop("checked"));
+       
+        $("#btn-add").click(function () {
+           
             if (!$("input:radio[name='size']").is(":checked")){
-                $('#message').html('Bạn chưa chọn size');
-                $("#modal").modal('show');
+                $("#myModal").show();
+                //$(".myModal").modal('show');
+                alert("Bạn chưa chọn size")
                 return false;
             }
         });
+
     </script>
     } 
 <!-- Message Modal-->
-<div id="modal" class="modal fade">
+<div id="myModal" class="modal fade myModal">
     <div class="modal-dialog modal-login">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 id="message"></h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
         </div>
     </div>
 </div>
-<!--- body -->>
+<!--- body -->
 <div class="site-section">
     <div class="container">
         <div class="row col-md-12">
@@ -66,7 +61,7 @@
                         <strong class="text-primary h4">@String.Format("{0:n0}", productDetail.price)đ </strong>
                     }
                 </p>
-                @using (Html.BeginForm("Add", "Cart", FormMethod.Post)) { 
+                @using (Html.BeginForm("Add", "Cart", FormMethod.Post, new { id = "add-form" })) {
                     <div class="mb-1 d-flex justify-content-center">
                         <input type="hidden" value="@productDetail.id_product" name="id"/>
                         @foreach (var item in listSize)
@@ -96,7 +91,6 @@
                    
                     
                         <button type="@(listSize.Count() != 0 ? "submit": "button")" id="@(listSize.Count() != 0 ? "btn-add" : "")" class="buy-now btn btn-sm height-auto px-4 py-3 @(listSize.Count() != 0 ? "btn-danger": "btn-secondary") d-flex justify-content-around" style="color:white; width:100%">Thêm vào giỏ</button>
-                        <p>@*<a href="/add?id=@productDetail.id_product&size=" id="btn-add" class="buy-now btn btn-sm height-auto px-4 py-3 btn-danger d-flex justify-content-around" style="color:white">Thêm vào giỏ</a>*@</p>
                     
                 }
             </div>
