@@ -7,7 +7,37 @@
     var relativeProduct = Model.listRelativeProduct;
     var imageRelativeProduct = Model.listImageRelativeProduct;
 }
-
+@section jsFooter{
+    <script>
+        //$("#btn-minus").click(function (e) {
+        //    if (("#quantity").val() == 1){
+        //        return false;
+        //    }
+        //});
+        $("#btn-add").click(function (e) {
+            //if ((e.target).tagName == 'INPUT') return true;
+            //e.preventDefault();
+            //$("#mode").prop("checked", !$("#mode").prop("checked"));
+            if (!$("input:radio[name='size']").is(":checked")){
+                $('#message').html('Bạn chưa chọn size');
+                $("#modal").modal('show');
+                return false;
+            }
+        });
+    </script>
+    } 
+<!-- Message Modal-->
+<div id="modal" class="modal fade">
+    <div class="modal-dialog modal-login">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="message"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--- body -->>
 <div class="site-section">
     <div class="container">
         <div class="row col-md-12">
@@ -36,56 +66,38 @@
                         <strong class="text-primary h4">@String.Format("{0:n0}", productDetail.price)đ </strong>
                     }
                 </p>
-                <div class="mb-1 d-flex justify-content-center">
-                    @foreach (var item in listSize)
-                    {
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="@item.id_size" name="inlineDefaultRadiosExample">
-                            <label class="custom-control-label" for="@item.id_size">@item.name</label>
+                @using (Html.BeginForm("Add", "Cart", FormMethod.Post)) { 
+                    <div class="mb-1 d-flex justify-content-center">
+                        <input type="hidden" value="@productDetail.id_product" name="id"/>
+                        @foreach (var item in listSize)
+                        {
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" value="@item.id_size" id="@item.id_size" name="size">
+                                <label class="custom-control-label" for="@item.id_size">@item.name</label>
+                            </div>
+                        }
+                        @if (listSize.Count() == 0)
+                        {
+                            <div><p>Hết hàng</p></div>
+                        }
+
+                    </div>
+                    <div class="mb-5 d-flex justify-content-around" style="margin-top:20px">
+                        <div class="input-group mb-3" style="max-width: 120px;">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-primary js-btn-minus" id="btn-minus" type="button">&minus;</button>
+                            </div>
+                            <input type="text" id="quantity" class="form-control text-center" value="1" name="quantity" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                            </div>
                         </div>
-                    }
-                    @if (listSize.Count() == 0)
-                    {
-                        <div><p>Hết hàng</p></div>
-                    }
-
-                    @*<!-- Default inline 1-->
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="defaultInline1" name="inlineDefaultRadiosExample">
-                        <label class="custom-control-label" for="defaultInline1">S</label>
                     </div>
-
-                    <!-- Default inline 2-->
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="defaultInline2" name="inlineDefaultRadiosExample">
-                        <label class="custom-control-label" for="defaultInline2">M</label>
-                    </div>
-
-                    <!-- Default inline 3-->
-                    <div class="custom-control custom-radio custom-control-inline" style="margin-bottom:20px">
-                        <input type="radio" class="custom-control-input" id="defaultInline3" name="inlineDefaultRadiosExample">
-                        <label class="custom-control-label" for="defaultInline3">L</label>
-                    </div>*@
+                   
                     
-                </div>
-                <div class="mb-5 d-flex justify-content-around" style="margin-top:20px">
-                    <div class="input-group mb-3" style="max-width: 120px;">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-                        </div>
-                        <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-                        </div>
-                    </div>
-                </div>
-                @if (listSize.Count() == 0)
-                {
-                    <p><a class="buy-now btn btn-sm height-auto px-4 py-3 btn-secondary d-flex justify-content-around" style="color:white">Thêm vào giỏ</a></p>
-                }
-                else
-                {
-                    <p><a href="/cart?id=@productDetail.id_product&quantity=1" class="buy-now btn btn-sm height-auto px-4 py-3 btn-danger d-flex justify-content-around" style="color:white">Thêm vào giỏ</a></p>
+                        <button type="@(listSize.Count() != 0 ? "submit": "button")" id="@(listSize.Count() != 0 ? "btn-add" : "")" class="buy-now btn btn-sm height-auto px-4 py-3 @(listSize.Count() != 0 ? "btn-danger": "btn-secondary") d-flex justify-content-around" style="color:white; width:100%">Thêm vào giỏ</button>
+                        <p>@*<a href="/add?id=@productDetail.id_product&size=" id="btn-add" class="buy-now btn btn-sm height-auto px-4 py-3 btn-danger d-flex justify-content-around" style="color:white">Thêm vào giỏ</a>*@</p>
+                    
                 }
             </div>
         </div>

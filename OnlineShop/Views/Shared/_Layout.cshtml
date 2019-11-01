@@ -1,9 +1,12 @@
 ﻿@using OnlineShop.Common.Constants;
 @using Model.EF;
+@using OnlineShop.Model;
 @{
     Layout = null;
     User user = (User)Session[Constants.USER_SESSION];
     var message = TempData["Message"] != null ? TempData["Message"] : "";
+    var cart = (List<CartItem>)Session[Constants.CART_SESSION];
+    var cartCount = cart == null ? 0 : cart.Count();
 }
 
 <!DOCTYPE html>
@@ -293,7 +296,10 @@
                         <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
                         <a href="/Cart" class="icons-btn d-inline-block bag">
                             <span class="icon-shopping-bag"></span>
-                            <span class="number">2</span>
+                            @if (cartCount != 0)
+                            {
+                                <span class="number">@cartCount</span>
+                            }
                         </a>
                         <span style="margin-left: 15px">
                             <span class="icon-user-o" ></span> 

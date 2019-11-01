@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Giỏ hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var cart = (List<OnlineShop.Model.CartItem>)Session[Constants.CART_SESSION];
 
 }
 
@@ -11,27 +12,43 @@
     <script>
         $("#option2").hide();
         $('#defaultGroupExample1').click(function () {
-            // if ($(this).is(':checked')) alert('is checked'); 
             $("#option2").hide();
             $("#option1").show();
 
         });
         $('#defaultGroupExample2').click(function () {
-            // if ($(this).is(':checked')) alert('is checked'); 
             $("#option1").hide();
             $("#option2").show();
         });
+
+        function plus(id){
+            var id = id;
+            var price = $("#price"+id).val();
+            var quantity = $("#quantity" + id).val();
+            var total = format(price * (Number(quantity) + 1)) + 'đ';
+            $("#total-price" + id).html(total);          
+        }
+        function minus(id){
+            var id = id;
+            var price = $("#price" + id).val();
+            var quantity = $("#quantity" + id).val();
+            if (quantity == 0) {return};
+            var total = format(price * (Number(quantity) - 1)) +'đ';
+            $("#total-price" + id).html(total);
+        }
+        function format(x) {
+            return isNaN(x) ? "" : x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
     </script>
     }
 
-<!-- Body -->
 
 <div class="site-section">
     <div class="container">
         <div class="row mb-5">
             <form class="col-md-12" method="post">
                 <div class="site-blocks-table">
-                    @if (Model == null)
+                    @if (cart == null)
                     {
                         <div class="col-md-12" style="width:100%;text-align:center" >Giỏ hàng chưa có sản phẩm nào</div>
                         
@@ -42,6 +59,7 @@
                             <thead>
                                 <tr>
                                     <th class="product-thumbnail" colspan="2">Sản phẩm</th>
+                                    <th class="product-size">Size</th>
                                     <th class="product-price">Đơn giá</th>
                                     <th class="product-quantity">Số lượng</th>
                                     <th class="product-total">Giá</th>
@@ -49,7 +67,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model)
+                                @foreach (var item in cart)
                                 {
                                     <tr>
                                         <td class="product-thumbnail">
@@ -58,27 +76,36 @@
                                         <td class="product-name">
                                             <h2 class="h5 text-black">@item.product.name</h2>
                                         </td>
+                                        <td>
+                                            <h2 class="h5 text-black">@item.size</h2>
+                                        </td>
                                         @if (item.product.promotionPrice == null)
                                         {
-                                            <td>@String.Format("{0:n0}", item.product.price)đ</td>
+                                            <td >
+                                                <span>@String.Format("{0:n0}", item.product.price)đ</span>
+                                                <input type="hidden" id="price@(item.product.id_product)" value="@item.product.price"/>
+                                            </td>
                                         }
                                         else
                                         {
-                                            <td>@String.Format("{0:n0}", item.product.promotionPrice)đ</td>
+                                            <td>
+                                                <span>@String.Format("{0:n0}", item.product.promotionPrice)đ</span>
+                                                <input type="hidden" id="price@(item.product.id_product)" value="@item.product.promotionPrice" />
+                                            </td>
                                         }
                                         <td>
                                             <div class="input-group mb-3" style="max-width: 120px;">
                                                 <div class="input-group-prepend">
-                                                    <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                                                    <button onclick="minus(@item.product.id_product)" class="btn btn-outline-primary js-btn-minus" type="button" value="@item.product.id_product">&minus;</button>
                                                 </div>
-                                                <input type="text" class="form-control text-center" value="@item.quantity" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                                <input id="quantity@(item.product.id_product)" type="text" class="form-control text-center" value="@item.quantity" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
                                                 <div class="input-group-append">
-                                                    <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                                                    <button onclick="plus(@item.product.id_product)" class="btn btn-outline-primary js-btn-plus" type="button" value="@item.product.id_product">&plus;</button>
                                                 </div>
                                             </div>
 
                                         </td>
-                                        <td>.....</td>
+                                        <td id="total-price@(item.product.id_product)">@String.Format("{0:n0}", (item.product.promotionPrice == null ? (item.product.price * item.quantity) : (item.product.promotionPrice * item.quantity)))đ</td>
                                         <td><a href="#" class="btn btn-primary height-auto btn-sm">X</a></td>
                                     </tr>
                                 }
@@ -90,7 +117,7 @@
             </form>
         </div>
 
-      @if (Model != null)
+      @if (cart != null)
       {
         <div class="row">
             <div class="col-md-6">
@@ -100,6 +127,9 @@
                     </div>
                     <div class="col-md-6">
                         <button class="btn btn-outline-primary btn-sm btn-block">Đăng nhập</button>
+                    </div>
+                    <div class="col-md-6" >
+                        <a href="#" class="btn btn-outline-primary btn-sm btn-block">Cập nhật</a>
                     </div>
                 </div>
                 <div class="row">

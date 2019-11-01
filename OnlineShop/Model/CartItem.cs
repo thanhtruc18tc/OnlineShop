@@ -13,6 +13,7 @@ namespace OnlineShop.Model
         public string productName { get; set; }
         public int individualPrice { get; set; }
         public int quantity { get; set; }
+        public int size { get; set; }
         public int totalPrice { get; set; }
     }
 }

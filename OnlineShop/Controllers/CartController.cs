@@ -24,7 +24,7 @@ namespace OnlineShop.Controllers
             return View("Cart");
         }
 
-        public ActionResult Add(int id, int quantity)
+        public ActionResult Add(int id, int quantity, int size)
         {
             var product = new ProductDao(context).GetDetail(id);
 
@@ -32,9 +32,9 @@ namespace OnlineShop.Controllers
             if (cart != null)
             {
                 var list = (List<CartItem>)cart;
-                if (list.Exists(x => x.product.id_product == id))
+                if (list.Exists(x => x.product.id_product == id && x.size == size))
                 {
-                    foreach(var item in list)
+                    foreach (var item in list)
                     {
                         if (item.product.id_product == id)
                         {
@@ -44,11 +44,12 @@ namespace OnlineShop.Controllers
                 }
                 else
                 {
-                    // Create new cart 
+                    // Create new item 
                     var item = new CartItem();
                     item.image = new ImageDao(context).GetByIdProduct(id).link;
                     item.product = product;
                     item.quantity = quantity;
+                    item.size = size;
                     list.Add(item);
                 }
             }
@@ -59,14 +60,15 @@ namespace OnlineShop.Controllers
                 item.product = product;
                 item.image = new ImageDao(context).GetByIdProduct(id).link;
                 item.quantity = quantity;
+                item.size = size;
                 var list = new List<CartItem>();
-
+                list.Add(item);
                 // Save to session
                 Session[Constants.CART_SESSION] = list;
 
             }
 
-            return RedirectToAction("Cart");
+            return RedirectToAction("Index","Cart");
         }
     }
 }
