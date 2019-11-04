@@ -72,6 +72,15 @@ namespace OnlineShop.Controllers
                 var jsonItem = jsonCart.SingleOrDefault(x => x.product.id_product == item.product.id_product);
                 if (jsonItem != null)
                 {
+                    var inStore = new SizeDao(context).GetQuantity(jsonItem.product.id_category, jsonItem.size);
+                    if ( inStore < jsonItem.quantity)
+                    {
+                        return Json(new
+                        {
+                            status = false,
+                            message = "Xin lỗi, chúng tôi chỉ còn tất cả " + inStore + " sản phẩm"
+                        });
+                    }
                     item.quantity = jsonItem.quantity;
                 }
             }

@@ -27,6 +27,8 @@
                     if (response.status == true) {
                         //window.location.href="/Cart"
                         
+                    } else {
+
                     }
                 }
             });

@@ -12,6 +12,17 @@
 @section jsFooter{
     <script type="text/javascript" src="~/Assets/js/Controller/Cart/cartController.js"></script>
     <script>
+        function tempAlert(msg, duration) {
+            var el = document.createElement("div");
+            el.setAttribute("style", "position:absolute;top:55%;width:100%;background-color:white;text-align:center;line-height:90px;font-size:20px");
+            el.innerHTML = msg;
+            setTimeout(function () {
+                el.parentNode.removeChild(el);
+            }, duration);
+            document.body.appendChild(el);
+        }
+    </script>
+    <script>
         $("#option2").hide();
         $('#defaultGroupExample1').click(function () {
             $("#option2").hide();
@@ -51,8 +62,8 @@
         function format(x) {
             return isNaN(x) ? "" : x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-    </script>
-    }
+   </script>
+}
 
 
 <div class="site-section">
@@ -60,7 +71,7 @@
         <div class="row mb-5">
             <form class="col-md-12" method="post">
                 <div class="site-blocks-table">
-                    @if (cart == null)
+                    @if (cart == null || cart.Count() == 0)
                     {
                         <div class="col-md-12" style="width:100%;text-align:center" >Giỏ hàng chưa có sản phẩm nào</div>
                         
@@ -89,7 +100,7 @@
                                             <h2 class="h5 text-black">@item.product.name</h2>
                                         </td>
                                         <td>
-                                            <h2 class="h5 text-black">@item.size</h2>
+                                            <h2 class="h5 text-black">@item.sizeName</h2>
                                         </td>
                                         @if (item.product.promotionPrice == null)
                                         {
@@ -124,7 +135,7 @@
 
                             </tbody>
                         </table>
-                        <button id="btn-update" style="width:25%; float:right" class="btn btn-outline-primary btn-sm btn-block">Cập nhật giỏ hàng</button>
+                        <button id="btn-update" style="width:25%; float:right; display:none" class="btn btn-outline-primary btn-sm btn-block">Cập nhật giỏ hàng</button>
                     }
                 </div>
             </form>
@@ -139,7 +150,7 @@
                         <p>Bạn đã đăng nhập hay chưa?</p>
                     </div>
                     <div class="col-md-6">
-                        <button class="btn btn-outline-primary btn-sm btn-block">Đăng nhập</button>
+                        <button onclick="window.location='/login'" class="btn btn-outline-primary btn-sm btn-block">Đăng nhập</button>
                     </div>
                     
                 </div>

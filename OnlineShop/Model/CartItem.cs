@@ -14,6 +14,8 @@ namespace OnlineShop.Model
         public int individualPrice { get; set; }
         public int quantity { get; set; }
         public int size { get; set; }
+        public string sizeName { get; set; }
+        public List<int> avaiableSize { get; set; }
         public int totalPrice { get; set; }
     }
 }

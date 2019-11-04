@@ -9,16 +9,69 @@
 }
 @section jsFooter{
     <script>
-       
-        $("#btn-add").click(function () {
-           
-            if (!$("input:radio[name='size']").is(":checked")){
-                $("#myModal").show();
-                //$(".myModal").modal('show');
-                alert("Bạn chưa chọn size")
-                return false;
+        function tempAlert(msg, duration) {
+            var el = document.createElement("div");
+            el.setAttribute("style", "position:absolute;top:55%;width:100%;background-color:white;text-align:center;line-height:90px;font-size:20px");
+            el.innerHTML = msg;
+            setTimeout(function () {
+                el.parentNode.removeChild(el);
+            }, duration);
+            document.body.appendChild(el);
+        }
+        
+    </script>
+    <script>
+        var cart = {
+            init: function () {
+                cart.registerEvents();
+            },
+
+            registerEvents: function () {
+
+                $('#btn-add').off('click').on("click", function (e) {
+                    console.log($('#id').val())
+                    console.log($('#size').val())
+                    console.log($('#quantity').val())
+                    $.ajax({
+                        url: "/Product/Add",
+                        data:
+                            {
+                                id: $('#id').val(),
+                                quantity: $('#quantity').val(),
+                                size: $('#size').val()
+                        },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (response) {
+                            if (response.status == true) {
+                                tempAlert("Đã thêm sản phẩm vào giỏ hàng", 2000);
+                            } else {
+                                tempAlert(response.message, 2000);
+                            }
+                        }
+                    });
+                });
             }
-        });
+        }
+        cart.init();
+    </script>
+    <script>
+       
+        //$("#btn-minus").click(function () {
+        //    var num = $("#quantity-text").val();
+        //    alert(num)
+        //    if (num == 1 ) {
+        //        return false;
+        //    }
+        //});
+
+        //$("#btn-add").click(function () {
+        //    if (!$("input:radio[name='size']").is(":checked")){
+        //        $("#myModal").show();
+        //        //$(".myModal").modal('show');
+        //        return false;
+        //    }
+        //});
 
     </script>
     } 
@@ -27,7 +80,7 @@
     <div class="modal-dialog modal-login">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 id="message"></h4>
+                <h4 id="message">Đã thêm sản phẩm vào giỏ hàng</h4>
             </div>
         </div>
     </div>
@@ -63,13 +116,24 @@
                 </p>
                 @using (Html.BeginForm("Add", "Cart", FormMethod.Post, new { id = "add-form" })) {
                     <div class="mb-1 d-flex justify-content-center">
-                        <input type="hidden" value="@productDetail.id_product" name="id"/>
+                        <input type="hidden" value="@productDetail.id_product" id="id" data-id="@productDetail.id_product"/>
                         @foreach (var item in listSize)
                         {
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" value="@item.id_size" id="@item.id_size" name="size">
-                                <label class="custom-control-label" for="@item.id_size">@item.name</label>
-                            </div>
+                            if (item == listSize.First())
+                            {
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" class="custom-control-input" value="@item.id_size" id="size" checked="checked">
+                                    <label class="custom-control-label" for="@item.id_size">@item.name</label>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" class="custom-control-input" value="@item.id_size"  data-id="@item.id_size" id="size">
+                                    <label class="custom-control-label" for="@item.id_size">@item.name</label>
+                                </div>
+                            }
+
                         }
                         @if (listSize.Count() == 0)
                         {
@@ -82,7 +146,7 @@
                             <div class="input-group-prepend">
                                 <button class="btn btn-outline-primary js-btn-minus" id="btn-minus" type="button">&minus;</button>
                             </div>
-                            <input type="text" id="quantity" class="form-control text-center" value="1" name="quantity" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            <input type="text" class="form-control text-center" value="1" id="quantity" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
                             </div>
@@ -90,7 +154,7 @@
                     </div>
                    
                     
-                        <button type="@(listSize.Count() != 0 ? "submit": "button")" id="@(listSize.Count() != 0 ? "btn-add" : "")" class="buy-now btn btn-sm height-auto px-4 py-3 @(listSize.Count() != 0 ? "btn-danger": "btn-secondary") d-flex justify-content-around" style="color:white; width:100%">Thêm vào giỏ</button>
+                        <button type="@(listSize.Count() != 0 ? "button": "button")" id="@(listSize.Count() != 0 ? "btn-add" : "")" class="buy-now btn btn-sm height-auto px-4 py-3 @(listSize.Count() != 0 ? "btn-danger": "btn-secondary") d-flex justify-content-around" style="color:white; width:100%">Thêm vào giỏ</button>
                     
                 }
             </div>
