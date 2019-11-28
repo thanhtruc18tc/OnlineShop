@@ -41,7 +41,7 @@
             var total = format(price * (Number(quantity) + 1)) + 'đ';
             $("#total-price" + id).html(total);
 
-            var delayInMilliseconds = 100; //1 second
+            var delayInMilliseconds = 200; //1 second
             setTimeout(function () {
                 $("#btn-update").click();
             }, delayInMilliseconds);
@@ -54,7 +54,7 @@
             if (quantity == 0) {return};
             var total = format(price * (Number(quantity) - 1)) +'đ';
             $("#total-price" + id).html(total);
-            var delayInMilliseconds = 100; //1 second
+            var delayInMilliseconds = 200; //1 second
             setTimeout(function () {
                 $("#btn-update").click();
             }, delayInMilliseconds);
@@ -100,6 +100,7 @@
                                             <h2 class="h5 text-black">@item.product.name</h2>
                                         </td>
                                         <td>
+                                            <input type="hidden" id="size-id" data-id="@item.size" />
                                             <h2 class="h5 text-black">@item.sizeName</h2>
                                         </td>
                                         @if (item.product.promotionPrice == null)

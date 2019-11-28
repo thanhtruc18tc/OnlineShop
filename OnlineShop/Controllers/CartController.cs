@@ -72,7 +72,7 @@ namespace OnlineShop.Controllers
                 var jsonItem = jsonCart.SingleOrDefault(x => x.product.id_product == item.product.id_product);
                 if (jsonItem != null)
                 {
-                    var inStore = new SizeDao(context).GetQuantity(jsonItem.product.id_category, jsonItem.size);
+                    var inStore = new SizeDao(context).GetQuantity(jsonItem.product.id_product, item.size);
                     if ( inStore < jsonItem.quantity)
                     {
                         return Json(new

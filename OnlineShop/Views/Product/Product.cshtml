@@ -32,19 +32,24 @@
                     console.log($('#id').val())
                     console.log($('#size').val())
                     console.log($('#quantity').val())
+                    if ($('#quantity').val() == 0) {
+                        tempAlert("Số lượng không phù hợp", 2000);
+                        return;
+                    }
                     $.ajax({
                         url: "/Product/Add",
                         data:
                             {
                                 id: $('#id').val(),
                                 quantity: $('#quantity').val(),
-                                size: $('#size').val()
+                                size: $("#add-form input[type='radio']:checked").val()
                         },
                         dataType: "json",
                         type: "POST",
                         success: function (response) {
                             if (response.status == true) {
                                 tempAlert("Đã thêm sản phẩm vào giỏ hàng", 2000);
+                                location.reload();
                             } else {
                                 tempAlert(response.message, 2000);
                             }
@@ -56,6 +61,7 @@
         cart.init();
     </script>
     <script>
+        
        
         //$("#btn-minus").click(function () {
         //    var num = $("#quantity-text").val();
@@ -122,15 +128,15 @@
                             if (item == listSize.First())
                             {
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" class="custom-control-input" value="@item.id_size" id="size" checked="checked">
-                                    <label class="custom-control-label" for="@item.id_size">@item.name</label>
+                                    <input type="radio" class="form-check-input" value="@item.id_size" data-id="@item.id_size" id="size" name="size" checked>
+                                    <label>@item.name</label>
                                 </div>
                             }
                             else
                             {
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" class="custom-control-input" value="@item.id_size"  data-id="@item.id_size" id="size">
-                                    <label class="custom-control-label" for="@item.id_size">@item.name</label>
+                                    <input type="radio" class="form-check-input" value="@item.id_size" data-id="@item.id_size" id="size" name="size">
+                                    <label>@item.name</label>
                                 </div>
                             }
 
