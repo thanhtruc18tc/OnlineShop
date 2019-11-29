@@ -14,10 +14,48 @@ namespace Model.Dao
         {
             this.db = context;
         }
+        public bool AddCategory(Category category)
+        {
+            try
+            {
+                db.Categories.Add(category);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool DeleteCategory(int id)
+        {
+            try
+            {
+                var category = db.Categories.SingleOrDefault(x => x.id_category == id);
+                db.Categories.Remove(category);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public String GetNameById(int id)
+        {
+            return db.Categories.Where(x => x.id_category == id).SingleOrDefault().name;
+        }
 
         public int GetIdByName(string name)
         {
             return db.Categories.Where(x => x.name == name).SingleOrDefault().id_category;
+        }
+
+        public IEnumerable<Category> GetAll()
+        {
+            return db.Categories.ToList<Category>();
         }
 
         public List<int> GetIdForMenClothes()

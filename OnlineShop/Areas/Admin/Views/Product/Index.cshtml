@@ -1,0 +1,121 @@
+﻿@model PagedList.IPagedList<Model.EF.Product>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Sản phẩm - Admin ShopMax";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int page = ViewBag.Page;
+    int total = ViewBag.Total;
+    var listCat = ViewBag.Category;
+    int iCat = 0;
+    int numOfPage = (total % 9 == 0) ? (total / 9) : ((total / 9) + 1);
+    if (Model.Count() == 0)
+    {
+        numOfPage = 0;
+    }
+}
+
+@section jsHeader {
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+    </script>
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12" style="width:100%">
+                <p class="page-title">DANH SÁCH TẤT CẢ SẢN PHẨM </p>
+                <span>
+                    <div class="container">
+                        <div class="row">
+                            <div class='col-sm-12' style="margin-bottom:10px">
+                                Lọc theo:
+                                <button class="btn-success">Mới nhất</button>
+                                <button class="btn-default" style="margin-left:10px">Cũ nhất</button>
+                            </div>
+                            <div class='col-sm-6'>
+                                <div class="form-group">
+                                    <div class='input-group date' id='datetimepicker1'>
+                                        <input type='text' class="form-control" placeholder="Nhập từ khóa tìm kiếm..." />
+                                        <span class="input-group-addon">
+                                            Tìm
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='col-sm-6'>
+                                <button class="btn btn-primary">Thêm sản phẩm</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </span>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /row -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="white-box">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Danh mục sản phẩm</th>
+                                    <th>Giá bán</th>
+                                    <th>Giá gốc</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>@item.id_product</td>
+                                    <td>@item.name</td>
+                                    <td>@listCat[iCat]</td>
+                                    <td>@item.price</td>
+                                    <td>@item.promotionPrice</td>
+                                    <td>Còn hàng</td>
+                                    <td>@item.dateCreate</td>
+                                    <td>
+                                        <span><button class="btn-warning">Chỉnh sửa</button></span>
+                                        <span><button class="btn-danger">Xóa</button></span>
+                                    </td>
+                                </tr>
+                                iCat++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <nav class="text-center">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    @if (numOfPage != 0)
+                    {
+                        for (int i = 1; i <= numOfPage; i++)
+                        {
+                            if (i == page)
+                            {
+                                <li class="active page-item"><span>@i</span></li>
+                            }
+                            else
+                            {
+                                <li class="page-item"><a class="page-link" href="/Collection/Filter?page=@i">@i</a></li>
+                            }
+                        }
+                    }
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+        <!-- /.row -->
+    </div>

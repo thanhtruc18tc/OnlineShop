@@ -16,9 +16,18 @@ namespace Model.Dao
             this.db = context;
         }
 
-        public void Insert(int idProduct, string link)
+        public bool Insert(int idProduct, string link)
         {
-            db.Images.Add(new Image { id_product = idProduct, link = link });
+            try
+            {
+                db.Images.Add(new Image { id_product = idProduct, link = link });
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public Image GetByIdProduct(int idProd)

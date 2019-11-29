@@ -1,0 +1,174 @@
+﻿@model  Model.Helper.ProductView
+@{
+    List<Model.EF.Category> listCat = (List<Model.EF.Category>)ViewBag.Categories;
+    List<SelectListItem> selectList = new List<SelectListItem>();
+    foreach (var cat in listCat)
+    {
+        selectList.Add(new SelectListItem { Value = cat.id_category+"" , Text = cat.name });
+    }
+    String action = ViewBag.Action;
+    ViewBag.Title = action + " - Admin ShopMax";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int i_img = 2;
+}
+@section jsFooter{
+    <script>
+        var i = 2
+        var images = document.getElementById("images")
+        function addField() {
+            if (i <= 2) {
+                i = 2
+            }
+            if (i>4) {
+                return
+            }
+            var input = document.createElement("div")
+            input.classList = "form-group"
+            input.innerHTML = `<label class="col-md-12">Link hình ảnh @i_img</label>
+                                                            <div class="col-md-12">
+                                                                @Html.TextBoxFor(model => model.Images[i_img], new { @type = "url", @class = "form-control form-control-line", @required = "required", @autocomplete = "off" })
+                                                            </div>`
+            images.appendChild(input)
+            i++
+        }
+        function rmField() {
+            if (i > 2) {
+                images.removeChild(images.lastChild)
+                i--
+            }
+        }
+    </script>
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <p class="page-title">@action</p>
+            </div>
+        </div>
+        <!-- /.row -->
+        <!-- .row -->
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                @Html.ValidationSummary(true, "", new { @class = "text-center"+ ViewBag.ClassText })
+            </div>
+            @using (Html.BeginForm())
+            {
+                <div class="col-md-8 col-xs-12">
+                    <div class="white-box">
+                        <div class="form-horizontal form-material">
+                            <div class="form-group">
+                                <label class="col-sm-12">Danh mục sản phẩm</label>
+                                <div class="col-sm-12">
+                                    @Html.DropDownListFor(model => model.Id_category, selectList, new { @class = "form-control form-control-line", @required = "required", @autocomplete = "off" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Tên sản phẩm</label>
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.Name, new { @type = "text", @class = "form-control form-control-line", @name = "name", @required = "required", @autocomplete = "off" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-6">Giá gốc</label>
+                                <label class="col-md-6">Giá bán</label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(model => model.Price, new { @type = "number", @class = "form-control form-control-line", @name = "price", @required = "required", @autocomplete = "off" })
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(model => model.PrPrice, new { @type = "number", @class = "form-control form-control-line", @name = "prprice", @required = "required", @autocomplete = "off" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Miêu tả</label>
+                                <div class="col-md-12">
+                                    @Html.TextAreaFor(model => model.Description, new { rows = 6, @type = "text", @class = "form-control form-control-line", @name = "description", @required = "required", @autocomplete = "off" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <div class="white-box">
+                        <div class="form-horizontal form-material">
+                            <div class="form-group">
+                                <label class="col-md-4">Size S</label>
+                                <label class="col-md-4">Size M</label>
+                                <label class="col-md-4">Size L</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.SizeS, new { @type = "text", @class = "form-control form-control-line", @name = "sizes", @required = "required", @autocomplete = "off" })
+                                </div>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.SizeM, new { @type = "text", @class = "form-control form-control-line", @name = "sizem", @required = "required", @autocomplete = "off" })
+                                </div>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.SizeL, new { @type = "text", @class = "form-control form-control-line", @name = "sizel", @required = "required", @autocomplete = "off" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12 text-right">
+                                    <a href="javascript:void(0)" class="btn btn-warning" onclick="addFieldSize()">+</a>
+                                    <a href="javascript:void(0)" class="btn btn-default" onclick="rmFieldSize()">-</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white-box">
+                        <div class="form-horizontal form-material">
+                            <div id="images">
+                                <div class="form-group">
+                                    <label class="col-md-12">Link hình ảnh 1</label>
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(model => model.Images[0], new { @type = "url", @class = "form-control form-control-line", @name = "img1", @required = "required", @autocomplete = "off" })
+                                    </div>
+                                </div>
+                                @*<div class="form-group">
+                        <label class="col-md-12">Link hình ảnh 2</label>
+                        <div class="col-md-12">
+                            @Html.TextBoxFor(model => model.Images[1], new { @type = "url", @class = "form-control form-control-line", @name = "img1", @required = "required", @autocomplete = "off" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Link hình ảnh 3</label>
+                        <div class="col-md-12">
+                            @Html.TextBoxFor(model => model.Images[2], new { @type = "url", @class = "form-control form-control-line", @name = "img1", @required = "required", @autocomplete = "off" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-12">Link hình ảnh 4</label>
+                        <div class="col-md-12">
+                            @Html.TextBoxFor(model => model.Images[3], new { @type = "url", @class = "form-control form-control-line", @name = "img1", @required = "required", @autocomplete = "off" })
+                        </div>
+                    </div>*@
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12 text-right">
+                                    <a href="javascript:void(0)" class="btn btn-warning" onclick="addField()">+</a>
+                                    <a href="javascript:void(0)" class="btn btn-default" onclick="rmField()">-</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 text-right">
+                    <button type="submit" class="btn btn-success">@action</button>
+                    <button type="reset" class="btn btn-default">RESET</button>
+                </div>
+            }
+        </div>
+        <!-- /.row -->
+    </div>
+    <div id="errorModal" class="modal fade">
+        <div class="modal-dialog modal-login">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Viet</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+    </script>

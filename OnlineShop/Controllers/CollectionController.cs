@@ -19,7 +19,7 @@ namespace OnlineShop.Controllers
             var dao = new ProductDao(context);
             ViewBag.Page = 1;
             ViewBag.Total = 1;
-            ViewBag.FilterBy = "ao-so-mi-nam";
+            ViewBag.FilterBy = keywords;
             ViewBag.Title = Constants.Search+": "+keywords;
             var list = dao.Search(keywords);
             var listImage = GetListImage(list);

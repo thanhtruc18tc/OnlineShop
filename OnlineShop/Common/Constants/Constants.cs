@@ -47,5 +47,12 @@ namespace OnlineShop.Common.Constants
         // MARK: SEARCH
         public static string Search = "Tìm kiếm sản phẩm";
 
+        // MARK: ADMIN PRODUCT
+        public static string CreateProduct = "THÊM MỚI SẢN PHẨM";
+        public static string UpdateProduct = "CHỈNH SỬA SẢN PHẨM";
+        public static string Suc_CreateProduct = "Thêm sản phẩm mới thành công!";
+        public static string Err_CreateProduct = "Thêm sản phẩm mới thất bại!";
+        public static string Err_CreateProductImage = "Thêm hình ảnh sản phẩm mới thất bại!";
+        public static string Err_CreateProductSize = "Thêm size sản phẩm mới thất bại!";
     }
 }
