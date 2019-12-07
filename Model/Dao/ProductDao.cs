@@ -148,15 +148,18 @@ namespace Model.Dao
             {
                 var listId = dao.GetIdForMenClothes();
 
-                return db.Products.Where(item => listId.Contains(item.id_category))
-                .OrderByDescending(x => x.id_product).Count();
+                return 0;
             } else if (name == "Hàng nữ mới về")
             {
                 var listId = dao.GetIdForWomenClothes();
 
-                return db.Products.Where(item => listId.Contains(item.id_category))
-                .OrderByDescending(x => x.id_product).Count();
-            } else
+                return 0;
+            } else if (name == "Hàng mới")
+            {
+                return 0;
+            }
+
+            else
             {
                 var id = dao.GetIdByName(name);
                 return db.Products.Where(x => x.id_category == id).Count();
