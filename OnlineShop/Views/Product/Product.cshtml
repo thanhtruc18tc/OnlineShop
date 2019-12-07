@@ -49,7 +49,10 @@
                         success: function (response) {
                             if (response.status == true) {
                                 tempAlert("Đã thêm sản phẩm vào giỏ hàng", 2000);
-                                location.reload();
+                                setTimeout(function () {
+                                    location.reload();
+                                },1000);
+                                
                             } else {
                                 tempAlert(response.message, 2000);
                             }

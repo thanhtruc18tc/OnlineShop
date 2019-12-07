@@ -35,9 +35,7 @@ var cart = {
                 dataType: "json",
                 type: "POST",
                 success: function (response) {
-                    if (response.status == true) {
-                        //window.location.href="/Cart"
-                        
+                    if (response.status == true) {                        
                     } else {
                         tempAlert(response.message,2000)
                     }

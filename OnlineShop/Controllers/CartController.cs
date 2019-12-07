@@ -54,7 +54,7 @@ namespace OnlineShop.Controllers
         public JsonResult Delete(int id)
         {
             var sessionCart = (List<CartItem>)Session[Constants.CART_SESSION];
-            sessionCart.RemoveAll(x => x.product.id_category == id);
+            sessionCart.RemoveAll(x => x.product.id_product == id);
             Session[Constants.CART_SESSION] = sessionCart;
             return Json( new {
                  status = true
@@ -70,6 +70,16 @@ namespace OnlineShop.Controllers
             foreach (var item in sessionCart)
             {
                 var jsonItem = jsonCart.SingleOrDefault(x => x.product.id_product == item.product.id_product);
+
+                // If quantity = 0 => delete that item
+                if (jsonItem.quantity == 0) {
+                    var delete = Delete(jsonItem.product.id_product);
+                    return Json(new
+                    {
+                        status = true
+                    });
+                }
+
                 if (jsonItem != null)
                 {
                     var inStore = new SizeDao(context).GetQuantity(jsonItem.product.id_product, item.size);
@@ -136,6 +146,13 @@ namespace OnlineShop.Controllers
             }
 
             return RedirectToAction("Index","Cart");
+        }
+
+        public ActionResult SubmitOrder()
+        {
+            var sessionCart = (List<CartItem>)Session[Constants.CART_SESSION];
+
+            return RedirectToAction("Index", "Cart");
         }
     }
 }
