@@ -1,20 +1,27 @@
-﻿using System;
+﻿using Model.EF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Model.EF;
 
 namespace Model.Dao
 {
     public class SizeDao
     {
         OnlineShopContext db = null;
-        public SizeDao(OnlineShopContext db)
+
+        public SizeDao(OnlineShopContext context)
         {
-            this.db = db;
+            db = context;
         }
 
+        public List<Size> GetListSize()
+        {
+            return db.Sizes.ToList<Size>();
+        }
+
+        // -- 
         public List<Size> GetSizeList(int idProd)
         {
             var listIdSize = db.SizeDetails.Where(x => x.id_product == idProd && x.quantity > 0).Select(item => item.id_size).ToList();

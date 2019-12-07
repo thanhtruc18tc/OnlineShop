@@ -62,8 +62,10 @@
     <Compile Include="Dao\CategoryDao.cs" />
     <Compile Include="Dao\ImageDao.cs" />
     <Compile Include="Dao\MemberDAO.cs" />
+    <Compile Include="Dao\OrderDao.cs" />
     <Compile Include="Dao\ProductDao.cs" />
     <Compile Include="Dao\SizeDao.cs" />
+    <Compile Include="Dao\SizeDetailDao.cs" />
     <Compile Include="Dao\UserDao.cs" />
     <Compile Include="EF\Category.cs" />
     <Compile Include="EF\Color.cs" />
@@ -79,6 +81,8 @@
     <Compile Include="EF\Subscriber.cs" />
     <Compile Include="EF\User.cs" />
     <Compile Include="EF\UserType.cs" />
+    <Compile Include="Helper\ProductView.cs" />
+    <Compile Include="Helper\SringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

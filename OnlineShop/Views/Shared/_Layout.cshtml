@@ -220,9 +220,10 @@
             <div class="search-wrap">
                 <div class="container">
                     <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
-                    <form action="#" method="post">
-                        <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
-                    </form>
+                    @using (Html.BeginForm("Search", "Collection", FormMethod.Get))
+                    {
+                        <input type="text" class="form-control" name="keywords" placeholder="Nhập từ khóa tìm kiếm và nhấn Enter..." required="required">
+                    }
                 </div>
             </div>
             <div class="container">

@@ -211,12 +211,14 @@
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Common\Base\AdminBaseController.cs" />
     <Compile Include="Common\Base\BaseController.cs" />
     <Compile Include="Common\Constants\Constants.cs" />
     <Compile Include="Common\Helper\Encryptor.cs" />
     <Compile Include="Common\Helper\MailHelper.cs" />
     <Compile Include="Common\Helper\RandomHelper.cs" />
+    <Compile Include="Common\Helper\StringHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CollectionController.cs" />
@@ -229,6 +231,7 @@
     <Compile Include="Model\CartInfo.cs" />
     <Compile Include="Model\CartItem.cs" />
     <Compile Include="Model\ProductDetailPage.cs" />
+    <Compile Include="Model\ProductView.cs" />
     <Compile Include="System_Models\AccountViewModels.cs" />
     <Compile Include="System_Models\IdentityModels.cs" />
     <Compile Include="Common\Param\LoginModel.cs" />
@@ -872,6 +875,10 @@
     <Content Include="Areas\Admin\Views\Account\Account.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Orders.cshtml" />
     <Content Include="Assets\js\MD5Hash\md5.min.js.map" />
+    <Content Include="Areas\Admin\Views\Product\Detail - Copy.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Home.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
