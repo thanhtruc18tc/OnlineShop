@@ -287,5 +287,6 @@ namespace Model.Dao
             return db.Users.Where(x => x.isAdmin == false).ToList<User>();
         }
         #endregion
+
     }
 }

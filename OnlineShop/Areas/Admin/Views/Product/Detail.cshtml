@@ -91,6 +91,12 @@
                 <div class="col-md-7 col-xs-12">
                     <div class="white-box">
                         <div class="form-horizontal form-material">
+                            @{ 
+                                if (action.Equals(Constants.UpdateProduct))
+                                {
+                                    @Html.HiddenFor(model => model.Id_product)
+                                }
+                            }
                             <div class="form-group">
                                 <label class="col-sm-12">Danh mục sản phẩm</label>
                                 <div class="col-sm-12">

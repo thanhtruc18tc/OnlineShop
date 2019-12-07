@@ -17,11 +17,35 @@ namespace OnlineShop.Areas.Admin.Controllers
         public ActionResult Index(int page = 1)
         {
             var daoProduct = new ProductDao(context);
+            var daoQua = new SizeDetailDao(context);
             ViewBag.Page = page;
             ViewBag.Total = daoProduct.GetCount();
             var list = daoProduct.GetProducts(page, pageSize);
+            var quaProduct = new List<int>();
+            foreach(var item in list)
+            {
+                quaProduct.Add(daoQua.GetQuanlity(item.id_product));
+            }
             ViewBag.Category = GetNameCategories(list);
+            ViewBag.Quanlity = quaProduct;
             return View(list);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var result = new ProductDao(context).DeleteProduct(id);
+            if (result.Equals(true))
+            {
+                ViewBag.ClassText = " text-success";
+                ModelState.AddModelError("", Constants.Suc_CreateProduct);
+            }
+            else
+            {
+                ViewBag.ClassText = " text-danger";
+                ModelState.AddModelError("", Constants.Err_CreateProduct);
+            }
+            return View();
+
         }
         public ActionResult Create()
         {
@@ -131,6 +155,7 @@ namespace OnlineShop.Areas.Admin.Controllers
 
             //Create model
             var model = new ProductView();
+            model.Id_product = id;
             model.Name = product.name;
             model.Price = (product.price != null) ? (int)product.price : 0;
             model.PrPrice = (product.promotionPrice != null)?(int)product.promotionPrice:0;
@@ -148,6 +173,27 @@ namespace OnlineShop.Areas.Admin.Controllers
             ViewBag.Action = Constants.UpdateProduct;
             return View("Detail", model);
         }
+
+        [HttpPost]
+        public ActionResult Edit(ProductView model)
+        {
+            var product = new ProductDao(context).UpdateProduct(model.Id_product, model.Name, model.Description, model.Price, model.PrPrice, model.Id_category);
+            ViewBag.ClassText = " text-success";
+            ModelState.AddModelError("", Constants.Suc_UpdateProduct);
+            model.Name = product.name;
+            model.Price = (product.price != null) ? (int)product.price : 0;
+            model.PrPrice = (product.promotionPrice != null) ? (int)product.promotionPrice : 0;
+            model.Id_category = product.id_category;
+            model.Description = product.description;
+            //Default View
+            var daoSize = new SizeDao(context);
+            var daoCat = new CategoryDao(context);
+            ViewBag.Categories = daoCat.GetAll();
+            ViewBag.Sizes = daoSize.GetListSize();
+            ViewBag.Action = Constants.UpdateProduct;
+            return View("Detail", model);
+        }
+
 
         private List<String> GetNameCategories(IEnumerable<Product> list)
         {

@@ -62,6 +62,7 @@
     <Compile Include="Dao\CategoryDao.cs" />
     <Compile Include="Dao\ImageDao.cs" />
     <Compile Include="Dao\MemberDAO.cs" />
+    <Compile Include="Dao\OrderDao.cs" />
     <Compile Include="Dao\ProductDao.cs" />
     <Compile Include="Dao\SizeDao.cs" />
     <Compile Include="Dao\SizeDetailDao.cs" />

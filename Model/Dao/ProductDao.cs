@@ -28,12 +28,23 @@ namespace Model.Dao
                 return false;
             }
         }
+        public Product UpdateProduct(int id, string name, string description,int price, int prprice,int id_cat)
+        {
+            Product product = GetDetail(id);
+            product.name = name;
+            product.id_category = id_cat;
+            product.description = description;
+            product.price = price;
+            product.promotionPrice = prprice;
+            db.SaveChanges();
+            return product;
+        }
 
         public bool DeleteProduct(int id)
         {
             try
             {
-                Product product = db.Products.SingleOrDefault(x => x.id_product == id);
+                Product product = GetDetail(id);
                 db.Products.Remove(product);
                 db.SaveChanges();
                 return true;
@@ -76,9 +87,9 @@ namespace Model.Dao
             }
         }
 
-        public void GetIdByName()
+        public int GetIdByName(string name)
         {
-            throw new NotImplementedException();
+            return db.Products.Where(x => x.name == name).SingleOrDefault().id_product;
         }
 
         public Product GetDetail(int id)

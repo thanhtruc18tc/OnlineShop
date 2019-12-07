@@ -1,7 +1,16 @@
-﻿
+﻿@model PagedList.IPagedList<Model.EF.Order>
 @{
     ViewBag.Title = "Orders - Admin ShopMax";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int page = ViewBag.Page;
+    int total = ViewBag.Total;
+    int numOfPage = (total % 9 == 0) ? (total / 9) : ((total / 9) + 1);
+    if (Model.Count() == 0)
+    {
+        numOfPage = 0;
+    }
+    var listUser = ViewBag.Users;
+    var i = 0;
 }
 
 @section jsHeader {
@@ -36,7 +45,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </span>
             </div>
             <!-- /.col-lg-12 -->
@@ -49,7 +58,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>STT</th>
+                                    <th>Mã hóa đ</th>
                                     <th>Tên khách hàng</th>
                                     <th>Ngày đặt</th>
                                     <th>Tổng tiền</th>
@@ -58,40 +67,33 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Nguyễn Anh Nhật</td>
-                                    <td>15/10/2019</td>
-                                    <td>1.500.000 VND</td>
-                                    <td>Đã giao</td>
-                                    <td>
-                                        <span><button class="btn-warning">Chỉnh sửa đơn hàng</button></span>
-                                        <span><button class="btn-danger">Xóa đơn hàng</button></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Nguyễn Anh Nhật</td>
-                                    <td>15/10/2019</td>
-                                    <td>1.500.000 VND</td>
-                                    <td>Đã giao</td>
-                                    <td>
-                                        <span><button class="btn-warning">Chỉnh sửa đơn hàng</button></span>
-                                        <span><button class="btn-danger">Xóa đơn hàng</button></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Nguyễn Anh Nhật</td>
-                                    <td>15/10/2019</td>
-                                    <td>1.500.000 VND</td>
-                                    <td>Đã giao</td>
-                                    <td>
-                                        <span><button class="btn-warning">Chỉnh sửa đơn hàng</button></span>
-                                        <span><button class="btn-danger">Xóa đơn hàng</button></span>
-                                    </td>
-                                </tr>
-
+                                @*<tr>
+            <td>1</td>
+            <td>Nguyễn Anh Nhật</td>
+            <td>15/10/2019</td>
+            <td>1.500.000 VND</td>
+            <td>Đã giao</td>
+            <td>
+                <span><button class="btn-warning">Chỉnh sửa đơn hàng</button></span>
+                <span><button class="btn-danger">Xóa đơn hàng</button></span>
+            </td>
+        </tr>*@
+                                @{
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.id_order</td>
+                                            <td>@listUser[i]</td>
+                                            <td>@item.createDate</td>
+                                            <td>@item.totalPrice VND</td>
+                                            <td>@item.status</td>
+                                            <td>
+                                                <span><button class="btn-warning">Chỉnh sửa đơn hàng</button></span>
+                                                <span><button class="btn-danger">Xóa đơn hàng</button></span>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
                             </tbody>
                         </table>
                     </div>
