@@ -25,6 +25,7 @@ namespace Model.EF
         {
 
         }
+
         [Key]
         public int id_user { get; set; }
 
@@ -55,8 +56,6 @@ namespace Model.EF
         public bool isActive { get; set; }
 
         public int id_type { get; set; }
-
-        public virtual Order Order { get; set; }
 
         public virtual UserType UserType { get; set; }
     }

@@ -9,6 +9,8 @@ using Model.Dao;
 using OnlineShop.Common.Base;
 using System.Web.Script.Serialization;
 using Model.EF;
+using OnlineShop.Common.Helper;
+
 namespace OnlineShop.Controllers
 {
     public class CartController : BaseController
@@ -16,7 +18,7 @@ namespace OnlineShop.Controllers
         // GET: Cart
         public ActionResult Index()
         {
-            
+
             //var list = new List<CartItem>();
             //if (cart != null)
             //{
@@ -26,7 +28,8 @@ namespace OnlineShop.Controllers
             var sessionUser = (User)Session[Constants.USER_SESSION];
             var sessionCart = (List<CartItem>)Session[Constants.CART_SESSION];
 
-            if (sessionUser != null) {
+            if (sessionUser != null)
+            {
                 cartInfo.shipName = sessionUser.name;
                 cartInfo.shipPhone = sessionUser.phone;
                 cartInfo.shipEmail = sessionUser.email;
@@ -34,9 +37,9 @@ namespace OnlineShop.Controllers
             }
 
             var totalPrice = 0;
-            if(sessionCart != null)
+            if (sessionCart != null)
             {
-                foreach(var item in sessionCart)
+                foreach (var item in sessionCart)
                 {
                     var price = (((item.product.promotionPrice == null) ? (int)item.product.price : (int)item.product.promotionPrice)) * item.quantity;
                     totalPrice += price;
@@ -56,8 +59,9 @@ namespace OnlineShop.Controllers
             var sessionCart = (List<CartItem>)Session[Constants.CART_SESSION];
             sessionCart.RemoveAll(x => x.product.id_product == id);
             Session[Constants.CART_SESSION] = sessionCart;
-            return Json( new {
-                 status = true
+            return Json(new
+            {
+                status = true
             });
 
         }
@@ -72,7 +76,8 @@ namespace OnlineShop.Controllers
                 var jsonItem = jsonCart.SingleOrDefault(x => x.product.id_product == item.product.id_product);
 
                 // If quantity = 0 => delete that item
-                if (jsonItem.quantity == 0) {
+                if (jsonItem.quantity == 0)
+                {
                     var delete = Delete(jsonItem.product.id_product);
                     return Json(new
                     {
@@ -83,7 +88,7 @@ namespace OnlineShop.Controllers
                 if (jsonItem != null)
                 {
                     var inStore = new SizeDao(context).GetQuantity(jsonItem.product.id_product, item.size);
-                    if ( inStore < jsonItem.quantity)
+                    if (inStore < jsonItem.quantity)
                     {
                         return Json(new
                         {
@@ -145,14 +150,80 @@ namespace OnlineShop.Controllers
 
             }
 
-            return RedirectToAction("Index","Cart");
+            return RedirectToAction("Index", "Cart");
         }
 
-        public ActionResult SubmitOrder()
+        public ActionResult SubmitOrder(string name, string email, string phone, string address, string pay_method)
         {
+            var dao = new OrderDao(context);
+            string contentString = "";
             var sessionCart = (List<CartItem>)Session[Constants.CART_SESSION];
 
+            var totalPrice = 0;
+            foreach (var item in sessionCart)
+            {
+                updateQuantityInStore(item.product.id_product, item.size, item.quantity);
+
+                var itemPrice = item.individualPrice * item.quantity;
+                totalPrice += itemPrice;
+
+                // Create html content
+                //contentString = @"<tr>
+                //                                                <td align=""left"" style=""padding: 3px 9px"" valign=""top"">
+                //                                                     < span > Rich Habits - Thói Quen Thành Công Của Những Triệu Phú Tự Thân </ span >< br >
+    
+                //                                                    </ td >
+    
+                //                                                    < td align = ""left"" style = ""padding:3px 9px"" valign = ""top"" >< span > 110.541đ </ span ></ td >
+               
+                //                                                               < td align = ""left"" style = ""padding:3px 9px"" valign = ""top"" > 1 </ td >
+                    
+                //                                                                    < td align = ""left"" style = ""padding:3px 9px"" valign = ""top"" >< span > 0đ </ span ></ td >
+                               
+                //                                                                               < td align = ""right"" style = ""padding:3px 9px"" valign = ""top"" >< span > 110.541đ </ span ></ td >
+                                          
+                //                                                                                      </ tr > ";
+                contentString = "<tr>< td align = \"left\" style = \"padding:3px 9px\" valign = \"top\" >< span > {{itemName}} </ span >< br ></ td >< td align = \"left\" style = \"padding:3px 9px\" valign = \"top\" >< span > {{itemIndiPrice}} </ span ></ td >< td align = \"left\" style = \"padding:3px 9px\" valign = \"top\" >{{itemQuantity}}</ td >< td align = \"left\" style = \"padding:3px 9px\" valign = \"top\" >< span >{{itemDiscount}}đ </ span ></ td >< td align = \"right\" style = \"padding:3px 9px\" valign = \"top\" >< span >{{itemPrice}} </ span ></ td ></ tr > ";
+                contentString = contentString.Replace("{{itemName}}", item.productName);
+                contentString = contentString.Replace("{{itemIndiPrice}}", item.individualPrice.ToString());
+                contentString = contentString.Replace("{{itemQuantity}}", item.quantity.ToString());
+                contentString = contentString.Replace("{{itemDiscount}}", "0");
+                contentString = contentString.Replace("{{itemPrice}}", item.totalPrice.ToString());
+                
+            }
+
+            var idUser = 1;
+            var sessionUser = (User)Session[Constants.USER_SESSION];
+            if (sessionUser != null)
+            {
+                idUser = sessionUser.id_user;
+            }
+
+            var order = new Order(name, phone, email, address, totalPrice, idUser, "Chưa duyệt", false, DateTime.Now);
+            var success = dao.AddOrder(order);
+            Session[Constants.CART_SESSION] = null;
+            setMessage("Đơn hàng của bạn đã được gửi đi.");
+
+            // Send mail
+            string content = System.IO.File.ReadAllText(Server.MapPath("~/Common/Order.html"));
+            content = content.Replace("{{name}}", name);
+            content = content.Replace("{{email}}", email);
+            content = content.Replace("{{phone}}", phone);
+            content = content.Replace("{{address}}", address);
+            content = content.Replace("{{createDate}}", DateTime.Now.ToString());
+            content = content.Replace("{{shipFee}}", "30.000");
+            content = content.Replace("{{totalPrice}}", totalPrice.ToString());
+            content = content.Replace("{{content}}", contentString);
+            content = content.Replace("{{paymentMethod}}", "Thanh toán khi nhận hàng");
+            new MailHelper().sendMail(email, "Đơn hàng mới từ The ShopMax", content);
+            Console.WriteLine(content);
             return RedirectToAction("Index", "Cart");
+        }
+
+        private bool updateQuantityInStore(int id, int idSize, int quantity)
+        {
+            var dao = new SizeDetailDao(context);
+            return dao.updateQuantity(id, idSize, quantity);
         }
     }
 }

@@ -10,6 +10,8 @@ namespace OnlineShop.Common.Base
 {
     public class AdminBaseController : Controller
     {
+        public OnlineShopContext context = new OnlineShopContext();
+        public int pageSize = 9;
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             var session = (User)Session[Constants.Constants.USER_SESSION];

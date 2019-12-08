@@ -11,7 +11,7 @@ using OnlineShop.Model;
 
 namespace OnlineShop.Areas.Admin.Controllers
 {
-    public class ProductController : BaseController
+    public class ProductController : AdminBaseController
     {
         // GET: Admin/Product
         public ActionResult Index(int page = 1)

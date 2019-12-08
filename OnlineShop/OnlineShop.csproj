@@ -562,6 +562,7 @@
     <Content Include="Assets\js\popper.min.js" />
     <Content Include="Assets\js\slick.min.js" />
     <Content Include="Assets\css\Controller\HomeCSS\modal.css" />
+    <Content Include="Common\Order.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />

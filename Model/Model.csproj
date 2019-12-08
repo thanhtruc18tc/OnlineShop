@@ -79,6 +79,7 @@
     <Compile Include="EF\Size.cs" />
     <Compile Include="EF\SizeDetail.cs" />
     <Compile Include="EF\Subscriber.cs" />
+    <Compile Include="EF\sysdiagram.cs" />
     <Compile Include="EF\User.cs" />
     <Compile Include="EF\UserType.cs" />
     <Compile Include="Helper\ProductView.cs" />

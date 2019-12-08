@@ -9,6 +9,18 @@ namespace Model.EF
     [Table("Order")]
     public partial class Order
     {
+        public Order(string shipName, string shipPhone, string shipEmail, string shipAddress, int totalPrice, int idUser, string status, bool isPaid, DateTime createDate)
+        {
+            this.shipAddress = shipAddress;
+            this.shipEmail = shipEmail;
+            this.shipMobile = shipPhone;
+            this.shipName = shipName;
+            this.totalPrice = totalPrice;
+            this.isPaid = isPaid;
+            this.status = status;
+            this.createDate = createDate;
+            this.id_customer = idUser;
+        }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
@@ -16,7 +28,6 @@ namespace Model.EF
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id_order { get; set; }
 
         [StringLength(50)]
@@ -42,8 +53,6 @@ namespace Model.EF
         public bool isPaid { get; set; }
 
         public DateTime createDate { get; set; }
-
-        public virtual User User { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

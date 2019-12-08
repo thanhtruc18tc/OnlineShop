@@ -23,7 +23,7 @@ namespace OnlineShop.Common.Helper
             string body = content;
             MailMessage message = new MailMessage(new MailAddress(fromEmailAddress, fromEmailDisplayName), new MailAddress(toEmail));
             message.Subject = subject;
-            message.IsBodyHtml = false;
+            message.IsBodyHtml = true;
             message.Body = body;
 
             var client = new SmtpClient();

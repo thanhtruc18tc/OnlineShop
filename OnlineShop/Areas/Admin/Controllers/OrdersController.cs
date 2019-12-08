@@ -10,7 +10,7 @@ using OnlineShop.Common.Constants;
 
 namespace OnlineShop.Areas.Admin.Controllers
 {
-    public class OrdersController : BaseController
+    public class OrdersController : AdminBaseController
     {
         // GET: Admin/Orders
         public ActionResult Index(int page = 1)

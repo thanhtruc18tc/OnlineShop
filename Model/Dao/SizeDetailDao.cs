@@ -64,5 +64,21 @@ namespace Model.Dao
         {
             return db.SizeDetails.Where(x => x.id_product == id).ToList();
         }
+
+        public bool updateQuantity(int idProduct,int idSize , int quantity)
+        {
+            try
+            {
+                var item = db.SizeDetails.Where(x => x.id_product == idProduct && x.id_size == idSize).First();
+                item.quantity = item.quantity - quantity;
+                db.SaveChanges();
+                return true;
+            } 
+            catch
+            {
+                return false;
+            }
+            
+        }
     }
 }

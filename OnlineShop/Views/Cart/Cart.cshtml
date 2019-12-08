@@ -159,51 +159,58 @@
                     <div class="col-md-12 text-left border-bottom mb-5" style="margin-top:50px">
                         <h3 class="text-black h4">Thông tin giao hàng</h3>
                     </div>
-                    <div class="col-md-12" style="margin-top:-40px">
-                        <p>Phương thức thanh toán</p>
-                    </div>
-                    <!-- Group of default radios - option 1 -->
-                    <div class="custom-control custom-radio col-md-12">
-                        <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="groupOfDefaultRadios" checked>
-                        <label class="custom-control-label" for="defaultGroupExample1">Thanh toán khi giao hàng (COD)</label>
-                        <p id="option1"> - Được kiểm tra hàng trước khi nhận hàng.<br />- Miễn phí ship với các đơn hàng trên 500.000 đ.</p>
-                    </div>
+                    @using (Html.BeginForm("SubmitOrder", "Cart", FormMethod.Post))
+                    {
+                        <div class="col-md-12" style="margin-top:-40px">
+                            <p>Phương thức thanh toán</p>
+                        </div>
+                        <!-- Group of default radios - option 1 -->
+                        <div class="custom-control custom-radio col-md-12">
+                            <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="pay_method" checked value="cod">
+                            <label class="custom-control-label" for="defaultGroupExample1">Thanh toán khi giao hàng (COD)</label>
+                            <p id="option1"> - Được kiểm tra hàng trước khi nhận hàng.<br />- Miễn phí ship với các đơn hàng trên 500.000 đ.</p>
+                        </div>
 
-                    <!-- Group of default radios - option 2 -->
-                    <div class="custom-control custom-radio col-md-12">
-                        <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="groupOfDefaultRadios">
-                        <label class="custom-control-label" for="defaultGroupExample2">Chuyển khoản qua ngân hàng</label>
-                        <p id="option2">-Vietcombank: Số tài khoản: 0531002495503 Chủ tài khoản: Trần Đại Dương Chi nhánh Bình Thạnh, HCM<br />-ACB: Số tài khoản: 157340939 Chủ tài khoản: Trần Đại Dương Chi nhánh Hàng Xanh, HCM</p>
-                    </div>
+                        <!-- Group of default radios - option 2 -->
+                        <div class="custom-control custom-radio col-md-12">
+                            <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="pay_method" value="atm">
+                            <label class="custom-control-label" for="defaultGroupExample2">Chuyển khoản qua ngân hàng</label>
+                            <p id="option2">-Vietcombank: Số tài khoản: 0531002495503 Chủ tài khoản: Trần Đại Dương Chi nhánh Bình Thạnh, HCM<br />-ACB: Số tài khoản: 157340939 Chủ tài khoản: Trần Đại Dương Chi nhánh Hàng Xanh, HCM</p>
+                        </div>
+                        <hr style="width:100%" />
+                        <div class="col-md-12" style="margin-bottom:-10px">
+                            <p>Họ và tên<span class="text-danger">*</span></p>
+                        </div>
+                        <div class="col-md-12 mb-3 mb-md-0">
+                            <input type="text" class="form-control py-3" id="name" value="@cartInfo.shipName" name="name">
+                        </div>
+                        <div class="col-md-12" style="margin-top: 15px; margin-bottom:-10px">
+                            <p>Số điện thoại<span class="text-danger">*</span></p>
+                        </div>
+                        <div class="col-md-12 mb-3 mb-md-0">
+                            <input type="text" class="form-control py-3" id="phone" name="phone" value="@cartInfo.shipPhone">
+                        </div>
+                        <div class="col-md-12" style="margin-top: 15px; margin-bottom:-10px">
+                            <p>Email<span class="text-danger">*</span></p>
+                        </div>
+                        <div class="col-md-12 mb-3 mb-md-0">
+                            <input type="text" class="form-control py-3" id="email" name="email" value="@cartInfo.shipEmail">
+                        </div>
+                        <div class="col-md-12" style="margin-top: 15px; margin-bottom:-10px">
+                            <p>Địa chỉ nhận hàng<span class="text-danger">*</span></p>
+                        </div>
+                        <div class="col-md-12 mb-3 mb-md-0">
+                            <input type="text" class="form-control py-3" id="address" name="address">
+                        </div>
+                        <div class="col-md-12 mb-3 mb-md-0" style="margin-top: 30px">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block"   style="float:right;width:200px">Gửi đơn hàng</button>
+                        </div>
 
-                    <hr style="width:100%" />
-                    <div class="col-md-12" style="margin-bottom:-10px">
-                        <p>Họ và tên<span class="text-danger">*</span></p>
-                    </div>
-                    <div class="col-md-12 mb-3 mb-md-0">
-                        <input type="text" class="form-control py-3" id="name" value="@cartInfo.shipName">
-                    </div>
-                    <div class="col-md-12" style="margin-top: 15px; margin-bottom:-10px">
-                        <p>Số điện thoại<span class="text-danger">*</span></p>
-                    </div>
-                    <div class="col-md-12 mb-3 mb-md-0">
-                        <input type="text" class="form-control py-3" id="phone" value="@cartInfo.shipPhone">
-                    </div>
-                    <div class="col-md-12" style="margin-top: 15px; margin-bottom:-10px">
-                        <p>Email<span class="text-danger">*</span></p>
-                    </div>
-                    <div class="col-md-12 mb-3 mb-md-0">
-                        <input type="text" class="form-control py-3" id="email" value="@cartInfo.shipEmail">
-                    </div>
-                    <div class="col-md-12" style="margin-top: 15px; margin-bottom:-10px">
-                        <p>Địa chỉ nhận hàng<span class="text-danger">*</span></p>
-                    </div>
-                    <div class="col-md-12 mb-3 mb-md-0">
-                        <input type="text" class="form-control py-3" id="address">
-                    </div>
-                    <div class="col-md-12 mb-3 mb-md-0" style="margin-top: 30px">
-                        <button class="btn btn-primary btn-lg btn-block" onclick="window.location='checkout.html'" style="float:right;width:200px">Gửi đơn hàng</button>
-                    </div>
+                    }
+
+
+
+
                 </div>
 
             </div>
@@ -249,3 +256,4 @@
     </div>
 </div>
 <!-- Body -->
+
