@@ -1,4 +1,5 @@
 ﻿@model OnlineShop.Model.CartInfo
+@using Model.EF;
 @using OnlineShop.Common.Constants;
 
 @{
@@ -6,7 +7,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var cart = (List<OnlineShop.Model.CartItem>)Session[Constants.CART_SESSION];
     var cartInfo = Model;
-
+    User user = (User)Session[Constants.USER_SESSION];
 }
 
 @section jsFooter{
@@ -146,15 +147,18 @@
       {
         <div class="row">
             <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-6 mb-3 mb-md-0">
-                        <p>Bạn đã đăng nhập hay chưa?</p>
+                @if (user == null)
+                {
+                    <div class="row">
+                        <div class="col-md-6 mb-3 mb-md-0">
+                            <p>Bạn đã đăng nhập hay chưa?</p>
+                        </div>
+                        <div class="col-md-6">
+                            <button onclick="window.location='/login'" class="btn btn-outline-primary btn-sm btn-block">Đăng nhập</button>
+                        </div>
+
                     </div>
-                    <div class="col-md-6">
-                        <button onclick="window.location='/login'" class="btn btn-outline-primary btn-sm btn-block">Đăng nhập</button>
-                    </div>
-                    
-                </div>
+                }
                 <div class="row">
                     <div class="col-md-12 text-left border-bottom mb-5" style="margin-top:50px">
                         <h3 class="text-black h4">Thông tin giao hàng</h3>
@@ -182,25 +186,25 @@
                             <p>Họ và tên<span class="text-danger">*</span></p>
                         </div>
                         <div class="col-md-12 mb-3 mb-md-0">
-                            <input type="text" class="form-control py-3" id="name" value="@cartInfo.shipName" name="name">
+                            <input type="text" class="form-control py-3" id="name" value="@cartInfo.shipName" name="name" required>
                         </div>
                         <div class="col-md-12" style="margin-top: 15px; margin-bottom:-10px">
                             <p>Số điện thoại<span class="text-danger">*</span></p>
                         </div>
                         <div class="col-md-12 mb-3 mb-md-0">
-                            <input type="text" class="form-control py-3" id="phone" name="phone" value="@cartInfo.shipPhone">
+                            <input type="text" class="form-control py-3" id="phone" name="phone" value="@cartInfo.shipPhone" required>
                         </div>
                         <div class="col-md-12" style="margin-top: 15px; margin-bottom:-10px">
                             <p>Email<span class="text-danger">*</span></p>
                         </div>
                         <div class="col-md-12 mb-3 mb-md-0">
-                            <input type="text" class="form-control py-3" id="email" name="email" value="@cartInfo.shipEmail">
+                            <input type="email" class="form-control py-3" id="email" name="email" value="@cartInfo.shipEmail" required>
                         </div>
                         <div class="col-md-12" style="margin-top: 15px; margin-bottom:-10px">
                             <p>Địa chỉ nhận hàng<span class="text-danger">*</span></p>
                         </div>
                         <div class="col-md-12 mb-3 mb-md-0">
-                            <input type="text" class="form-control py-3" id="address" name="address">
+                            <input type="text" class="form-control py-3" id="address" name="address" required>
                         </div>
                         <div class="col-md-12 mb-3 mb-md-0" style="margin-top: 30px">
                             <button type="submit" class="btn btn-primary btn-lg btn-block"   style="float:right;width:200px">Gửi đơn hàng</button>

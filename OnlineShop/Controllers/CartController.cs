@@ -109,7 +109,6 @@ namespace OnlineShop.Controllers
         public ActionResult Add(int id, int quantity, int size)
         {
             var product = new ProductDao(context).GetDetail(id);
-
             var cart = Session[Constants.CART_SESSION];
             if (cart != null)
             {
@@ -164,31 +163,28 @@ namespace OnlineShop.Controllers
             {
                 updateQuantityInStore(item.product.id_product, item.size, item.quantity);
 
-                var itemPrice = item.individualPrice * item.quantity;
-                totalPrice += itemPrice;
-
-                // Create html content
-                //contentString = @"<tr>
-                //                                                <td align=""left"" style=""padding: 3px 9px"" valign=""top"">
-                //                                                     < span > Rich Habits - Thói Quen Thành Công Của Những Triệu Phú Tự Thân </ span >< br >
-    
-                //                                                    </ td >
-    
-                //                                                    < td align = ""left"" style = ""padding:3px 9px"" valign = ""top"" >< span > 110.541đ </ span ></ td >
+                var itemPrice = 0;
+                var indivialPrice = 0;
+                var discountPrice = 0;
+                if (item.product.promotionPrice == null)
+                {
+                    indivialPrice = (int)item.product.price;
+                    itemPrice = (int)item.product.price * item.quantity;
+                } else {
+                    discountPrice = (int)item.product.price - (int)item.product.promotionPrice;
+                    indivialPrice = (int)item.product.promotionPrice;
+                    itemPrice = (int)item.product.promotionPrice * item.quantity;
+                }
                
-                //                                                               < td align = ""left"" style = ""padding:3px 9px"" valign = ""top"" > 1 </ td >
-                    
-                //                                                                    < td align = ""left"" style = ""padding:3px 9px"" valign = ""top"" >< span > 0đ </ span ></ td >
-                               
-                //                                                                               < td align = ""right"" style = ""padding:3px 9px"" valign = ""top"" >< span > 110.541đ </ span ></ td >
-                                          
-                //                                                                                      </ tr > ";
-                contentString = "<tr>< td align = \"left\" style = \"padding:3px 9px\" valign = \"top\" >< span > {{itemName}} </ span >< br ></ td >< td align = \"left\" style = \"padding:3px 9px\" valign = \"top\" >< span > {{itemIndiPrice}} </ span ></ td >< td align = \"left\" style = \"padding:3px 9px\" valign = \"top\" >{{itemQuantity}}</ td >< td align = \"left\" style = \"padding:3px 9px\" valign = \"top\" >< span >{{itemDiscount}}đ </ span ></ td >< td align = \"right\" style = \"padding:3px 9px\" valign = \"top\" >< span >{{itemPrice}} </ span ></ td ></ tr > ";
-                contentString = contentString.Replace("{{itemName}}", item.productName);
-                contentString = contentString.Replace("{{itemIndiPrice}}", item.individualPrice.ToString());
+
+                totalPrice += itemPrice;
+                contentString += "<tr><td align=\"left\" style=\"padding:3px 9px\" valign=\"top\"><span> {{itemName}} </span><br></td><td align=\"left\" style=\"padding:3px 9px\" valign=\"top\"><span> {{itemSize}} </span><br></td><td align=\"left\" style =\"padding:3px 9px\" valign=\"top\"><span> {{itemIndiPrice}}đ </span></td><td align=\"left\" style =\"padding:3px 9px\" valign=\"top\">{{itemQuantity}}</td><td align=\"left\" style=\"padding:3px 9px\" valign=\"top\"><span>{{itemDiscount}}đ </span></td><td align=\"right\" style=\"padding:3px 9px\" valign=\"top\" ><span>{{itemPrice}} </span></td></tr>";
+                contentString = contentString.Replace("{{itemName}}", item.product.name);
+                contentString = contentString.Replace("{{itemSize}}", item.sizeName);
+                contentString = contentString.Replace("{{itemIndiPrice}}", String.Format("{0:n0}", indivialPrice));
                 contentString = contentString.Replace("{{itemQuantity}}", item.quantity.ToString());
                 contentString = contentString.Replace("{{itemDiscount}}", "0");
-                contentString = contentString.Replace("{{itemPrice}}", item.totalPrice.ToString());
+                contentString = contentString.Replace("{{itemPrice}}", String.Format("{0:n0}", itemPrice));
                 
             }
 
@@ -205,16 +201,29 @@ namespace OnlineShop.Controllers
             setMessage("Đơn hàng của bạn đã được gửi đi.");
 
             // Send mail
+            var shipFee = 30000;
             string content = System.IO.File.ReadAllText(Server.MapPath("~/Common/Order.html"));
             content = content.Replace("{{name}}", name);
             content = content.Replace("{{email}}", email);
             content = content.Replace("{{phone}}", phone);
             content = content.Replace("{{address}}", address);
             content = content.Replace("{{createDate}}", DateTime.Now.ToString());
-            content = content.Replace("{{shipFee}}", "30.000");
-            content = content.Replace("{{totalPrice}}", totalPrice.ToString());
+            
+            if (totalPrice > 500000)
+            {
+                shipFee = 0;
+            }
+            content = content.Replace("{{totalPrice}}", String.Format("{0:n0}", totalPrice + shipFee));
+            content = content.Replace("{{shipFee}}", shipFee.ToString());
             content = content.Replace("{{content}}", contentString);
-            content = content.Replace("{{paymentMethod}}", "Thanh toán khi nhận hàng");
+            if (pay_method == "cod")
+            {
+                content = content.Replace("{{paymentMethod}}", "Thanh toán khi nhận hàng");
+            } else
+            {
+                content = content.Replace("{{paymentMethod}}", "Chuyển khoản");
+            }
+            
             new MailHelper().sendMail(email, "Đơn hàng mới từ The ShopMax", content);
             Console.WriteLine(content);
             return RedirectToAction("Index", "Cart");
