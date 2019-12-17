@@ -9,8 +9,6 @@
     {
         numOfPage = 0;
     }
-    var listUser = ViewBag.Users;
-    var i = 0;
 }
 
 @section jsHeader {
@@ -58,40 +56,41 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Mã hóa đ</th>
+                                    <th>Mã hóa đơn</th>
                                     <th>Tên khách hàng</th>
-                                    <th>Ngày đặt</th>
                                     <th>Tổng tiền</th>
+                                    <th>Thanh toán</th>
                                     <th>Trạng thái</th>
+                                    <th>Ngày đặt</th>
                                     <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @*<tr>
-            <td>1</td>
-            <td>Nguyễn Anh Nhật</td>
-            <td>15/10/2019</td>
-            <td>1.500.000 VND</td>
-            <td>Đã giao</td>
-            <td>
-                <span><button class="btn-warning">Chỉnh sửa đơn hàng</button></span>
-                <span><button class="btn-danger">Xóa đơn hàng</button></span>
-            </td>
-        </tr>*@
                                 @{
                                     foreach (var item in Model)
                                     {
-                                        <tr>
-                                            <td>@item.id_order</td>
-                                            <td>@listUser[i]</td>
-                                            <td>@item.createDate</td>
-                                            <td>@item.totalPrice VND</td>
-                                            <td>@item.status</td>
-                                            <td>
-                                                <span><button class="btn-warning">Chỉnh sửa đơn hàng</button></span>
-                                                <span><button class="btn-danger">Xóa đơn hàng</button></span>
-                                            </td>
-                                        </tr>
+                                        var thanhtoan = "";
+                                        if (item.isPaid.Equals(true))
+                                        {
+                                            thanhtoan = "Chưa thanh toán";
+                                        }
+                                        else
+                                        {
+                                            thanhtoan = "Đã thanh toán";
+                                        }
+                                        //View
+                                                                <tr>
+                                                                    <td>@item.id_order</td>
+                                                                    <td>@item.shipName</td>
+                                                                    <td>@item.totalPrice VND</td>
+                                                                    <td>@thanhtoan</td>
+                                                                    <td>@item.status</td>
+                                                                    <td>@item.createDate</td>
+                                                                    <td>
+                                                                        <span><button class="btn-warning">Chỉnh sửa đơn hàng</button></span>
+                                                                        <span><button class="btn-danger">Xóa đơn hàng</button></span>
+                                                                    </td>
+                                                                </tr>
                                     }
                                 }
                             </tbody>

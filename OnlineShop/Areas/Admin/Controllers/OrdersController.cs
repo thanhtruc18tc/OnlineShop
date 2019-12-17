@@ -17,14 +17,8 @@ namespace OnlineShop.Areas.Admin.Controllers
         {
             var daoOrder = new OrderDao(context);
             var listOrder = daoOrder.GetAllOrder(page, pageSize);
-            var listNameCus = new List<string>();
-            foreach(var order in listOrder)
-            {
-                listNameCus.Add(new UserDao(context).GetById((int)order.id_customer).name);
-            }
             ViewBag.Page = page;
             ViewBag.Total = listOrder.Count();
-            ViewBag.Users = listNameCus;
             return View("Orders",listOrder);
         }
     }

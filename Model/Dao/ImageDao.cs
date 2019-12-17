@@ -30,6 +30,25 @@ namespace Model.Dao
             }
         }
 
+        public void Update(int idImage, string link)
+        {
+            Image image = GetByIdImage(idImage);
+            image.link = link;
+            db.SaveChanges();
+        }
+
+        public void Delete(int idImage)
+        {
+            var image = GetByIdImage(idImage);
+            db.Images.Remove(image);
+            db.SaveChanges();
+        }
+
+        public Image GetByIdImage(int id)
+        {
+            return db.Images.FirstOrDefault(x => x.id_image == id);
+        }
+
         public Image GetByIdProduct(int idProd)
         {
             return db.Images.FirstOrDefault(x => x.id_product == idProd);
@@ -38,6 +57,11 @@ namespace Model.Dao
         public List<string> GetAllImage(int idProd)
         {
             return db.Images.Where(x => x.id_product == idProd).Select(x => x.link).ToList();
+        }
+
+        public List<Image> GetImages(int idProd)
+        {
+            return db.Images.Where(x => x.id_product == idProd).ToList<Image>();
         }
     }
 }

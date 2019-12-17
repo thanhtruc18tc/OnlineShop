@@ -30,12 +30,34 @@ namespace Model.Dao
             }
         }
 
-        public bool DeleteSizeDetail(int id)
+        public void Update(int idPro, int idSize, int quantity)
         {
             try
             {
-                SizeDetail sizeDetail = db.SizeDetails.SingleOrDefault(x => x.id_product == id);
-                db.SizeDetails.Remove(sizeDetail);
+                var sizeDetail = db.SizeDetails.SingleOrDefault(x => x.id_product == idPro && x.id_size == idSize);
+                if (quantity > 0)
+                {
+                    sizeDetail.quantity = quantity;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    DeleteSizeDetail(idPro, idSize);
+                }
+            }
+            catch
+            {
+                Insert(idPro, idSize, quantity);
+            }
+            
+        }
+
+        public bool DeleteSizeDetail(int idPro, int idSize)
+        {
+            try
+            {
+                SizeDetail sizeDetail = db.SizeDetails.SingleOrDefault(x => x.id_product == idPro && x.id_size == idSize);
+                db.SizeDetails.Remove(sizeDetail); 
                 db.SaveChanges();
                 return true;
             }

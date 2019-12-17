@@ -7,7 +7,7 @@ using OnlineShop.Common.Base;
 using Model.Dao;
 using Model.EF;
 using OnlineShop.Common.Constants;
-using OnlineShop.Model;
+using Model.Helper;
 
 namespace OnlineShop.Areas.Admin.Controllers
 {
@@ -178,6 +178,19 @@ namespace OnlineShop.Areas.Admin.Controllers
         public ActionResult Edit(ProductView model)
         {
             var product = new ProductDao(context).UpdateProduct(model.Id_product, model.Name, model.Description, model.Price, model.PrPrice, model.Id_category);
+            var listSize = model.Id_Size;
+            var listQua = model.Qua_Size;
+            var sizeDetailDao = new SizeDetailDao(context);
+            var imageDao = new ImageDao(context);
+            var listImage = imageDao.GetImages(model.Id_product);
+            for (int i = 0; i < listSize.Count; i++)
+            {
+                sizeDetailDao.Update(model.Id_product, listSize[i], listQua[i]);
+            }
+            for (int i = 0; i < listImage.Count; i++)
+            {
+                imageDao.Update(listImage[i].id_image, model.Images[i]);   
+            }
             ViewBag.ClassText = " text-success";
             ModelState.AddModelError("", Constants.Suc_UpdateProduct);
             model.Name = product.name;
