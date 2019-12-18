@@ -8,7 +8,7 @@ namespace Model.EF
     public partial class OnlineShopContext : DbContext
     {
         public OnlineShopContext()
-            : base("Data Source=DESKTOP-LGTHABV\\SQLEXPRESS;Initial Catalog=ShopMax;Integrated Security=True")
+            : base("Data Source=DESKTOP-LGTHABV\\SQLEXPRESS;Initial Catalog=OnlShop3;Integrated Security=True")
         {
         }
 
