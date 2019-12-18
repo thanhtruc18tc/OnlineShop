@@ -92,7 +92,11 @@
                     <li>
                         @if (user != null)
                         {
-                            <a>Hello, @user.username</a>
+                            
+                            <a href="/profile" data-toggle="dropdown">Hello, @user.username</a>
+                            <div class="dropdown-menu clearfix icon-list-demo">
+                                <div class="col-sm-6 col-md-4 col-lg-3"><a href="/logout"><i class="fa fa-sign-out"></i>Đăng xuất</a></div>
+                            </div>
                         }
                     </li>
                 </ul>
