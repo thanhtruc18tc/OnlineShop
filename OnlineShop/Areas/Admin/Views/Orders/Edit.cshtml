@@ -83,38 +83,38 @@
                                     @Html.TextAreaFor(model => model.Address, new { rows = 5, @type = "text", @class = "form-control form-control-line", @required = "required", @autocomplete = "off" })
                                 </div>
                             </div>
-                            @*<div class="form-group">
-                                    <label class="col-md-12">Sản phẩm</label>
-                                    <div class="col-md-12">
-                                        <table width="100%">
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Tên sản phẩm</th>
-                                                <th>Số lượng</th>
-                                                <th>Giá tiền</th>
-                                            </tr>
-                                            @{
-                                                for(int i = 0; i < listOrd.Count; i++)
-                                                {
-                                                    <tr>
-                                                        <td>
-                                                            @i
-                                                        </td>
-                                                        <td>
-                                                            @ListName[i]
-                                                        </td>
-                                                        <td>
-                                                            @listOrd[i].quantity
-                                                        </td>
-                                                        <td>
-                                                            @listOrd[i].price
-                                                        </td>
-                                                    </tr>
-                                                }
+                            <div class="form-group">
+                                <label class="col-md-12">Sản phẩm</label>
+                                <div class="col-md-12">
+                                    <table width="100%">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Số lượng</th>
+                                            <th>Giá tiền</th>
+                                        </tr>
+                                        @{
+                                            for (int i = 0; i < listOrd.Count; i++)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @i
+                                                    </td>
+                                                    <td>
+                                                        @ListName[i]
+                                                    </td>
+                                                    <td>
+                                                        @listOrd[i].quantity
+                                                    </td>
+                                                    <td>
+                                                        @listOrd[i].price
+                                                    </td>
+                                                </tr>
                                             }
-                                        </table>
-                                    </div>
-                                </div>*@
+                                        }
+                                    </table>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="col-md-12">Tổng số tiền</label>
                                 <div class="col-md-12">
@@ -134,7 +134,7 @@
                     <button type="submit" class="btn btn-success">CẬP NHẬT</button>
                     <button type="reset" class="btn btn-default">RESET</button>
                 </div>
-            }
+                                            }
         </div>
         <!-- /.row -->
     </div>
@@ -149,4 +149,5 @@
         </div>
     </div>
     <script>
+
     </script>
