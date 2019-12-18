@@ -41,14 +41,18 @@ namespace OnlineShop.Areas.Admin.Controllers
             model.Id_Customer = (int)order.id_customer;
             var daoOrderDetail = new OrderDetailDao(context);
             var daoProduct = new ProductDao(context);
-            var listDetail = daoOrderDetail.GetAllByIdOrd(model.Id_Order);
+            var daoSize = new SizeDao(context);
+            var listDetail = daoOrderDetail.GetAllByIdOrd(order.id_order);
             List<string> listName = new List<string>();
+            List<string> listSize = new List<string>();
             foreach (var item in listDetail)
             {
                 listName.Add(daoProduct.GetDetail(item.id_product).name);
+                listSize.Add(daoSize.GetNameById(item.id_size));
             }
             ViewBag.ListDetail = listDetail;
             ViewBag.ListName = listName;
+            ViewBag.ListSize = listSize;
             //Default View
             ViewBag.Action = "CHỈNH SỬA ĐƠN HÀNG";
             return View("Edit", model);

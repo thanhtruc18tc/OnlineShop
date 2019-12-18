@@ -7,7 +7,7 @@ using OnlineShop.Common.Base;
 using Model.Dao;
 using Model.EF;
 using OnlineShop.Common.Constants;
-using OnlineShop.Model;
+using Model.Helper;
 
 namespace OnlineShop.Areas.Admin.Controllers
 {

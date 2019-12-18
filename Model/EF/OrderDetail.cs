@@ -18,6 +18,7 @@ namespace Model.EF
             this.price = price;
             this.id_size = idSize;
         }
+        public OrderDetail() { }
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

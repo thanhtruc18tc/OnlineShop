@@ -10,6 +10,7 @@
     slStatus.Add(new SelectListItem { Value = Constants.Order_Delivery_Suc, Text = Constants.Order_Delivery_Suc });
     //ViewBag.slStatus = slStatus;
     List<string> ListName = ViewBag.ListName;
+    List<string> ListSize = ViewBag.ListSize;
     List<Model.EF.OrderDetail> listOrd = ViewBag.ListDetail;
 }
 <div id="page-wrapper">
@@ -90,26 +91,30 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Tên sản phẩm</th>
+                                            <th>Size</th>
                                             <th>Số lượng</th>
                                             <th>Giá tiền</th>
                                         </tr>
                                         @{
                                             for (int i = 0; i < listOrd.Count; i++)
                                             {
-                                                <tr>
-                                                    <td>
-                                                        @i
-                                                    </td>
-                                                    <td>
-                                                        @ListName[i]
-                                                    </td>
-                                                    <td>
-                                                        @listOrd[i].quantity
-                                                    </td>
-                                                    <td>
-                                                        @listOrd[i].price
-                                                    </td>
-                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        @i
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @ListName[i]
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @ListSize[i]
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @listOrd[i].quantity
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @listOrd[i].price
+                                                                                    </td>
+                                                                                </tr>
                                             }
                                         }
                                     </table>
@@ -118,7 +123,7 @@
                             <div class="form-group">
                                 <label class="col-md-12">Tổng số tiền</label>
                                 <div class="col-md-12">
-                                    @Html.TextBoxFor(model => model.TotalPrice, new { @type = "number", @class = "form-control form-control-line", @required = "required", @autocomplete = "off" })
+                                    @Html.TextBoxFor(model => model.TotalPrice, new { @type = "number", @class = "form-control form-control-line", @Disabled = "disabled", @required = "required", @autocomplete = "off" })
                                 </div>
                             </div>
                             <div class="form-group">

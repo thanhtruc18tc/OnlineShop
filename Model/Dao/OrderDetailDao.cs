@@ -16,9 +16,9 @@ namespace Model.Dao
             db = context;
         }
 
-        public List<OrderDetail> GetAllByIdOrd(int id)
+        public IEnumerable<OrderDetail> GetAllByIdOrd(int id)
         {
-            return db.OrderDetails.Where(x => x.id_order == id).ToList();
+            return db.OrderDetails.Where(x => x.id_order == id).ToList<OrderDetail>();
         }
 
         public bool AddOrderDetail(OrderDetail orderDetail)
