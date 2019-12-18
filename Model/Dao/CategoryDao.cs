@@ -1,4 +1,5 @@
 ﻿using Model.EF;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,14 @@ namespace Model.Dao
             }
         }
 
+        public Category UpdateCategory(int id, string name)
+        {
+            Category category = GetCategoryByIdCat(id);
+            category.name = name;
+            db.SaveChanges();
+            return category;
+        }
+
         public bool DeleteCategory(int id)
         {
             try
@@ -53,9 +62,20 @@ namespace Model.Dao
             return db.Categories.Where(x => x.name == name).SingleOrDefault().id_category;
         }
 
+        public Category GetCategoryByIdCat(int id)
+        {
+            return db.Categories.SingleOrDefault(x => x.id_category == id);
+        }
+
         public IEnumerable<Category> GetAll()
         {
             return db.Categories.ToList<Category>();
+        }
+        public IEnumerable<Category> GetAllCategory(int page, int pageSize)
+        {
+            return db.Categories
+                .OrderByDescending(x => x.id_category)
+                .ToPagedList(page, pageSize);
         }
 
         public List<int> GetIdForMenClothes()

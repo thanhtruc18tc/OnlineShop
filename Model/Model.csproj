@@ -63,6 +63,7 @@
     <Compile Include="Dao\ImageDao.cs" />
     <Compile Include="Dao\MemberDAO.cs" />
     <Compile Include="Dao\OrderDao.cs" />
+    <Compile Include="Dao\OrderDetailDao.cs" />
     <Compile Include="Dao\ProductDao.cs" />
     <Compile Include="Dao\SizeDao.cs" />
     <Compile Include="Dao\SizeDetailDao.cs" />
@@ -82,6 +83,8 @@
     <Compile Include="EF\sysdiagram.cs" />
     <Compile Include="EF\User.cs" />
     <Compile Include="EF\UserType.cs" />
+    <Compile Include="Helper\CategoryView.cs" />
+    <Compile Include="Helper\OrderView.cs" />
     <Compile Include="Helper\ProductView.cs" />
     <Compile Include="Helper\SringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

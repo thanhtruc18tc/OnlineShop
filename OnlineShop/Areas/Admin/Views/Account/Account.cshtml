@@ -81,13 +81,13 @@
                                         <td>@listUser[i - 1].name</td>
                                         <td>@listUser[i - 1].username</td>
                                         <td>@listUser[i - 1].email</td>
-                                        <td>@(listUser[i - 1].admin == true ? "Quản trị viên" : "Khách hàng")</td>
-                                        <td>@(listUser[i - 1].status == true ? "Đang hoạt động" : "Bị Khóa")</td>
+                                        <td>@(listUser[i - 1].isAdmin == true ? "Quản trị viên" : "Khách hàng")</td>
+                                        <td>@(listUser[i - 1].isActive == true ? "Đang hoạt động" : "Bị Khóa")</td>
                                         <td>
                                             @using (@Html.BeginForm("ChangeStatus", "Account", FormMethod.Post))
                                             {
                                                 <input type="hidden" name="id" value="@listUser[i-1].id_user" />
-                                                <input type="submit" value="@(listUser[i-1].status == true ? "Khóa tài khoản" : "Kích hoạt tài khoản")" class="btn-change @(listUser[i-1].status == true ? "btn-danger" : "btn-success")" />
+                                                <input type="submit" value="@(listUser[i-1].isActive == true ? "Khóa tài khoản" : "Kích hoạt tài khoản")" class="btn-change @(listUser[i-1].isActive == true ? "btn-danger" : "btn-success")" />
                                             }
                                         </td>
                                     </tr>

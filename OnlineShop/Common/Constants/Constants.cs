@@ -67,5 +67,15 @@ namespace OnlineShop.Common.Constants
         public static string Err_CreateProductSize = "Thêm size sản phẩm mới thất bại!";
         public static string SoldOut = "Hết hàng";
 
+        // MARK: ADMIN ORDER
+        public static string Order_Success = "Cập nhật đơn hàng thành công";
+        public static string Order_Error = "Cập nhật đơn hàng thất bại";
+        public static string Order_Suc_Pay = "Đã thanh toán";
+        public static string Order_Not_Pay = "Chưa thanh toán";
+        public static string Order_Not_Handling = "Chưa xử lý";
+        public static string Order_Delivery = "Đang giao";
+        public static string Order_Delivery_Suc = "Đã giao";
+
+
     }
 }

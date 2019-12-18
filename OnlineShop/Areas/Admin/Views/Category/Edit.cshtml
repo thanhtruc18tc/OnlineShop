@@ -1,0 +1,63 @@
+﻿@model  Model.Helper.CategoryView
+@using OnlineShop.Common.Constants;
+@{
+    String action = ViewBag.Action;
+    ViewBag.Title = action + " - Admin ShopMax";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    
+}
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <p class="page-title">@action</p>
+            </div>
+        </div>
+        <!-- /.row -->
+        <!-- .row -->
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                @Html.ValidationSummary(true, "", new { @class = "text-center" + ViewBag.ClassText })
+            </div>
+            @using (Html.BeginForm())
+            {
+                <div class="col-md-12 col-xs-12">
+                    <div class="white-box">
+                        <div class="form-horizontal form-material">
+                            @Html.HiddenFor(model => model.Id_Category)
+                            <div class="form-group">
+                                <label class="col-md-12">ID</label>
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.Id_Category, new { @type = "text", @class = "form-control form-control-line", @Disabled = "disabled", @required = "required", @autocomplete = "off" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Tên danh mục</label>
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.Name, new { @type = "text", @class = "form-control form-control-line", @required = "required", @autocomplete = "off" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 text-right">
+                    <button type="submit" class="btn btn-success">@action</button>
+                    <button type="reset" class="btn btn-default">RESET</button>
+                </div>
+            }
+        </div>
+        <!-- /.row -->
+    </div>
+    <div id="errorModal" class="modal fade">
+        <div class="modal-dialog modal-login">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Viet</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+    </script>

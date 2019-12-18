@@ -7,7 +7,7 @@ using OnlineShop.Common.Base;
 using Model.Dao;
 using Model.EF;
 using OnlineShop.Common.Constants;
-using OnlineShop.Model;
+using Model.Helper;
 
 namespace OnlineShop.Areas.Admin.Controllers
 {
@@ -180,11 +180,6 @@ namespace OnlineShop.Areas.Admin.Controllers
             var product = new ProductDao(context).UpdateProduct(model.Id_product, model.Name, model.Description, model.Price, model.PrPrice, model.Id_category);
             ViewBag.ClassText = " text-success";
             ModelState.AddModelError("", Constants.Suc_UpdateProduct);
-            model.Name = product.name;
-            model.Price = (product.price != null) ? (int)product.price : 0;
-            model.PrPrice = (product.promotionPrice != null) ? (int)product.promotionPrice : 0;
-            model.Id_category = product.id_category;
-            model.Description = product.description;
             //Default View
             var daoSize = new SizeDao(context);
             var daoCat = new CategoryDao(context);

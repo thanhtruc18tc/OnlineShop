@@ -35,5 +35,24 @@ namespace Model.Dao
                 return false;
             }
         }
+
+        public Order UpdateOrder(int id, bool isPaid, string address, string email, string sdt, string name, string status, int total)
+        {
+            var order = GetDetailByIdOrder(id);
+            order.isPaid = isPaid;
+            order.shipAddress = address;
+            order.shipEmail = email;
+            order.shipMobile = sdt;
+            order.shipName = name;
+            order.status = status;
+            order.totalPrice = total;
+            db.SaveChanges();
+            return order;
+        }
+
+        public Order GetDetailByIdOrder(int id)
+        {
+            return db.Orders.SingleOrDefault(x => x.id_order == id);
+        }
     }
 }
