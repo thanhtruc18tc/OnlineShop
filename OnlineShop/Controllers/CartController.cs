@@ -175,7 +175,6 @@ namespace OnlineShop.Controllers
                     indivialPrice = (int)item.product.promotionPrice;
                     itemPrice = (int)item.product.promotionPrice * item.quantity;
                 }
-               
 
                 totalPrice += itemPrice;
                 contentString += "<tr><td align=\"left\" style=\"padding:3px 9px\" valign=\"top\"><span> {{itemName}} </span><br></td><td align=\"left\" style=\"padding:3px 9px\" valign=\"top\"><span> {{itemSize}} </span><br></td><td align=\"left\" style =\"padding:3px 9px\" valign=\"top\"><span> {{itemIndiPrice}}đ </span></td><td align=\"left\" style =\"padding:3px 9px\" valign=\"top\">{{itemQuantity}}</td><td align=\"left\" style=\"padding:3px 9px\" valign=\"top\"><span>{{itemDiscount}}đ </span></td><td align=\"right\" style=\"padding:3px 9px\" valign=\"top\" ><span>{{itemPrice}} </span></td></tr>";
@@ -195,8 +194,24 @@ namespace OnlineShop.Controllers
                 idUser = sessionUser.id_user;
             }
 
+
+
             var order = new Order(name, phone, email, address, totalPrice, idUser, "Chưa duyệt", false, DateTime.Now);
             var success = dao.AddOrder(order);
+
+            var idOrder = new OrderDao(context).GetLastestOrder();
+            // add to order detail
+            foreach (var item in sessionCart)
+            {
+                var price = item.product.price;
+                if (item.product.promotionPrice != null)
+                {
+                    price = item.product.promotionPrice;
+                }
+                var orderDetail = new OrderDetail(idOrder, item.product.id_product, item.size, item.quantity, (int)price);
+                new OrderDetailDao(context).AddOrderDetail(orderDetail);
+            }
+
             Session[Constants.CART_SESSION] = null;
             setMessage("Đơn hàng của bạn đã được gửi đi.");
 

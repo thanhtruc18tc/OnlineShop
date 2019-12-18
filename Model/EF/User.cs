@@ -9,6 +9,8 @@ namespace Model.EF
     [Table("User")]
     public partial class User
     {
+
+
         public User(string username, string password, string email, string name, string phone, string address, int id_type, bool isAdmin, bool isActive)
         {
             this.username = username;

@@ -20,5 +20,19 @@ namespace Model.Dao
         {
             return db.OrderDetails.Where(x => x.id_order == id).ToList();
         }
+
+        public bool AddOrderDetail(OrderDetail orderDetail)
+        {
+            try
+            {
+                db.OrderDetails.Add(orderDetail);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace Model.EF
     [Table("Order")]
     public partial class Order
     {
+
         public Order(string shipName, string shipPhone, string shipEmail, string shipAddress, int totalPrice, int idUser, string status, bool isPaid, DateTime createDate)
         {
             this.shipAddress = shipAddress;

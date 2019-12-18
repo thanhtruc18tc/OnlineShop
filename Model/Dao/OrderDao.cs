@@ -35,5 +35,17 @@ namespace Model.Dao
                 return false;
             }
         }
+
+        public int GetLastestOrder()
+        {
+            try
+            {
+                return (from item in db.Orders.OrderByDescending(x => x.createDate) select item.id_order).FirstOrDefault();
+            }
+            catch
+            {
+                return 0;
+            }
+        }
     }
 }
