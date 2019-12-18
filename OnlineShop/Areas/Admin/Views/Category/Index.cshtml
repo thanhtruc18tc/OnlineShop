@@ -1,0 +1,73 @@
+﻿@model PagedList.IPagedList<Model.EF.Category>
+@using OnlineShop.Common.Constants;
+@{
+    ViewBag.Title = "Category - Admin ShopMax";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int page = ViewBag.Page;
+    int total = ViewBag.Total;
+    int numOfPage = (total % 9 == 0) ? (total / 9) : ((total / 9) + 1);
+    if (Model.Count() == 0)
+    {
+        numOfPage = 0;
+    }
+}
+
+@section jsHeader {
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+    </script>
+}
+<style>
+    tr:hover {
+        box-shadow: 5px 5px grey;
+    }
+</style>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12" style="width:100%">
+                <p class="page-title">DANH SÁCH TẤT CẢ DANH MỤC </p>
+                <span>
+                    <div class="container">
+                        <div class="row">
+                            <div class='col-sm-6'>
+                                <a href="/Admin/Category/Create" class="btn btn-primary">Thêm Danh Mục</a>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /row -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="white-box">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>TÊN DANH MỤC</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var item in Model)
+                                    {
+                                        <tr onclick="location.href='/Admin/Category/Edit?id=@item.id_category'">
+                                            <td>@item.id_category</td>
+                                            <td>@item.name</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>

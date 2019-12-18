@@ -23,7 +23,8 @@
             setUnSelectedStatus("btn-all")
             setUnSelectedStatus("btn-admin")
             setSelectedStatus("btn-customer")
-            window.location.href = '@Url.Action("FilterCustomer", "Account")';
+            //window.location.href = '@Url.Action("FilterCustomer", "Account")';
+            window.location.href = '#';
         }
 
         // Extension
@@ -50,7 +51,7 @@
                 <span>
                     Lọc theo: <button id="btn-all" class="btn-success" onclick="btnAllOnClicked()">Tất cả</button>
                     <button id="btn-admin" class="btn-default" style="margin-left:10px" onclick="btnAdminOnClicked()">Admin</button>
-                    <button id="btn-customer" class="btn-default" style="margin-left:10px" onclick="btnCustomerOnClicked()">Khách hàng</button>
+                    <!-- <button id="btn-customer" class="btn-default" style="margin-left:10px" onclick="btnCustomerOnClicked()">Khách hàng</button> -->
                 </span>
             </div>
             <!-- /.col-lg-12 -->
@@ -81,13 +82,13 @@
                                         <td>@listUser[i - 1].name</td>
                                         <td>@listUser[i - 1].username</td>
                                         <td>@listUser[i - 1].email</td>
-                                        <td>@(listUser[i - 1].admin == true ? "Quản trị viên" : "Khách hàng")</td>
-                                        <td>@(listUser[i - 1].status == true ? "Đang hoạt động" : "Bị Khóa")</td>
+                                        <td>@(listUser[i - 1].isAdmin == true ? "Quản trị viên" : "Khách hàng")</td>
+                                        <td>@(listUser[i - 1].isActive == true ? "Đang hoạt động" : "Bị Khóa")</td>
                                         <td>
                                             @using (@Html.BeginForm("ChangeStatus", "Account", FormMethod.Post))
                                             {
                                                 <input type="hidden" name="id" value="@listUser[i-1].id_user" />
-                                                <input type="submit" value="@(listUser[i-1].status == true ? "Khóa tài khoản" : "Kích hoạt tài khoản")" class="btn-change @(listUser[i-1].status == true ? "btn-danger" : "btn-success")" />
+                                                <input type="submit" value="@(listUser[i-1].isActive == true ? "Khóa tài khoản" : "Kích hoạt tài khoản")" class="btn-change @(listUser[i-1].isActive == true ? "btn-danger" : "btn-success")" />
                                             }
                                         </td>
                                     </tr>

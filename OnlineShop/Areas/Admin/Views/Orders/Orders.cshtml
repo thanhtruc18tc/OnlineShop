@@ -1,4 +1,5 @@
 ﻿@model PagedList.IPagedList<Model.EF.Order>
+@using OnlineShop.Common.Constants;
 @{
     ViewBag.Title = "Orders - Admin ShopMax";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -9,8 +10,6 @@
     {
         numOfPage = 0;
     }
-    var listUser = ViewBag.Users;
-    var i = 0;
 }
 
 @section jsHeader {
@@ -20,7 +19,11 @@
         });
     </script>
 }
-
+<style>
+    tr:hover {
+        box-shadow: 5px 5px grey;
+    }
+</style>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row bg-title">
@@ -58,39 +61,40 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Mã hóa đ</th>
-                                    <th>Tên khách hàng</th>
+                                    <th>ID</th>
+                                    <th>Người nhận</th>
+                                    <th>Email</th>
+                                    <th>SĐT</th>
+                                    <th>Địa chỉ</th>
                                     <th>Ngày đặt</th>
                                     <th>Tổng tiền</th>
+                                    <th>Thanh toán</th>
                                     <th>Trạng thái</th>
-                                    <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @*<tr>
-            <td>1</td>
-            <td>Nguyễn Anh Nhật</td>
-            <td>15/10/2019</td>
-            <td>1.500.000 VND</td>
-            <td>Đã giao</td>
-            <td>
-                <span><button class="btn-warning">Chỉnh sửa đơn hàng</button></span>
-                <span><button class="btn-danger">Xóa đơn hàng</button></span>
-            </td>
-        </tr>*@
                                 @{
                                     foreach (var item in Model)
                                     {
-                                        <tr>
+                                        var thanhtoan = "";
+                                        if (item.isPaid.Equals(true))
+                                        {
+                                            thanhtoan = Constants.Order_Suc_Pay;
+                                        }
+                                        else
+                                        {
+                                            thanhtoan = Constants.Order_Not_Pay;
+                                        }
+                                        <tr onclick="location.href='/Admin/Orders/Edit?id=@item.id_order'">
                                             <td>@item.id_order</td>
-                                            <td>@listUser[i]</td>
+                                            <td>@item.shipName</td>
+                                            <td>@item.shipEmail</td>
+                                            <td>@item.shipMobile</td>
+                                            <td>@item.shipAddress</td>
                                             <td>@item.createDate</td>
                                             <td>@item.totalPrice VND</td>
+                                            <td>@thanhtoan</td>
                                             <td>@item.status</td>
-                                            <td>
-                                                <span><button class="btn-warning">Chỉnh sửa đơn hàng</button></span>
-                                                <span><button class="btn-danger">Xóa đơn hàng</button></span>
-                                            </td>
                                         </tr>
                                     }
                                 }

@@ -1,0 +1,152 @@
+﻿@model  Model.Helper.OrderView
+@using OnlineShop.Common.Constants;
+@{
+    String action = ViewBag.Action;
+    ViewBag.Title = action + " - Admin ShopMax";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<SelectListItem> slStatus = new List<SelectListItem>();
+    slStatus.Add(new SelectListItem { Value = Constants.Order_Not_Handling, Text = Constants.Order_Not_Handling });
+    slStatus.Add(new SelectListItem { Value = Constants.Order_Delivery, Text = Constants.Order_Delivery });
+    slStatus.Add(new SelectListItem { Value = Constants.Order_Delivery_Suc, Text = Constants.Order_Delivery_Suc });
+    //ViewBag.slStatus = slStatus;
+    List<string> ListName = ViewBag.ListName;
+    List<Model.EF.OrderDetail> listOrd = ViewBag.ListDetail;
+}
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <p class="page-title">@action</p>
+            </div>
+        </div>
+        <!-- /.row -->
+        <!-- .row -->
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                @Html.ValidationSummary(true, "", new { @class = "text-center" + ViewBag.ClassText })
+            </div>
+            @using (Html.BeginForm())
+            {
+                <div class="col-md-6 col-xs-12">
+                    <div class="white-box">
+                        <div class="form-horizontal form-material">
+                            @Html.HiddenFor(model => model.Id_Order)
+                            @Html.HiddenFor(model => model.Id_Customer)
+                            <div class="form-group">
+                                <label class="col-md-12">Tên người đặt</label>
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.Name, new { @type = "text", @class = "form-control form-control-line", @required = "required", @autocomplete = "off" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Tên người nhận</label>
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.ShipName, new { @type = "text", @class = "form-control form-control-line", @required = "required", @autocomplete = "off" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Số điện thoại</label>
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.SDT, new { @type = "text", @class = "form-control form-control-line", @required = "required", @autocomplete = "off" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Email</label>
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.Email, new { @type = "text", @class = "form-control form-control-line", @required = "required", @autocomplete = "off" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Trạng thái</label>
+                                <div class="col-md-12">
+                                    @Html.DropDownListFor(model => model.status, slStatus, new { @class = "form-control form-control-line", @required = "required", @autocomplete = "off" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Thanh toán</label>
+                                <div class="col-md-6">
+                                    @Html.RadioButtonFor(model => model.IsPaid, true, false)@Html.Label(Constants.Order_Suc_Pay)
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.RadioButtonFor(model => model.IsPaid, false, false)@Html.Label(Constants.Order_Not_Pay)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="white-box">
+                        <div class="form-horizontal form-material">
+                            <div class="form-group">
+                                <label class="col-md-12">Địa chỉ</label>
+                                <div class="col-md-12">
+                                    @Html.TextAreaFor(model => model.Address, new { rows = 5, @type = "text", @class = "form-control form-control-line", @required = "required", @autocomplete = "off" })
+                                </div>
+                            </div>
+                            @*<div class="form-group">
+                                    <label class="col-md-12">Sản phẩm</label>
+                                    <div class="col-md-12">
+                                        <table width="100%">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Số lượng</th>
+                                                <th>Giá tiền</th>
+                                            </tr>
+                                            @{
+                                                for(int i = 0; i < listOrd.Count; i++)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @i
+                                                        </td>
+                                                        <td>
+                                                            @ListName[i]
+                                                        </td>
+                                                        <td>
+                                                            @listOrd[i].quantity
+                                                        </td>
+                                                        <td>
+                                                            @listOrd[i].price
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </table>
+                                    </div>
+                                </div>*@
+                            <div class="form-group">
+                                <label class="col-md-12">Tổng số tiền</label>
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.TotalPrice, new { @type = "number", @class = "form-control form-control-line", @required = "required", @autocomplete = "off" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Ngày tạo</label>
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.Datetime, new { @type = "text", @class = "form-control form-control-line", @Disabled = "disabled", @required = "required", @autocomplete = "off" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 text-right">
+                    <button type="submit" class="btn btn-success">CẬP NHẬT</button>
+                    <button type="reset" class="btn btn-default">RESET</button>
+                </div>
+            }
+        </div>
+        <!-- /.row -->
+    </div>
+    <div id="errorModal" class="modal fade">
+        <div class="modal-dialog modal-login">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Viet</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    </script>
